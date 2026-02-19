@@ -40,7 +40,9 @@
       var k = key || (name + "::" + JSON.stringify(props || {}));
       if (seen.has(k)) return;
       seen.add(k);
-      if (window.analytics && window.analytics.track) window.analytics.track(name, props || {});
+      if (window.analytics && typeof window.analytics.track === "function") {
+        window.analytics.track(name, props || {});
+      }
     };
   }
   var trackOnce = trackOnceFactory();
@@ -53,51 +55,112 @@
       .replace(/^-+|-+$/g, "");
   }
 
-  function setup() {
-    var reportDate = document.body.getAttribute("data-report-date") || null;
+  function getReportDate() {
+    // Always keep as YYYY-MM-DD string (stable dimension for charts)
+    return document.body.getAttribute("data-report-date") || null;
+  }
 
-    trackOnce("Report Viewed", {
-      report_date: reportDate,
-      url: location.href,
-      title: document.title
-    }, "Report Viewed::" + reportDate + "::" + location.href);
+  function getReportId(reportDate) {
+    // Prefer reportDate; fallback to filename sans extension
+    if (reportDate) return reportDate;
+    var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
+    return file || null;
+  }
+
+  function setup() {
+    var reportDate = getReportDate();     // "2026-02-19"
+    var reportId = getReportId(reportDate);
+
+    // Stable keys (prevents analytics drift when you rename headings)
+    var SECTION_KEY_MAP = {
+      "Summary": "summary",
+      "Stock Report": "stock-report",
+      "News (analysis)": "news-analysis",
+      "Complete List of News Articles": "news-list"
+    };
+
+    // Optional: if you want "Report Viewed" to mean "engaged", delay it 5s.
+    // If you want "landed", remove the setTimeout wrapper.
+    setTimeout(function () {
+      trackOnce(
+        "Report Viewed",
+        {
+          report_date: reportDate,
+          report_id: reportId,
+          url: location.href,
+          path: location.pathname,
+          title: document.title
+        },
+        "Report Viewed::" + (reportId || "") + "::" + location.href
+      );
+    }, 5000);
 
     var headings = Array.prototype.slice.call(document.querySelectorAll("h2"));
     if (!headings.length) return;
 
-    headings.forEach(function(h) {
+    headings.forEach(function (h, idx) {
       var title = (h.textContent || "").trim();
-      var key = slug(title) || "section";
+      var key = SECTION_KEY_MAP[title] || slug(title) || "section";
+
       if (!h.id) h.id = "sec-" + key;
+
       h.setAttribute("data-segment-section", key);
       h.setAttribute("data-segment-title", title);
+      h.setAttribute("data-segment-order", String(idx + 1));
     });
 
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (!entry.isIntersecting) return;
-        var h = entry.target;
+    var obs = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
 
-        trackOnce("Report Section Viewed", {
-          report_date: reportDate,
-          section: h.getAttribute("data-segment-section"),
-          section_title: h.getAttribute("data-segment-title"),
-          section_id: h.id,
-          url: location.href
-        }, "Section::" + reportDate + "::" + h.getAttribute("data-segment-section") + "::" + location.href);
-      });
-    }, { threshold: 0.25 });
+          var h = entry.target;
+          var sectionKey = h.getAttribute("data-segment-section");
+          var sectionTitle = h.getAttribute("data-segment-title");
+          var sectionOrder = Number(h.getAttribute("data-segment-order") || "0");
 
-    headings.forEach(function(h) { obs.observe(h); });
+          trackOnce(
+            "Report Section Viewed",
+            {
+              report_date: reportDate,
+              report_id: reportId,
+              section: sectionKey,
+              section_title: sectionTitle,
+              section_id: h.id,
+              section_order: sectionOrder,
+              url: location.href,
+              path: location.pathname
+            },
+            "Section::" + (reportId || "") + "::" + sectionKey + "::" + location.href
+          );
+        });
+      },
+      { threshold: 0.10 } // lower threshold = more reliable firing
+    );
+
+    headings.forEach(function (h) {
+      obs.observe(h);
+    });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setup);
-  } else {
-    setup();
+  function boot() {
+    // Ensure Segment is fully ready before firing initial events
+    if (window.analytics && typeof window.analytics.ready === "function") {
+      window.analytics.ready(setup);
+    } else {
+      // Fallback if analytics isn't available for some reason
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", setup);
+      } else {
+        setup();
+      }
+    }
   }
+
+  boot();
 })();
 </script>
+
 
 </head>
 <body data-report-date="2026-02-19">

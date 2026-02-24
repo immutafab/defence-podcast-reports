@@ -21,6 +21,57 @@
   blockquote { border-left:4px solid #94a3b8; margin:1em 0; padding:.6em 1em; color:#475569; background:#f8fafc; }
   hr { border:0; border-top:1px solid #e2e8f0; margin:2em 0; }
   ul,ol { margin:.5em 0 .8em 1.4em; } li { margin-bottom:.3em; }
+
+  /* ...existing styles... */
+
+  .signup-cta {
+    margin: 16px 0 24px;
+    padding: 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #f8fafc;
+  }
+  .signup-cta h3 {
+    margin: 0 0 6px;
+    font-size: 1.05rem;
+    color: #0f172a;
+  }
+  .signup-cta p {
+    margin: 0 0 10px;
+    color: #334155;
+    font-size: 0.95rem;
+  }
+  .signup-form {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .signup-form input[type="email"] {
+    flex: 1 1 280px;
+    min-width: 220px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font: inherit;
+  }
+  .signup-form button {
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .signup-form button:hover { opacity: 0.95; }
+  .signup-note {
+    margin-top: 8px;
+    font-size: 0.82rem;
+    color: #64748b;
+  }
+
 </style>
 
 <!-- Segment: loader -->
@@ -273,10 +324,145 @@ function getReportId(reportDate) {
   // Capture phase helps catch clicks before navigation handlers run
   document.addEventListener("click", handleOutboundClick, true);
 })();
+
+
+</script>
+
+<script>
+(function () {
+  function getReportDate() {
+    return document.body.getAttribute("data-report-date") || null;
+  }
+
+  function getReportId(reportDate) {
+    if (reportDate) return "rpt_" + reportDate;
+    var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
+    return file ? "rpt_" + file : null;
+  }
+
+  function getStableUserId() {
+    var key = "fc_user_id";
+    try {
+      var id = localStorage.getItem(key);
+      if (!id) {
+        id = "fc_" + Math.random().toString(16).slice(2) + "_" + Date.now();
+        localStorage.setItem(key, id);
+      }
+      return id;
+    } catch (e) {
+      return "fc_session_" + Date.now();
+    }
+  }
+
+  function setupSignup() {
+    var form = document.getElementById("signup-form");
+    var emailInput = document.getElementById("signup-email");
+    if (!form || !emailInput) return;
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      var email = (emailInput.value || "").trim().toLowerCase();
+      if (!email) return;
+
+      var reportDate = getReportDate();
+      var reportId = getReportId(reportDate);
+      var userId = getStableUserId();
+
+      // Always keep one identity; enrich with email on signup
+      if (window.analytics && typeof analytics.identify === "function") {
+        analytics.identify(userId, {
+          email: email,
+          signup_source: "frontline-capital-report",
+          signup_placement: "top",
+          last_report_id: reportId
+        });
+      }
+
+      // Track attempt
+      if (window.analytics && typeof analytics.track === "function") {
+        analytics.track("Signup CTA Submitted", {
+          report_date: reportDate,
+          report_id: reportId,
+          placement: "top",
+          email_domain: email.split("@")[1] || null,
+          path: window.location.pathname,
+          url: window.location.href
+        });
+      }
+
+      // Actually submit to the provider
+      try {
+        var fd = new FormData(form);
+        var res = await fetch(form.action, {
+          method: form.method || "POST",
+          body: fd,
+          headers: { "Accept": "application/json" }
+        });
+
+        if (!res.ok) throw new Error("Signup request failed: " + res.status);
+
+        if (window.analytics && typeof analytics.track === "function") {
+          analytics.track("Signup CTA Succeeded", {
+            report_date: reportDate,
+            report_id: reportId,
+            placement: "top",
+            path: window.location.pathname,
+            url: window.location.href
+          });
+        }
+
+        // Simple success UI
+        form.innerHTML = "<strong>Thanks — you're subscribed.</strong>";
+      } catch (err) {
+        if (window.analytics && typeof analytics.track === "function") {
+          analytics.track("Signup CTA Failed", {
+            report_date: reportDate,
+            report_id: reportId,
+            placement: "top",
+            error: (err && err.message) ? err.message.slice(0, 200) : "unknown",
+            path: window.location.pathname,
+            url: window.location.href
+          });
+        }
+        alert("Signup failed — please try again.");
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupSignup);
+  } else {
+    setupSignup();
+  }
+})();
 </script>
 
 </head>
 <body data-report-date="2026-02-19">
+
+<div class="signup-cta" id="signup-cta">
+  <h3>Get the daily report by email</h3>
+  <p>Get Frontline Capital in your inbox each morning.</p>
+
+  <!-- Replace action URL with your provider endpoint -->
+  <form id="signup-form" class="signup-form" method="POST" action="https://formspree.io/f/REPLACE_ME">
+    <input
+      type="email"
+      name="email"
+      id="signup-email"
+      placeholder="you@example.com"
+      required
+      autocomplete="email"
+    />
+    <input type="hidden" name="source" value="frontline-capital-report" />
+    <input type="hidden" name="report_date" value="2026-02-19" />
+    <button type="submit">Subscribe</button>
+  </form>
+
+  <div class="signup-note">No spam. Unsubscribe anytime.</div>
+</div>
+
 <h1 id="frontline-capital-daily-report-2026-02-19">Frontline Capital – Daily Report – 2026-02-19</h1>
 <!-- segment:summary -->
 <h2 id="summary">Summary</h2>

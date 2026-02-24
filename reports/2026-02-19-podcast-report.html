@@ -197,6 +197,32 @@
     catch (e) { return null; }
   }
 
+  function getReportDate() {
+    return document.body.getAttribute("data-report-date") || null;
+  }
+
+  function getReportId(reportDate) {
+    if (reportDate) return reportDate;
+    var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
+    return file || null;
+  }
+
+  function getLinkType(a) {
+    var href = (a.getAttribute("href") || "").trim();
+    if (!href) return "unknown";
+
+    // nav-ish links
+    if (href.startsWith("#") || href.startsWith("javascript:")) return "nav";
+    if (a.closest("nav, header, footer")) return "nav";
+
+    // classify by domain
+    var domain = getDomain(a.href);
+    if (!domain) return "unknown";
+
+    if (domain === window.location.hostname) return "internal";
+    return "source"; // outbound
+  }
+
   function shouldIgnore(a) {
     var href = (a.getAttribute("href") || "").trim();
     if (!href) return true;
@@ -215,15 +241,20 @@
     var domain = getDomain(href);
     if (!domain) return;
 
-    // Track only outbound links (change/remove if you want all links)
+    // Track only outbound links (keep this if Source Checkers = source links only)
     if (domain === window.location.hostname) return;
+
+    var reportDate = getReportDate();
+    var reportId = getReportId(reportDate);
 
     if (window.analytics && typeof window.analytics.track === "function") {
       window.analytics.track("Report Link Clicked", {
         href: href,
         domain: domain,
         text: (a.textContent || "").trim().slice(0, 200),
-        report_date: document.body.getAttribute("data-report-date") || null,
+        report_date: reportDate,
+        report_id: reportId,
+        link_type: getLinkType(a),
         path: window.location.pathname,
         url: window.location.href
       });

@@ -159,8 +159,35 @@
 
   boot();
 })();
-</script>
 
+(function () {
+  function ensureUserId() {
+    var key = "fc_user_id";
+    var id = null;
+
+    try {
+      id = localStorage.getItem(key);
+      if (!id) {
+        id = "fc_" + Math.random().toString(16).slice(2) + "_" + Date.now();
+        localStorage.setItem(key, id);
+      }
+    } catch (e) {
+      // if localStorage blocked, fallback to a session id
+      id = "fc_session_" + Date.now();
+    }
+
+    if (window.analytics && typeof window.analytics.identify === "function") {
+      window.analytics.identify(id);
+    }
+  }
+
+  if (window.analytics && typeof window.analytics.ready === "function") {
+    window.analytics.ready(ensureUserId);
+  } else {
+    setTimeout(ensureUserId, 1000);
+  }
+})();
+</script>
 
 </head>
 <body data-report-date="2026-02-19">

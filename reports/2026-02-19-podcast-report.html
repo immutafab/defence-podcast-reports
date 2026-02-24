@@ -60,11 +60,12 @@
     return document.body.getAttribute("data-report-date") || null;
   }
 
-  function getReportId(reportDate) {
-    if (reportDate) return "rpt_" + reportDate;
-    var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
-    return file ? "rpt_" + file : null;
-  }
+function getReportId(reportDate) {
+  // Force string ID so Segment doesn't cast it as a date
+  if (reportDate) return "rpt_" + reportDate;
+  var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
+  return file ? "rpt_" + file : null;
+}
 
   function setup() {
     var reportDate = getReportDate();     // "2026-02-19"

@@ -354,12 +354,12 @@ function getReportId(reportDate) {
     }
   }
 
-  function setupSignup() {
+  function setupSignupSegmentOnly() {
     var form = document.getElementById("signup-form");
     var emailInput = document.getElementById("signup-email");
     if (!form || !emailInput) return;
 
-    form.addEventListener("submit", async function (e) {
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
 
       var email = (emailInput.value || "").trim().toLowerCase();
@@ -368,72 +368,43 @@ function getReportId(reportDate) {
       var reportDate = getReportDate();
       var reportId = getReportId(reportDate);
       var userId = getStableUserId();
+      var emailDomain = email.split("@")[1] || null;
 
-      // Always keep one identity; enrich with email on signup
-      if (window.analytics && typeof analytics.identify === "function") {
-        analytics.identify(userId, {
-          email: email,
-          signup_source: "frontline-capital-report",
-          signup_placement: "top",
-          last_report_id: reportId
-        });
+      if (!(window.analytics && typeof analytics.identify === "function")) {
+        alert("Analytics not ready yet — try again in a second.");
+        return;
       }
 
-      // Track attempt
-      if (window.analytics && typeof analytics.track === "function") {
-        analytics.track("Signup CTA Submitted", {
-          report_date: reportDate,
-          report_id: reportId,
-          placement: "top",
-          email_domain: email.split("@")[1] || null,
-          path: window.location.pathname,
-          url: window.location.href
-        });
-      }
+      // 1) Attach email to the same stable user
+      analytics.identify(userId, {
+        email: email,
+        email_domain: emailDomain,
+        signup_source: "frontline-capital-report",
+        signup_placement: "top",
+        last_report_id: reportId,
+        last_report_date: reportDate // keep as string
+      });
 
-      // Actually submit to the provider
-      try {
-        var fd = new FormData(form);
-        var res = await fetch(form.action, {
-          method: form.method || "POST",
-          body: fd,
-          headers: { "Accept": "application/json" }
-        });
+      // 2) Track the conversion action
+      analytics.track("Signup CTA Submitted", {
+        report_date: reportDate,     // NOTE: Segment may cast this as Date in schema if it’s seen as one
+        report_date_str: reportDate, // stable string dimension
+        report_id: reportId,
+        placement: "top",
+        email_domain: emailDomain,
+        path: window.location.pathname,
+        url: window.location.href
+      });
 
-        if (!res.ok) throw new Error("Signup request failed: " + res.status);
-
-        if (window.analytics && typeof analytics.track === "function") {
-          analytics.track("Signup CTA Succeeded", {
-            report_date: reportDate,
-            report_id: reportId,
-            placement: "top",
-            path: window.location.pathname,
-            url: window.location.href
-          });
-        }
-
-        // Simple success UI
-        form.innerHTML = "<strong>Thanks — you're subscribed.</strong>";
-      } catch (err) {
-        if (window.analytics && typeof analytics.track === "function") {
-          analytics.track("Signup CTA Failed", {
-            report_date: reportDate,
-            report_id: reportId,
-            placement: "top",
-            error: (err && err.message) ? err.message.slice(0, 200) : "unknown",
-            path: window.location.pathname,
-            url: window.location.href
-          });
-        }
-        alert("Signup failed — please try again.");
-      }
+      // 3) Optimistic success UI (since there’s no backend)
+      form.innerHTML = "<strong>Saved — you’re on the list.</strong>";
     });
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setupSignup);
+    document.addEventListener("DOMContentLoaded", setupSignupSegmentOnly);
   } else {
-    setupSignup();
+    setupSignupSegmentOnly();
   }
 })();
 </script>
@@ -446,19 +417,10 @@ function getReportId(reportDate) {
   <p>Get Frontline Capital in your inbox each morning.</p>
 
   <!-- Replace action URL with your provider endpoint -->
-  <form id="signup-form" class="signup-form" method="POST" action="https://formspree.io/f/REPLACE_ME">
-    <input
-      type="email"
-      name="email"
-      id="signup-email"
-      placeholder="you@example.com"
-      required
-      autocomplete="email"
-    />
-    <input type="hidden" name="source" value="frontline-capital-report" />
-    <input type="hidden" name="report_date" value="2026-02-19" />
-    <button type="submit">Subscribe</button>
-  </form>
+ <form id="signup-form" class="signup-form">
+  <input type="email" id="signup-email" placeholder="you@example.com" required autocomplete="email" />
+  <button type="submit">Subscribe</button>
+</form>
 
   <div class="signup-note">No spam. Unsubscribe anytime.</div>
 </div>

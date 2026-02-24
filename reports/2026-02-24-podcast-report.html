@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Frontline Capital — Daily Report — 2026-02-24</title>
+
+<style>
+  body { font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif; margin:32px auto; max-width:960px; color:#0f172a; background:#fff; }
+  h1,h2,h3,h4,h5,h6 { line-height:1.25; margin-top:1.8em; margin-bottom:0.6em; font-weight:600; }
+  h1 { font-size:1.9em; border-bottom:2px solid #e2e8f0; padding-bottom:.3em; }
+  h2 { font-size:1.6em; border-bottom:1px solid #e2e8f0; padding-bottom:.2em; }
+  h3 { font-size:1.3em; color:#1e293b; }
+  a { color:#2563eb; text-decoration:none; } a:hover { text-decoration:underline; }
+  table { width:100%; border-collapse:collapse; margin:1.2em 0; font-size:.95em; }
+  th,td { border:1px solid #e2e8f0; padding:6px 10px; text-align:left; }
+  th { background:#f1f5f9; font-weight:600; }
+  tr:nth-child(even) td { background:#f8fafc; }
+  code { background:#f1f5f9; border-radius:4px; padding:2px 4px; font-size:90%; }
+  pre { background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:12px; overflow-x:auto; }
+  blockquote { border-left:4px solid #94a3b8; margin:1em 0; padding:.6em 1em; color:#475569; background:#f8fafc; }
+  hr { border:0; border-top:1px solid #e2e8f0; margin:2em 0; }
+  ul,ol { margin:.5em 0 .8em 1.4em; } li { margin-bottom:.3em; }
+
+  /* ...existing styles... */
+
+  .signup-cta {
+    margin: 16px 0 24px;
+    padding: 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #f8fafc;
+  }
+  .signup-cta h3 {
+    margin: 0 0 6px;
+    font-size: 1.05rem;
+    color: #0f172a;
+  }
+  .signup-cta p {
+    margin: 0 0 10px;
+    color: #334155;
+    font-size: 0.95rem;
+  }
+  .signup-form {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .signup-form input[type="email"] {
+    flex: 1 1 280px;
+    min-width: 220px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font: inherit;
+  }
+  .signup-form button {
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .signup-form button:hover { opacity: 0.95; }
+  .signup-note {
+    margin-top: 8px;
+    font-size: 0.82rem;
+    color: #64748b;
+  }
+
+</style>
+
+<!-- Segment: loader -->
+<script>
+  !function(){var i="analytics",analytics=window[i]=window[i]||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window[i].initialized)return window[i][e].apply(window[i],arguments);var n=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");n.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}n.unshift(e);analytics.push(n);return analytics}};for(var n=0;n<analytics.methods.length;n++){var key=analytics.methods[n];analytics[key]=analytics.factory(key)}analytics.load=function(key,n){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute("data-global-segment-analytics-key",i);t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r);analytics._loadOptions=n};analytics.SNIPPET_VERSION="5.2.0";
+  analytics.load("7RsCbsh97yt1jrOUsWf8fOwxiNNQhlSc");
+  analytics.page();
+  }}();
+</script>
+
+<!-- Segment: section tracking (by H2 headings) -->
+<script>
+(function () {
+  function trackOnceFactory() {
+    var seen = new Set();
+    return function (name, props, key) {
+      var k = key || (name + "::" + JSON.stringify(props || {}));
+      if (seen.has(k)) return;
+      seen.add(k);
+      if (window.analytics && typeof window.analytics.track === "function") {
+        window.analytics.track(name, props || {});
+      }
+    };
+  }
+  var trackOnce = trackOnceFactory();
+
+  function slug(s) {
+    return (s || "")
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  function getReportDate() {
+    // Always keep as YYYY-MM-DD string (stable dimension for charts)
+    return document.body.getAttribute("data-report-date") || null;
+  }
+
+function getReportId(reportDate) {
+  // Force string ID so Segment doesn't cast it as a date
+  if (reportDate) return "rpt_" + reportDate;
+  var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
+  return file ? "rpt_" + file : null;
+}
+
+  function setup() {
+    var reportDate = getReportDate();     // "2026-02-19"
+    var reportId = getReportId(reportDate);
+
+    // Stable keys (prevents analytics drift when you rename headings)
+    var SECTION_KEY_MAP = {
+      "Summary": "summary",
+      "Stock Report": "stock-report",
+      "News (analysis)": "news-analysis",
+      "Complete List of News Articles": "news-list"
+    };
+
+    // Optional: if you want "Report Viewed" to mean "engaged", delay it 5s.
+    // If you want "landed", remove the setTimeout wrapper.
+    setTimeout(function () {
+      trackOnce(
+        "Report Viewed",
+        {
+          report_date: reportDate,
+          report_id: reportId,
+          url: location.href,
+          path: location.pathname,
+          title: document.title
+        },
+        "Report Viewed::" + (reportId || "") + "::" + location.href
+      );
+    }, 5000);
+
+    var headings = Array.prototype.slice.call(document.querySelectorAll("h2"));
+    if (!headings.length) return;
+
+    headings.forEach(function (h, idx) {
+      var title = (h.textContent || "").trim();
+      var key = SECTION_KEY_MAP[title] || slug(title) || "section";
+
+      if (!h.id) h.id = "sec-" + key;
+
+      h.setAttribute("data-segment-section", key);
+      h.setAttribute("data-segment-title", title);
+      h.setAttribute("data-segment-order", String(idx + 1));
+    });
+
+    var obs = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+
+          var h = entry.target;
+          var sectionKey = h.getAttribute("data-segment-section");
+          var sectionTitle = h.getAttribute("data-segment-title");
+          var sectionOrder = Number(h.getAttribute("data-segment-order") || "0");
+
+          trackOnce(
+            "Report Section Viewed",
+            {
+              report_date: reportDate,
+              report_id: reportId,
+              section: sectionKey,
+              section_title: sectionTitle,
+              section_id: h.id,
+              section_order: sectionOrder,
+              url: location.href,
+              path: location.pathname
+            },
+            "Section::" + (reportId || "") + "::" + sectionKey + "::" + location.href
+          );
+        });
+      },
+      { threshold: 0.10 } // lower threshold = more reliable firing
+    );
+
+    headings.forEach(function (h) {
+      obs.observe(h);
+    });
+  }
+
+  function boot() {
+    // Ensure Segment is fully ready before firing initial events
+    if (window.analytics && typeof window.analytics.ready === "function") {
+      window.analytics.ready(setup);
+    } else {
+      // Fallback if analytics isn't available for some reason
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", setup);
+      } else {
+        setup();
+      }
+    }
+  }
+
+  boot();
+})();
+
+(function () {
+  function ensureUserId() {
+    var key = "fc_user_id";
+    var id = null;
+
+    try {
+      id = localStorage.getItem(key);
+      if (!id) {
+        id = "fc_" + Math.random().toString(16).slice(2) + "_" + Date.now();
+        localStorage.setItem(key, id);
+      }
+    } catch (e) {
+      // if localStorage blocked, fallback to a session id
+      id = "fc_session_" + Date.now();
+    }
+
+    if (window.analytics && typeof window.analytics.identify === "function") {
+      window.analytics.identify(id);
+    }
+  }
+
+  if (window.analytics && typeof window.analytics.ready === "function") {
+    window.analytics.ready(ensureUserId);
+  } else {
+    setTimeout(ensureUserId, 1000);
+  }
+})();
+</script>
+
+<!-- Segment: outbound link click tracking -->
+<script>
+(function () {
+  function getDomain(url) {
+    try { return new URL(url, window.location.href).hostname; }
+    catch (e) { return null; }
+  }
+
+  function shouldIgnore(a) {
+    var href = (a.getAttribute("href") || "").trim();
+    if (!href) return true;
+    if (href.startsWith("#")) return true;
+    if (href.startsWith("javascript:")) return true;
+    if (href.startsWith("mailto:") || href.startsWith("tel:")) return true;
+    return false;
+  }
+
+  function getReportDate() {
+    return document.body.getAttribute("data-report-date") || null;
+  }
+
+  function getReportId(reportDate) {
+    // Prefix so Segment doesn't auto-cast it as a Date
+    if (reportDate) return "rpt_" + reportDate;
+    var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
+    return file ? "rpt_" + file : null;
+  }
+
+  function handleOutboundClick(e) {
+    var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if (!a) return;
+    if (shouldIgnore(a)) return;
+
+    var href = a.href;
+    var domain = getDomain(href);
+    if (!domain) return;
+
+    // outbound only
+    if (domain === window.location.hostname) return;
+
+    var reportDate = getReportDate();
+    var reportId = getReportId(reportDate);
+
+    // Let ctrl/cmd-click and middle-click behave normally (new tab)
+    var isModified = e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1;
+    var target = (a.getAttribute("target") || "").toLowerCase();
+    var opensNewTab = target === "_blank" || isModified;
+
+    // For same-tab nav, delay navigation briefly so track has time to send
+    if (!opensNewTab) {
+      e.preventDefault();
+    }
+
+    var navigated = false;
+    function go() {
+      if (navigated || opensNewTab) return;
+      navigated = true;
+      window.location.href = href;
+    }
+
+    if (window.analytics && typeof window.analytics.track === "function") {
+      window.analytics.track("Report Link Clicked", {
+        href: href,
+        domain: domain,
+        text: (a.textContent || "").trim().slice(0, 200),
+        report_date: reportDate,
+        report_id: reportId,
+        link_type: "source",
+        path: window.location.pathname,
+        url: window.location.href
+      }, function () {
+        go();
+      });
+
+      // Fallback in case callback doesn’t fire
+      if (!opensNewTab) setTimeout(go, 250);
+    } else {
+      go();
+    }
+  }
+
+  // Capture phase helps catch clicks before navigation handlers run
+  document.addEventListener("click", handleOutboundClick, true);
+})();
+
+
+</script>
+
+<script>
+(function () {
+  function getReportDate() {
+    return document.body.getAttribute("data-report-date") || null;
+  }
+
+  function getReportId(reportDate) {
+    if (reportDate) return "rpt_" + reportDate;
+    var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
+    return file ? "rpt_" + file : null;
+  }
+
+  function getStableUserId() {
+    var key = "fc_user_id";
+    try {
+      var id = localStorage.getItem(key);
+      if (!id) {
+        id = "fc_" + Math.random().toString(16).slice(2) + "_" + Date.now();
+        localStorage.setItem(key, id);
+      }
+      return id;
+    } catch (e) {
+      return "fc_session_" + Date.now();
+    }
+  }
+
+  function setupSignupSegmentOnly() {
+    var form = document.getElementById("signup-form");
+    var emailInput = document.getElementById("signup-email");
+    if (!form || !emailInput) return;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      var email = (emailInput.value || "").trim().toLowerCase();
+      if (!email) return;
+
+      var reportDate = getReportDate();
+      var reportId = getReportId(reportDate);
+      var userId = getStableUserId();
+      var emailDomain = email.split("@")[1] || null;
+
+      if (!(window.analytics && typeof analytics.identify === "function")) {
+        alert("Analytics not ready yet — try again in a second.");
+        return;
+      }
+
+      // 1) Attach email to the same stable user
+      analytics.identify(userId, {
+        email,
+        email_domain: emailDomain,
+        signup_source: "frontline-capital-report",
+        signup_placement: "top",
+        last_report_id: reportId,
+        last_report_date_str: reportDate
+      });
+
+      analytics.track("Signup CTA Submitted", {
+        report_id: reportId,
+        report_date_str: reportDate,
+        placement: "top",
+        email_domain: emailDomain,
+        path: location.pathname,
+        url: location.href
+      });
+
+      // 3) Optimistic success UI (since there’s no backend)
+      form.innerHTML = "<strong>Saved — you’re on the list.</strong>";
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupSignupSegmentOnly);
+  } else {
+    setupSignupSegmentOnly();
+  }
+})();
+</script>
+
+</head>
+<body data-report-date="2026-02-24">
+
+<div class="signup-cta" id="signup-cta">
+  <h3>Get the daily report by email</h3>
+  <p>Get Frontline Capital in your inbox each morning.</p>
+
+  <!-- Replace action URL with your provider endpoint -->
+ <form id="signup-form" class="signup-form">
+  <input type="email" id="signup-email" placeholder="you@example.com" required autocomplete="email" />
+  <button type="submit">Subscribe</button>
+</form>
+
+  <div class="signup-note">No spam. Unsubscribe anytime.</div>
+</div>
+
+<h1 id="frontline-capital-daily-report-2026-02-24">Frontline Capital – Daily Report – 2026-02-24</h1>
+<!-- segment:summary -->
+<h2 id="summary">Summary</h2>
+<h3 id="headline-summary">Headline Summary</h3>
+<p>Indonesia has taken a significant role in the Gaza peacekeeping mission by deploying thousands of troops as part of the US-led International Stabilisation Force, focusing on civilian protection and humanitarian efforts [6]. The US Army is accelerating the development of a 1000 km anti-ship Precision Strike Missile to enhance long-range strike capabilities [39]. The Pentagon&rsquo;s FY26 budget plan includes a substantial $152 billion allocation for munitions, missile defense, and shipbuilding, reflecting a strategic focus on strengthening military infrastructure [30]. Lockheed Martin (LMT) is advancing AI integration in military aircraft by testing autonomous identification capabilities on the F-35 [24]. Northrop Grumman (NOC) is expediting B-21 Raider production with a $4.5 billion funding boost, aiming for delivery by 2027 [20;23;25]. Kratos Defense (KTOS) has reported strong financial results and secured multiple new defense contracts, enhancing investor confidence [17].</p>
+<h3 id="markets-in-brief">Markets in Brief</h3>
+<p>Today&rsquo;s defense market showed a mixed tone, with some stocks gaining on contract wins and technological advancements, while others faced pressures from macro defense spending trends. Notably, Kratos saw a boost from a new US Air Force contract, while broader European defense spending continues to influence market dynamics [999].</p>
+<!-- segment:stock-report -->
+<h2 id="stock-report">Stock Report</h2>
+<h3 id="1-main-table">1) Main Table</h3>
+<table>
+<thead>
+<tr>
+<th>Ticker</th>
+<th>Today Price/Δ</th>
+<th>Fresh catalyst(s) [n] (direct / adjacent / macro)</th>
+<th>TA snapshot</th>
+<th>Plan (Entry / ATR-stop / Targets)</th>
+<th>Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PLTR</td>
+<td>$130.60 (▼ -4.64, -3.43%)</td>
+<td>No direct catalysts; macro defense spending context [3]</td>
+<td>D/W/M: Up/Flat/Down; &lt;20/50; near S1 128</td>
+<td>128 / 125 / 135</td>
+<td>Cautious; macro pressures</td>
+</tr>
+<tr>
+<td>AVAV</td>
+<td>$261.33 (▼ -3.30, -1.25%)</td>
+<td>No direct catalysts; macro defense spending context [3]</td>
+<td>D/W/M: Up/Up/Flat; &gt;20/50; testing R1 265</td>
+<td>260 / 255 / 275</td>
+<td>Cautious; sector-wide spending</td>
+</tr>
+<tr>
+<td>APH</td>
+<td>$147.82 (▼ -3.22, -2.13%)</td>
+<td>No direct catalysts; macro defense spending context [3]</td>
+<td>D/W/M: Flat/Flat/Down; &lt;20/50; near S1 145</td>
+<td>146 / 142 / 152</td>
+<td>Bearish; weak technicals</td>
+</tr>
+<tr>
+<td>KTOS</td>
+<td>$94.31 (▼ -1.77, -1.84%)</td>
+<td>US Air Force contract for engine design [16]</td>
+<td>D/W/M: Up/Up/Up; &gt;20/50; testing R1 96</td>
+<td>95 / 92 / 100</td>
+<td>Bullish; new contract win</td>
+</tr>
+<tr>
+<td>EPIRUS</td>
+<td>Not publicly listed (no market data)</td>
+<td>Partnership with Digital Force Technologies [12]</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>RHM.DE</td>
+<td>$1,718.00 (▲ +16.50, +0.97%)</td>
+<td>No direct catalysts; macro European defense spending [3]</td>
+<td>D/W/M: Up/Up/Up; &gt;20/50; testing R1 1720</td>
+<td>1715 / 1700 / 1750</td>
+<td>Bullish; strong European demand</td>
+</tr>
+<tr>
+<td>ITA</td>
+<td>$241.26 (▼ -2.39, -0.98%)</td>
+<td>No direct catalysts; macro defense spending context [3]</td>
+<td>D/W/M: Up/Flat/Up; &gt;20/50; near S1 240</td>
+<td>240 / 235 / 250</td>
+<td>Cautious; sector-wide trends</td>
+</tr>
+<tr>
+<td>LMT</td>
+<td>$660.62 (▲ +2.36, +0.36%)</td>
+<td>AI in F-35 testing [24]</td>
+<td>D/W/M: Up/Up/Up; &gt;20/50; testing R1 665</td>
+<td>662 / 655 / 680</td>
+<td>Bullish; AI integration progress</td>
+</tr>
+<tr>
+<td>NOC</td>
+<td>$725.39 (▲ +1.83, +0.25%)</td>
+<td>Accelerating B-21 Raider production [20]</td>
+<td>D/W/M: Up/Up/Up; &gt;20/50; testing R1 730</td>
+<td>726 / 720 / 740</td>
+<td>Bullish; production boost</td>
+</tr>
+<tr>
+<td>RTX</td>
+<td>$201.92 (▼ -3.00, -1.46%)</td>
+<td>Defense and autonomy wins [46]</td>
+<td>D/W/M: Up/Flat/Up; &gt;20/50; near S1 200</td>
+<td>202 / 198 / 210</td>
+<td>Cautious; mixed signals</td>
+</tr>
+<tr>
+<td>BA</td>
+<td>$230.44 (▼ -1.59, -0.69%)</td>
+<td>Demonstrates AI for space-grade hardware [18]</td>
+<td>D/W/M: Up/Flat/Up; &gt;20/50; testing R1 235</td>
+<td>231 / 228 / 240</td>
+<td>Cautious; innovation in AI</td>
+</tr>
+<tr>
+<td>GD</td>
+<td>$348.98 (▼ -2.44, -0.69%)</td>
+<td>No direct catalysts; macro defense spending context [3]</td>
+<td>D/W/M: Flat/Up/Up; &gt;20/50; near S1 345</td>
+<td>347 / 340 / 355</td>
+<td>Cautious; sector-wide trends</td>
+</tr>
+<tr>
+<td>HII</td>
+<td>$438.01 (▲ +0.44, +0.10%)</td>
+<td>No direct catalysts; macro defense spending context [3]</td>
+<td>D/W/M: Up/Up/Flat; &gt;20/50; testing R1 440</td>
+<td>439 / 435 / 450</td>
+<td>Cautious; stable outlook</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-market-sector-context">2) Market &amp; Sector Context</h3>
+<ul>
+<li>European defense spending is increasing as the US slows its defense budget, impacting global defense stocks [3].</li>
+<li>The US Air Force is advancing its Collaborative Combat Aircraft program, indicating ongoing investment in drone and AI technologies [19].</li>
+<li>The Pentagon&rsquo;s FY26 budget emphasizes munitions, missile defense, and shipbuilding, affecting defense contractors [30].</li>
+</ul>
+<h3 id="3-other-interesting-aidefense-names">3) Other Interesting AI/Defense Names</h3>
+<ul>
+<li>Northrop Grumman is accelerating B-21 Raider production, reflecting strong demand for advanced military aircraft [20].</li>
+<li>Boeing&rsquo;s AI advancements for space-grade hardware demonstrate innovation in integrating AI into aerospace applications [18].</li>
+</ul>
+<!-- segment:news-analysis -->
+<h2 id="news-analysis">News (analysis)</h2>
+<h3 id="wars-conflict">Wars &amp; Conflict</h3>
+<ul>
+<li>Indonesia steps up in the Gaza peacekeeping mission by taking a deputy commander role in the US-led International Stabilisation Force, deploying thousands of troops to focus on civilian protection and humanitarian efforts [6].</li>
+<li>NATO marks the fourth anniversary of Russia’s full-scale invasion of Ukraine, underscoring ongoing tensions and military engagements [8].</li>
+</ul>
+<h3 id="military-spending-policy">Military Spending &amp; Policy</h3>
+<ul>
+<li>Europe boosts its defense spending as the US slows down, maintaining its status as the world&rsquo;s largest military power [3].</li>
+<li>The US Army is fast-tracking the development of a 1000 km anti-ship Precision Strike Missile (PrSM) to bolster long-range strike capabilities [39].</li>
+<li>The Pentagon&rsquo;s FY26 budget plan allocates $152 billion for munitions, missile defense, and shipbuilding [30].</li>
+</ul>
+<h3 id="ai-drones-autonomy">AI, Drones &amp; Autonomy</h3>
+<ul>
+<li>FlytBase introduces FlytBase One, a platform enhancing real-time event detection and fleet management for autonomous drones and AI agents [2].</li>
+<li>Lockheed Martin tests AI on the F-35 for autonomous identification of unknown contacts, advancing AI integration in military aircraft [24].  ⟶ Companies: Lockheed Martin (LMT)</li>
+<li>The US Air Force and General Atomics demonstrate manned-unmanned teaming between an F-22 and an MQ-20 drone, highlighting advanced autonomy in tactical operations [31;47].</li>
+</ul>
+<h3 id="new-defense-tech-programs">New Defense Tech &amp; Programs</h3>
+<ul>
+<li>Australia invests $310 million in long-lead items for its AUKUS nuclear-powered submarine program, enhancing its defense capabilities [13].</li>
+<li>Northrop Grumman accelerates B-21 Raider production with a $4.5 billion funding boost, targeting delivery by 2027 [20;23;25].  ⟶ Companies: Northrop Grumman (NOC)</li>
+<li>Kratos and GE Aerospace secure a $12.4 million contract to design an engine for the US Air Force&rsquo;s Collaborative Combat Aircraft, focusing on affordability and performance [16].</li>
+</ul>
+<h3 id="geopolitics-resources">Geopolitics &amp; Resources</h3>
+<ul>
+<li>The US partially evacuates its Beirut embassy amid rising tensions with Iran, reflecting heightened geopolitical risks [29;34].</li>
+<li>China deploys a record number of maritime militia in the South China Sea, though their strategic role seems to be diminishing [7].</li>
+</ul>
+<h3 id="other-signals">Other Signals</h3>
+<ul>
+<li>The Philippine Navy commissions two new vessels, enhancing maritime capabilities under a $573 million contract with South Korea [1].</li>
+<li>NASA&rsquo;s working group advances autonomous multi-drone operations, aiming for integration into national airspace [42].</li>
+<li>The Space Force seeks industry input on in-orbit refueling, indicating a push to enhance space operations capabilities [36].</li>
+<li>Aerlijn&rsquo;s Nightmare V3, a high-speed C-UAS interceptor, is now available in Europe, capable of neutralizing Class-1 strike drones with speeds up to 300 km/h and a 10 km range [4; 5].</li>
+<li>Mehler Protection has developed the SCILT system, a close-range C-UAS designed to protect land vehicles from small drone threats [11].</li>
+<li>Epirus and Digital Force Technologies are collaborating on a non-kinetic C-UAS system, integrating Epirus&rsquo; Leonidas HPM platform with DFT&rsquo;s Seraphim software [12].  ⟶ Companies: Epirus (EPIRUS)</li>
+<li>The Department of Homeland Security is advising on counter-UAV measures for World Cup events to protect against potential drone threats [43].</li>
+<li>Kratos Defense &amp; Security Solutions reported strong financial results and secured multiple new defense contracts, boosting investor confidence [17].  ⟶ Companies: Kratos Defense (KTOS)</li>
+<li>IonQ has been selected for the Missile Defense Agency&rsquo;s SHIELD IDIQ contract, with a ceiling of $151 billion, to deliver innovative capabilities [28].</li>
+<li>RTX has achieved significant defense milestones, including Navy approval for Raytheon&rsquo;s StormBreaker and advancements in autonomous mission software [46].  ⟶ Companies: RTX (RTX)</li>
+<li>Northrop Grumman is proposing a Cannon-Based Air Defense system to counter drone swarms and low-flying missiles for the U.S. Army [15].  ⟶ Companies: Northrop Grumman (NOC)</li>
+<li>The U.S. Army is urgently developing the M1-E3 tank to replace the drone-vulnerable M1 Abrams, focusing on improved defenses [22].</li>
+<li>The Army is preparing for an influx of small drones, emphasizing the need for advanced training and logistics [40].</li>
+<li>Boeing has demonstrated a large language model for space-grade hardware, overcoming initial skepticism from manufacturers [18].  ⟶ Companies: Boeing (BA)</li>
+<li>The Space Development Agency awarded AST SpaceMobile a $30 million contract to test commercial satellite links for military radios [27; 37].</li>
+<li>Space Systems Command announced winners of the &ldquo;Fight Tonight&rdquo; competition, funding five solutions to enhance U.S. Space Force capabilities [41].</li>
+<li>The 17th Field Artillery Brigade conducted an Arctic ground raid mission with HIMARS, showcasing operational capabilities in extreme conditions [38].</li>
+<li>The Army&rsquo;s 11th Airborne Division faced challenges with technology and logistics during Arctic training exercises [32].</li>
+<li>Joint exercises involving the 104th, 103rd, and 158th Fighter Wings demonstrated rapid rearming and refueling capabilities [33].</li>
+<li>Schiebel plans to establish a UK entity to capitalize on expanding defense opportunities, following successful collaborations [14].</li>
+<li>General Atomics Aeronautical Systems announced the YFQ-42A Dark Merlin for the U.S. Air Force&rsquo;s Collaborative Combat Aircraft program [48].</li>
+<li>SimActive is enhancing defense mapping capabilities with its Correlator3D software, focusing on speed and intelligence [44].</li>
+<li>A topping out ceremony marked progress in constructing a new facility for submarine readiness at Naval Submarine Base Kings Bay [45].</li>
+</ul>
+<!-- segment:news-list -->
+<h2 id="complete-list-of-news-articles">Complete List of News Articles</h2>
+<p>[1] <a href="https://www.navalnews.com/naval-news/2026/02/philippine-navy-commissions-new-patrol-vessel-missile-boat/">navalnews.com — Philippine Navy commissions new patrol vessel, missile boat (2026-02-24T11:22:10+00:00)</a><br>
+Summary: Two of the Philippine Navy’s newest ships entered active duty during a commissioning ceremony at the Naval Operating Base in Subic Bay on Tuesday. The offshore patrol vessel BRP Rajah Sulayman (PS-20) was inducted into service alongside the fast attack interdiction craft BRP Audrey Bañares (PG-910). The BRP Rajah Sulayman , named after a pre-Hispanic ruler who led Tagalog forces during the 1570 Battle of Manila, is the first of six 2,400-ton ships under a ₱30 billion ($573 million) contract signed with South Korean shipbuilder HD Hyundai in 2022. Its commissioning follows post-delivery activit…<br>
+&lt;<a href="https://www.navalnews.com/naval-news/2026/02/philippine-navy-commissions-new-patrol-vessel-missile-boat/">https://www.navalnews.com/naval-news/2026/02/philippine-navy-commissions-new-patrol-vessel-missile-boat/</a>&gt;<br>
+[2] <a href="https://www.unmannedairspace.info/uncategorized/flytbase-launches-connectivity-platform-and-ai-agents/">unmannedairspace.info — Flytbase launches connectivity platform and AI agents (2026-02-24T11:19:26+00:00)</a><br>
+Summary: FlytBase has introduced FlytBase One, building a foundational platform for the Physical AI era, where autonomous drones, robots, sensors and enterprise infrastructure operate as connected systems instead of isolated tools. The company has also announced Verkos AI agents, designed to detect events in live video, trigger actions and deliver alerts and notifications across fleets of autonomous devices. “Cameras, drones, radar, robots, vehicles and field operations still run on disconnected platforms,” the company said. “The result is a visibility and action gap: enterprises can see events in frag…<br>
+&lt;<a href="https://www.unmannedairspace.info/uncategorized/flytbase-launches-connectivity-platform-and-ai-agents/">https://www.unmannedairspace.info/uncategorized/flytbase-launches-connectivity-platform-and-ai-agents/</a>&gt;<br>
+[3] <a href="https://www.ft.com/content/9593e226-25de-4108-b604-8c413675cd75">ft.com — Europe re-arms as US slows defence spending (2026-02-24T11:00:08+00:00)</a><br>
+Summary: Washington remains world’s largest military power but European capitals spend more than before, says IISS<br>
+&lt;<a href="https://www.ft.com/content/9593e226-25de-4108-b604-8c413675cd75">https://www.ft.com/content/9593e226-25de-4108-b604-8c413675cd75</a>&gt;<br>
+[4] <a href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxQc2RNTlp6TDdwbHdfVDRXQ3RTS1N1eTBwcVl1QTRYS0RxRnN1eTI3RXRxNXlQWTUzYnBqRHZ4dFpjY3dEdW80Zm9fWUh4UUFYaHNSMTNUOWpWYlF0RHZrWENiZ0xzQ2ZYc3NFOWl5dU1YTV9fejFTSmpJUzJ5MTk0TnpURlo2MUVXZzQ4X1EtLVJLY2hVS3NiLV9CYjItSGNtS3pWZnJVeXF6VHpkTkNBS3lzRG42TzRfdm9QV0J6alhkMUpCWWNMVmZSV0U0NE9MRG5CMGZfeHNuQQ?oc=5">news.google.com — “Aerlijn’s Nightmare V3 high speed C-UAS interceptor now available in Europe” - Unmanned airspace (2026-02-24T10:55:21+00:00)</a><br>
+Summary: “Aerlijn’s Nightmare V3 high speed C-UAS interceptor now available in Europe” Unmanned airspace<br>
+&lt;<a href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxQc2RNTlp6TDdwbHdfVDRXQ3RTS1N1eTBwcVl1QTRYS0RxRnN1eTI3RXRxNXlQWTUzYnBqRHZ4dFpjY3dEdW80Zm9fWUh4UUFYaHNSMTNUOWpWYlF0RHZrWENiZ0xzQ2ZYc3NFOWl5dU1YTV9fejFTSmpJUzJ5MTk0TnpURlo2MUVXZzQ4X1EtLVJLY2hVS3NiLV9CYjItSGNtS3pWZnJVeXF6VHpkTkNBS3lzRG42TzRfdm9QV0J6alhkMUpCWWNMVmZSV0U0NE9MRG5CMGZfeHNuQQ?oc=5">https://news.google.com/rss/articles/CBMi2gFBVV95cUxQc2RNTlp6TDdwbHdfVDRXQ3RTS1N1eTBwcVl1QTRYS0RxRnN1eTI3RXRxNXlQWTUzYnBqRHZ4dFpjY3dEdW80Zm9fWUh4UUFYaHNSMTNUOWpWYlF0RHZrWENiZ0xzQ2ZYc3NFOWl5dU1YTV9fejFTSmpJUzJ5MTk0TnpURlo2MUVXZzQ4X1EtLVJLY2hVS3NiLV9CYjItSGNtS3pWZnJVeXF6VHpkTkNBS3lzRG42TzRfdm9QV0J6alhkMUpCWWNMVmZSV0U0NE9MRG5CMGZfeHNuQQ?oc=5</a>&gt;<br>
+[5] <a href="https://www.unmannedairspace.info/counter-uas-systems-and-policies/aerlijns-nightmare-v3-high-speed-c-uas-interceptor-now-available-in-europe/">unmannedairspace.info — &#8220;Aerlijn&#8217;s Nightmare V3 high speed C-UAS interceptor now available in Europe&#8221; (2026-02-24T10:52:33+00:00)</a><br>
+Summary: Ukraine’s Defence Tech Community in a Linkedin story reports that Dutch company Aerlijn has introduced its Nightmare V3 high-speed interceptor to the European market, developed in collaboration with Ukrainian Project ODIN. “Designed to neutralise Class-1 strike drones, Nightmare V3 reaches speeds of 280–300 km/h and features a thermal LWIR camera, automatic target acquisition up to 800 m, a 10 km tactical range, and an operational ceiling above 6 km,” said the report. “The Dutch company has successfully intercepted Shahed, Gerbera, and Lancet drones. The system has been used and recommended by…<br>
+&lt;<a href="https://www.unmannedairspace.info/counter-uas-systems-and-policies/aerlijns-nightmare-v3-high-speed-c-uas-interceptor-now-available-in-europe/">https://www.unmannedairspace.info/counter-uas-systems-and-policies/aerlijns-nightmare-v3-high-speed-c-uas-interceptor-now-available-in-europe/</a>&gt;<br>
+[6] <a href="https://www.scmp.com/week-asia/politics/article/3344477/why-indonesias-lead-role-gaza-peacekeeping-force-carries-high-political-risk?utm_source=rss_feed">scmp.com — Why Indonesia’s lead role in Gaza peacekeeping force carries high political risk (2026-02-24T10:31:59+00:00)</a><br>
+Summary: Indonesia’s decision to accept a deputy commander post in the United States-led International Stabilisation Force (ISF) for Gaza has placed it in a position to play a prominent role in the mission as it prepares to deploy thousands of troops to the war-torn enclave. While the Indonesian government has stressed that its personnel would focus on protecting civilians and supporting humanitarian efforts, analysts say the ISF’s broader objectives – including the disarmament of Palestinian armed&hellip;<br>
+&lt;<a href="https://www.scmp.com/week-asia/politics/article/3344477/why-indonesias-lead-role-gaza-peacekeeping-force-carries-high-political-risk?utm_source=rss_feed">https://www.scmp.com/week-asia/politics/article/3344477/why-indonesias-lead-role-gaza-peacekeeping-force-carries-high-political-risk?utm_source=rss_feed</a>&gt;<br>
+[7] <a href="https://www.scmp.com/news/china/military/article/3344474/record-chinese-maritime-militia-deployed-south-china-sea-2025-us-report?utm_source=rss_feed">scmp.com — ‘Record’ Chinese maritime militia deployed in South China Sea in 2025: US report (2026-02-24T10:18:23+00:00)</a><br>
+Summary: China’s maritime militia was deployed in “record-high numbers” across the disputed South China Sea in 2025, according to a US think tank report. However, the report also cited a concentration of civilian fishing fleets near less contested reefs, saying this suggested their waning strategic role for Beijing. The report was published on Monday by the Asia Maritime Transparency Initiative (AMTI) – a research programme affiliated with the Centre for Strategic and International Studies, a&hellip;<br>
+&lt;<a href="https://www.scmp.com/news/china/military/article/3344474/record-chinese-maritime-militia-deployed-south-china-sea-2025-us-report?utm_source=rss_feed">https://www.scmp.com/news/china/military/article/3344474/record-chinese-maritime-militia-deployed-south-china-sea-2025-us-report?utm_source=rss_feed</a>&gt;<br>
+[8] <a href="https://news.google.com/rss/articles/CBMi4AFBVV95cUxPdTdVY2F3ZW5TaW1hZzlvYnpvWVRxeWRZNEgzbUxHTU9CaFlnOTBZTkRqdFVlTW1NczIyUkNkNEY4Nlc2M3I1R0tXVURnS3ZGWTBHenhMY0d0RHZwZEhPT3ItNzJ0LTQxSlRuWWZrTThNNFo4a19kNC0tY1MxT2o5SUtfRTdlNHh4NU9HMkJUTkRaMzF2M1I1REVVNjJsY2FCcTR6S3NVa1Y2UmFoWVVEYkhPdFlYcU1JVlNOU3kzd3RXd2lVX2Z1Ukh2UjVGYXlfSm44SmZaTjBqOTdiclAtUQ?oc=5">news.google.com — NATO Commemorates the Fourth Anniversary of Russia’s Full-Scale Invasion of Ukraine - North Atlantic Treaty Organization (2026-02-24T10:08:15+00:00)</a><br>
+Summary: NATO Commemorates the Fourth Anniversary of Russia’s Full-Scale Invasion of Ukraine North Atlantic Treaty Organization<br>
+&lt;<a href="https://news.google.com/rss/articles/CBMi4AFBVV95cUxPdTdVY2F3ZW5TaW1hZzlvYnpvWVRxeWRZNEgzbUxHTU9CaFlnOTBZTkRqdFVlTW1NczIyUkNkNEY4Nlc2M3I1R0tXVURnS3ZGWTBHenhMY0d0RHZwZEhPT3ItNzJ0LTQxSlRuWWZrTThNNFo4a19kNC0tY1MxT2o5SUtfRTdlNHh4NU9HMkJUTkRaMzF2M1I1REVVNjJsY2FCcTR6S3NVa1Y2UmFoWVVEYkhPdFlYcU1JVlNOU3kzd3RXd2lVX2Z1Ukh2UjVGYXlfSm44SmZaTjBqOTdiclAtUQ?oc=5">https://news.google.com/rss/articles/CBMi4AFBVV95cUxPdTdVY2F3ZW5TaW1hZzlvYnpvWVRxeWRZNEgzbUxHTU9CaFlnOTBZTkRqdFVlTW1NczIyUkNkNEY4Nlc2M3I1R0tXVURnS3ZGWTBHenhMY0d0RHZwZEhPT3ItNzJ0LTQxSlRuWWZrTThNNFo4a19kNC0tY1MxT2o5SUtfRTdlNHh4NU9HMkJUTkRaMzF2M1I1REVVNjJsY2FCcTR6S3NVa1Y2UmFoWVVEYkhPdFlYcU1JVlNOU3kzd3RXd2lVX2Z1Ukh2UjVGYXlfSm44SmZaTjBqOTdiclAtUQ?oc=5</a>&gt;<br>
+[9] <a href="https://www.navalnews.com/naval-news/2026/02/one-hull-for-todays-crews-and-tomorrows-unmanned-missions-cross-water-positions-modular-aluminium-rib-as-a-transition-platform/">navalnews.com — One hull for today’s crews and tomorrow’s unmanned missions: Cross Water positions modular aluminium RIB as a transition platform (2026-02-24T09:29:00+00:00)</a><br>
+Summary: Maritime forces are being asked to modernise in two directions at once. They must keep crewed boats reliable, safe and ready for daily missions while also preparing for unmanned and autonomous concepts that are advancing quickly but unevenly across regulations, training, maintenance culture and operational trust. Sponsored by Cross Water Production, a Swedish–Estonian boatbuilder, is positioning its Cross Water Modular aluminium RIB around a simple premise: many operators do not want two separate fleets – one “traditional” and one “unmanned.” Instead, the company proposes a long-life base hull…<br>
+&lt;<a href="https://www.navalnews.com/naval-news/2026/02/one-hull-for-todays-crews-and-tomorrows-unmanned-missions-cross-water-positions-modular-aluminium-rib-as-a-transition-platform/">https://www.navalnews.com/naval-news/2026/02/one-hull-for-todays-crews-and-tomorrows-unmanned-missions-cross-water-positions-modular-aluminium-rib-as-a-transition-platform/</a>&gt;<br>
+[10] <a href="https://www.suasnews.com/2026/02/finnish-defence-forces-to-procure-parrot-anafi-ukr-micro-uav-systems-to-strengthen-isr-capabilities/">suasnews.com — Finnish Defence Forces to procure Parrot ANAFI UKR micro-UAV systems to strengthen ISR capabilities (2026-02-24T09:22:05+00:00)</a><br>
+Summary: Parrot, a European leader in professional micro-UAVs, welcomes the announcement made by the Finnish Defence<br>
+&lt;<a href="https://www.suasnews.com/2026/02/finnish-defence-forces-to-procure-parrot-anafi-ukr-micro-uav-systems-to-strengthen-isr-capabilities/">https://www.suasnews.com/2026/02/finnish-defence-forces-to-procure-parrot-anafi-ukr-micro-uav-systems-to-strengthen-isr-capabilities/</a>&gt;<br>
+[11] <a href="https://www.unmannedairspace.info/counter-uas-systems-and-policies/mehler-develops-close-range-c-uas-for-land-vehicles/">unmannedairspace.info — Mehler develops close-range C-UAS for land vehicles (2026-02-24T09:19:08+00:00)</a><br>
+Summary: Mehler Protection has developed a new close-range protection system to counter drones attacking land vehicles from short range and low angles. The SCILT system has been conceived as a last protective layer for individual vehicles, addressing the gap between large-scale mobile air defence systems and passive vehicle protection. Designed to counter small drones, including FPV drones, kamikaze drones and loitering munitions, SCILT operates in close and very close-range engagements and is intended to defeat both single drones and multiple simultaneous threats in the immediate hazard zone. The syst…<br>
+&lt;<a href="https://www.unmannedairspace.info/counter-uas-systems-and-policies/mehler-develops-close-range-c-uas-for-land-vehicles/">https://www.unmannedairspace.info/counter-uas-systems-and-policies/mehler-develops-close-range-c-uas-for-land-vehicles/</a>&gt;<br>
+[12] <a href="https://www.unmannedairspace.info/counter-uas-systems-and-policies/epirus-teams-up-with-digital-force-technologies-to-develop-non-kinetic-c-uas/">unmannedairspace.info — Epirus teams up with Digital Force Technologies to develop non-kinetic C-UAS (2026-02-24T08:54:42+00:00)</a><br>
+Summary: Epirus and Digital Force Technologies (DFT) have formed a partnership to deliver a fully integrated counter-uncrewed aerial system (C-UAS) kill chain that combines the companies’ respective technologies for detection, tracking, identification, localisation and non-kinetic, low-collateral defeat. Under the agreement, Epirus will lead systems integration of DFT’s Seraphim command-and-control and multi-modal sensor fusion software with Epirus’ Leonidas high-power microwave (HPM) platform. Leonidas uses electromagnetic interference to defeat swarming, AI-controlled and fibre-optic guided UAS that …<br>
+&lt;<a href="https://www.unmannedairspace.info/counter-uas-systems-and-policies/epirus-teams-up-with-digital-force-technologies-to-develop-non-kinetic-c-uas/">https://www.unmannedairspace.info/counter-uas-systems-and-policies/epirus-teams-up-with-digital-force-technologies-to-develop-non-kinetic-c-uas/</a>&gt;<br>
+[13] <a href="https://www.navalnews.com/naval-news/2026/02/australia-announces-acquisition-of-long-lead-items-for-aukus-nuclear-propulsion-systems/">navalnews.com — Australia announces acquisition of long-lead items for AUKUS nuclear propulsion systems (2026-02-24T08:33:24+00:00)</a><br>
+Summary: The Australian (Prime Minister Albanese) Government has announced a $310 million payment for the acquisition of long‑lead items from the United Kingdom to support Australia’s future sovereign conventionally‑armed, nuclear‑powered submarine capability (SSN-AUKUS ) . Australian Ministry of Defense press release Today’s announcement will directly support the manufacture of critical components for nuclear‑powered submarines which will be built at Osborne in South Australia, including the nuclear propulsion systems of Australia’s first two SSN-AUKUS. Under the AUKUS program, the United Kingdom will…<br>
+&lt;<a href="https://www.navalnews.com/naval-news/2026/02/australia-announces-acquisition-of-long-lead-items-for-aukus-nuclear-propulsion-systems/">https://www.navalnews.com/naval-news/2026/02/australia-announces-acquisition-of-long-lead-items-for-aukus-nuclear-propulsion-systems/</a>&gt;<br>
+[14] <a href="https://www.uasvision.com/2026/02/24/schiebel-to-establish-a-uk-entity-to-support-expanding-defence-opportunities/">uasvision.com — Schiebel to Establish a UK Entity to Support Expanding Defence Opportunities (2026-02-24T06:54:59+00:00)</a><br>
+Summary: Schiebel announces its intention to establish a dedicated Schiebel UK legal entity, reflecting strong growth opportunities in the United Kingdom defence market and the company’s long-term commitment to supporting the UK Armed Forces and industrial partners. The decision follows the successful collaboration with Thales UK to deliver the Peregrine Rotary Wing Unmanned Aerial System (RWUAS), based […]<br>
+&lt;<a href="https://www.uasvision.com/2026/02/24/schiebel-to-establish-a-uk-entity-to-support-expanding-defence-opportunities/">https://www.uasvision.com/2026/02/24/schiebel-to-establish-a-uk-entity-to-support-expanding-defence-opportunities/</a>&gt;<br>
+[15] <a href="https://www.uasvision.com/2026/02/24/northrop-grumman-proposes-cannon-based-air-defence-system-for-us-army-drone-threat/">uasvision.com — Northrop Grumman Proposes Cannon-Based Air Defence System for US Army Drone Threat (2026-02-24T06:50:42+00:00)</a><br>
+Summary: Northrop Grumman is advancing its Cannon-Based Air Defense (CBAD) concept as a scalable response to the growing threat of drone swarms and low-flying cruise missiles targeting U.S. Army formations. CBAD integrates guided medium-caliber cannon ammunition with layered radar and electro-optical sensors, all connected through battle management command-and-control networks. Rather than functioning as a standalone gun […]<br>
+&lt;<a href="https://www.uasvision.com/2026/02/24/northrop-grumman-proposes-cannon-based-air-defence-system-for-us-army-drone-threat/">https://www.uasvision.com/2026/02/24/northrop-grumman-proposes-cannon-based-air-defence-system-for-us-army-drone-threat/</a>&gt;<br>
+[16] <a href="https://www.uasvision.com/2026/02/24/kratos-and-ge-aerospace-win-us-air-force-award-to-design-engine-for-expendable-collaborative-combat-aircraft/">uasvision.com — Kratos and GE Aerospace Win US Air Force Award to Design Engine for Expendable Collaborative Combat Aircraft (2026-02-24T06:30:02+00:00)</a><br>
+Summary: Kratos Defense &amp; Security Solutions, Inc. has announced a joint U.S. Air Force contract worth $12.4 million to design a next-generation engine for small Collaborative Combat Aircraft (CCA). The initial phase will complete the preliminary design of the GEK1500, targeting demanding performance requirements while meeting aggressive cost goals to enable affordable mass production. Stacey Rock, […]<br>
+&lt;<a href="https://www.uasvision.com/2026/02/24/kratos-and-ge-aerospace-win-us-air-force-award-to-design-engine-for-expendable-collaborative-combat-aircraft/">https://www.uasvision.com/2026/02/24/kratos-and-ge-aerospace-win-us-air-force-award-to-design-engine-for-expendable-collaborative-combat-aircraft/</a>&gt;<br>
+[17] <a href="https://finance.yahoo.com/news/look-kratos-defense-security-solutions-021442082.html?.tsrc=rss">finance.yahoo.com — A Look At Kratos Defense &amp; Security Solutions (KTOS) Valuation After Strong Results And Major Defense Contract Wins (2026-02-24T02:14:42+00:00)</a><br>
+Summary: Kratos Defense &amp; Security Solutions (KTOS) has investors’ attention after reporting fourth quarter and full year 2025 results, with higher revenue and net income than a year earlier, alongside multiple new defense contract wins. See our latest analysis for Kratos Defense &amp; Security Solutions. Kratos’ recent earnings beat and steady flow of new defense and space contracts have come after a sharp re-rating. The stock has shown a 25.66% 3 month share price return and a very large 1 year total&hellip;<br>
+&lt;<a href="https://finance.yahoo.com/news/look-kratos-defense-security-solutions-021442082.html?.tsrc=rss">https://finance.yahoo.com/news/look-kratos-defense-security-solutions-021442082.html?.tsrc=rss</a>&gt;<br>
+[18] <a href="https://spacenews.com/boeing-demonstrates-large-language-model-for-space-grade-hardware/">spacenews.com — Boeing demonstrates large language model for space-grade hardware (2026-02-24T01:47:12+00:00)</a><br>
+Summary: SAN FRANCISCO – Before uploading a large language model to space-grade hardware, Boeing Space Mission Systems engineers sought guidance from the hardware manufacturer. “They told us it wasn’t possible, but we are skilled engineers who were going to figure out a pathway to make it happen,” Arvel Chappell III, Boeing Space Mission Systems AI Lab […] The post Boeing demonstrates large language model for space-grade hardware appeared first on SpaceNews .<br>
+&lt;<a href="https://spacenews.com/boeing-demonstrates-large-language-model-for-space-grade-hardware/">https://spacenews.com/boeing-demonstrates-large-language-model-for-space-grade-hardware/</a>&gt;<br>
+[19] <a href="https://www.af.mil/News/Article-Display/Article/4412705/collaborative-combat-aircraft-program-progresses-through-deliberate-weapons-int/">af.mil — Collaborative Combat Aircraft program progresses through deliberate weapons integration testing (2026-02-24T01:11:00+00:00)</a><br>
+Summary: The Air Force has entered the next phase of developmental testing for its Collaborative Combat Aircraft program.<br>
+&lt;<a href="https://www.af.mil/News/Article-Display/Article/4412705/collaborative-combat-aircraft-program-progresses-through-deliberate-weapons-int/">https://www.af.mil/News/Article-Display/Article/4412705/collaborative-combat-aircraft-program-progresses-through-deliberate-weapons-int/</a>&gt;<br>
+[20] <a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxOMm5sNDFBLXRYQ2J4MTJFVkszOU5COEY2RG5EVjc3SkZBWlZ4RVc0VzM3RnRDLWd2ZUEwbGpKX1VYMDBJemZiWm43RVYtVXpiVjlTaTdmRU82UE5rRzJ0ZGk3aGRCUEdBVDNPWVExdTJlSkU0em8xNmZHSTUtVG5Fams2MDlMVWU1dDZ6SEp1VGxSVFNB?oc=5">news.google.com — Northrop Grumman Accelerating B-21 Raider Production - Northrop Grumman (2026-02-24T01:02:08+00:00)</a><br>
+Summary: Northrop Grumman Accelerating B-21 Raider Production Northrop Grumman<br>
+&lt;<a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxOMm5sNDFBLXRYQ2J4MTJFVkszOU5COEY2RG5EVjc3SkZBWlZ4RVc0VzM3RnRDLWd2ZUEwbGpKX1VYMDBJemZiWm43RVYtVXpiVjlTaTdmRU82UE5rRzJ0ZGk3aGRCUEdBVDNPWVExdTJlSkU0em8xNmZHSTUtVG5Fams2MDlMVWU1dDZ6SEp1VGxSVFNB?oc=5">https://news.google.com/rss/articles/CBMilAFBVV95cUxOMm5sNDFBLXRYQ2J4MTJFVkszOU5COEY2RG5EVjc3SkZBWlZ4RVc0VzM3RnRDLWd2ZUEwbGpKX1VYMDBJemZiWm43RVYtVXpiVjlTaTdmRU82UE5rRzJ0ZGk3aGRCUEdBVDNPWVExdTJlSkU0em8xNmZHSTUtVG5Fams2MDlMVWU1dDZ6SEp1VGxSVFNB?oc=5</a>&gt;<br>
+[21] <a href="https://spacenews.com/meink-saltzman-make-case-for-space-force-expansion/">spacenews.com — Meink, Saltzman make case for Space Force expansion (2026-02-24T00:42:02+00:00)</a><br>
+Summary: Meink: How the future force is designed ‘will be critical as the Space Force expands even faster in the next few years’ The post Meink, Saltzman make case for Space Force expansion appeared first on SpaceNews .<br>
+&lt;<a href="https://spacenews.com/meink-saltzman-make-case-for-space-force-expansion/">https://spacenews.com/meink-saltzman-make-case-for-space-force-expansion/</a>&gt;<br>
+[22] <a href="https://www.nextbigfuture.com/2026/02/us-urgently-needs-new-m1-e3-tank-to-replace-drone-vulnerable-m1-abrams-tank.html">nextbigfuture.com — US Urgently Needs New M1-E3 Tank to Replace Drone Vulnerable M1 Abrams Tank (2026-02-24T00:18:58+00:00)</a><br>
+Summary: The US Army is now a rushing to make the new M1-E3 tank because 27 out of 31 M1 Abrams were wrecked in Ukraine. They were mainly destroyed by cheap drones and mines. The new tank will have be lighter and have improved defences against cheap drones. Better armor in the right spots and better &hellip; Read more<br>
+&lt;<a href="https://www.nextbigfuture.com/2026/02/us-urgently-needs-new-m1-e3-tank-to-replace-drone-vulnerable-m1-abrams-tank.html">https://www.nextbigfuture.com/2026/02/us-urgently-needs-new-m1-e3-tank-to-replace-drone-vulnerable-m1-abrams-tank.html</a>&gt;<br>
+[23] <a href="https://breakingdefense.com/2026/02/air-force-ramps-up-b-21-raider-production-capacity-aims-for-2027-delivery/">breakingdefense.com — Air Force ramps up B-21 Raider production capacity, aims for 2027 delivery (2026-02-23T23:30:06+00:00)</a><br>
+Summary: A $4.5 billion spending boost for the B-21 program outlined by lawmakers as part of the 2025 reconciliation package will help fund the accelerated production.<br>
+&lt;<a href="https://breakingdefense.com/2026/02/air-force-ramps-up-b-21-raider-production-capacity-aims-for-2027-delivery/">https://breakingdefense.com/2026/02/air-force-ramps-up-b-21-raider-production-capacity-aims-for-2027-delivery/</a>&gt;<br>
+[24] <a href="https://breakingdefense.com/2026/02/lockheed-test-flies-f-35-with-artificial-intelligence-to-quickly-id-unknown-contacts/">breakingdefense.com — Lockheed test-flies F-35 with artificial intelligence to quickly ID unknown contacts (2026-02-23T22:33:22+00:00)</a><br>
+Summary: Known as Project Overwatch, the AI is trained to distinguish different types of emissions, autonomously identifying the source for the human pilot.<br>
+&lt;<a href="https://breakingdefense.com/2026/02/lockheed-test-flies-f-35-with-artificial-intelligence-to-quickly-id-unknown-contacts/">https://breakingdefense.com/2026/02/lockheed-test-flies-f-35-with-artificial-intelligence-to-quickly-id-unknown-contacts/</a>&gt;<br>
+[25] <a href="https://www.af.mil/News/Article-Display/Article/4412198/daf-increases-b-21-raider-production-capacity-to-deliver-combat-capability-fast/">af.mil — DAF increases B-21 Raider production capacity to deliver combat capability faster (2026-02-23T22:18:00+00:00)</a><br>
+Summary: The Department of the Air Force and Northrop Grumman Corp. have reached an agreement to expand production capacity for the B-21 Raider, accelerating delivery of the Air Force’s next-generation stealth bomber fleet.<br>
+&lt;<a href="https://www.af.mil/News/Article-Display/Article/4412198/daf-increases-b-21-raider-production-capacity-to-deliver-combat-capability-fast/">https://www.af.mil/News/Article-Display/Article/4412198/daf-increases-b-21-raider-production-capacity-to-deliver-combat-capability-fast/</a>&gt;<br>
+[26] <a href="https://www.war.gov/News/Contracts/Contract/Article/4412484/contracts-for-feb-23-2026/">war.gov — Contracts for Feb. 23, 2026 (2026-02-23T22:00:43+00:00)</a><br>
+Summary: Today&rsquo;s Department of War contracts valued at $7.5 million or more are now live on War.gov.<br>
+&lt;<a href="https://www.war.gov/News/Contracts/Contract/Article/4412484/contracts-for-feb-23-2026/">https://www.war.gov/News/Contracts/Contract/Article/4412484/contracts-for-feb-23-2026/</a>&gt;<br>
+[27] <a href="https://breakingdefense.com/2026/02/sda-taps-ast-spacemobile-to-demo-commercial-satellite-links-to-military-radios/">breakingdefense.com — SDA taps AST SpaceMobile to demo commercial satellite links to military radios (2026-02-23T21:46:32+00:00)</a><br>
+Summary: The $30M award is the first under SDA’s Hybrid Acquisition for proliferated Low-earth Orbit (HALO) program.<br>
+&lt;<a href="https://breakingdefense.com/2026/02/sda-taps-ast-spacemobile-to-demo-commercial-satellite-links-to-military-radios/">https://breakingdefense.com/2026/02/sda-taps-ast-spacemobile-to-demo-commercial-satellite-links-to-military-radios/</a>&gt;<br>
+[28] <a href="http://www.businesswire.com/news/home/20260223400381/en/IonQ-Selected-to-Support-Missile-Defense-Agency-SHIELD-IDIQ-Contract/?feedref=JjAwJuNHiystnCoBq_hl-d9cWptq3LFKqvWRRM6VXqVcgiwDl5F89IquLVWUqfRVgLxDkSKfgoruKb9yWl5as-PbWreMWuYBefATrZ0EPTXUYDHrCfzvcc7PfEC8QrAfBSvR87oUDgbHejiywQBpbg==">businesswire.com — IonQ Selected to Support Missile Defense Agency SHIELD IDIQ Contract (2026-02-23T21:30:00+00:00)</a><br>
+Summary: COLLEGE PARK, Md.&ndash;(BUSINESS WIRE)&ndash;IonQ (NYSE: IONQ) is pleased to announce it was awarded a contract under the Missile Defense Agency Scalable Homeland Innovative Enterprise Layered Defense (SHIELD) indefinite-delivery/indefinite-quantity (IDIQ) contract with a ceiling of $151 billion. This contract encompasses a broad range of work areas that allows for the rapid delivery of innovative capabilities to the warfighter with increased speed and agility. IonQ is among more than 2,400 companies el<br>
+&lt;<a href="http://www.businesswire.com/news/home/20260223400381/en/IonQ-Selected-to-Support-Missile-Defense-Agency-SHIELD-IDIQ-Contract/?feedref=JjAwJuNHiystnCoBq_hl-d9cWptq3LFKqvWRRM6VXqVcgiwDl5F89IquLVWUqfRVgLxDkSKfgoruKb9yWl5as-PbWreMWuYBefATrZ0EPTXUYDHrCfzvcc7PfEC8QrAfBSvR87oUDgbHejiywQBpbg==">http://www.businesswire.com/news/home/20260223400381/en/IonQ-Selected-to-Support-Missile-Defense-Agency-SHIELD-IDIQ-Contract/?feedref=JjAwJuNHiystnCoBq_hl-d9cWptq3LFKqvWRRM6VXqVcgiwDl5F89IquLVWUqfRVgLxDkSKfgoruKb9yWl5as-PbWreMWuYBefATrZ0EPTXUYDHrCfzvcc7PfEC8QrAfBSvR87oUDgbHejiywQBpbg==</a>&gt;<br>
+[29] <a href="https://www.armytimes.com/news/pentagon-congress/2026/02/23/us-pulls-nonessential-staff-from-beirut-embassy-as-tensions-with-iran-ratchet-up/">armytimes.com — US pulls nonessential staff from Beirut embassy as tensions with Iran ratchet up (2026-02-23T21:20:08+00:00)</a><br>
+Summary: The United States has ordered nonessential personnel and their family members to leave its embassy in Beirut, a senior State Department official told Military Times on Monday, as Washington continues a massive military buildup in the Middle East. The official, who spoke on the condition of anonymity to discuss sensitive information, said the drawdown is a “prudent” step to reduce the American footprint in the region while President Donald Trump mulls a strike on Iran. “The Embassy remains operational with core staff in place. This is a temporary measure intended to ensure the safety of our per…<br>
+&lt;<a href="https://www.armytimes.com/news/pentagon-congress/2026/02/23/us-pulls-nonessential-staff-from-beirut-embassy-as-tensions-with-iran-ratchet-up/">https://www.armytimes.com/news/pentagon-congress/2026/02/23/us-pulls-nonessential-staff-from-beirut-embassy-as-tensions-with-iran-ratchet-up/</a>&gt;<br>
+[30] <a href="https://breakingdefense.com/2026/02/reconciliation-revealed-how-the-pentagon-plans-to-spend-all-152-billion-in-fy26/">breakingdefense.com — Reconciliation revealed: How the Pentagon plans to spend all $152 billion in FY26 (2026-02-23T20:28:50+00:00)</a><br>
+Summary: The spending plan, obtained by Breaking Defense, pumps billions into munitions, missile defense and shipbuilding, among other priorities.<br>
+&lt;<a href="https://breakingdefense.com/2026/02/reconciliation-revealed-how-the-pentagon-plans-to-spend-all-152-billion-in-fy26/">https://breakingdefense.com/2026/02/reconciliation-revealed-how-the-pentagon-plans-to-spend-all-152-billion-in-fy26/</a>&gt;<br>
+[31] <a href="https://www.defensenews.com/industry/techwatch/2026/02/23/f-22-raptor-mq-20-drone-complete-manned-unmanned-flight-exercise/">defensenews.com — F-22 Raptor, MQ-20 drone complete manned-unmanned flight exercise (2026-02-23T19:35:55+00:00)</a><br>
+Summary: The U.S. Air Force and General Atomics Aeronautical Systems Inc. recently completed a successful manned-unmanned teamed demonstration between an F-22 Raptor and an MQ-20 Avenger unmanned aircraft, advancing the integration of autonomous systems into tactical fighter operations, according to a Feb. 23 company release . The live-flight exercise, conducted at Edwards Air Force Base in California, featured a human-piloted F-22 issuing real-time commands to the MQ-20 via advanced autonomy software and a tactical data link. The Avenger drone responded by executing a range of mission tasks, including…<br>
+&lt;<a href="https://www.defensenews.com/industry/techwatch/2026/02/23/f-22-raptor-mq-20-drone-complete-manned-unmanned-flight-exercise/">https://www.defensenews.com/industry/techwatch/2026/02/23/f-22-raptor-mq-20-drone-complete-manned-unmanned-flight-exercise/</a>&gt;<br>
+[32] <a href="https://breakingdefense.com/2026/02/frozen-tablets-and-downed-drones-armys-11th-airborne-learns-to-fight-in-the-arctic/">breakingdefense.com — Frozen tablets and downed drones: Army’s 11th Airborne learns to fight in the Arctic (2026-02-23T19:30:21+00:00)</a><br>
+Summary: During JPMRC 26-02, the “Arctic Angels” grapple with tough terrain, fragile tech and logistical shortfalls as the Army tries to sharpen its Arctic edge.<br>
+&lt;<a href="https://breakingdefense.com/2026/02/frozen-tablets-and-downed-drones-armys-11th-airborne-learns-to-fight-in-the-arctic/">https://breakingdefense.com/2026/02/frozen-tablets-and-downed-drones-armys-11th-airborne-learns-to-fight-in-the-arctic/</a>&gt;<br>
+[33] <a href="https://www.104fw.ang.af.mil/News/Features/Article/4412187/expanding-joint-integrated-capabilities-158th-fighter-wing-104th-fighter-wing-a/">104fw.ang.af.mil — Expanding Joint Integrated Capabilities: 158th Fighter Wing, 104th Fighter Wing, and 103rd Airlift Wing Execute Rapid Rearming and Refueling Exercises (2026-02-23T19:15:08+00:00)</a><br>
+Summary: Westover AIR RESERVE BASE, Chicopee, Mass. – Members from the 104th Fighter Wing, 103rd Airlift Wing, and 158th Fighter Wing recently participated in a series of integrated combat turn (ICT) exercises, June 11-12, 2025, at Westover Air Reserve Base, Chicopee, Mass. The Distributable-ICT exercises consisted of F-15C Eagle’s from the 104th Fighter Wing and F-35A Lightning II’s from the 158th Fighter Wing getting refueled by a C-130H Hercules from the 103rd Airlift Wing that also delivered a full missile loadout for each jet. This exercise proved the capability to refuel and rearm multiple fighte…<br>
+&lt;<a href="https://www.104fw.ang.af.mil/News/Features/Article/4412187/expanding-joint-integrated-capabilities-158th-fighter-wing-104th-fighter-wing-a/">https://www.104fw.ang.af.mil/News/Features/Article/4412187/expanding-joint-integrated-capabilities-158th-fighter-wing-104th-fighter-wing-a/</a>&gt;<br>
+[34] <a href="https://www.bbc.com/news/articles/cj32l00k47lo?at_medium=RSS&amp;at_campaign=rss">bbc.com — US partially evacuates Beirut embassy amid rising Iran tensions (2026-02-23T19:08:55+00:00)</a><br>
+Summary: The State Department has ordered non-essential staff to leave the embassy in Beirut after a security review.<br>
+&lt;<a href="https://www.bbc.com/news/articles/cj32l00k47lo?at_medium=RSS&amp;at_campaign=rss">https://www.bbc.com/news/articles/cj32l00k47lo?at_medium=RSS&amp;at_campaign=rss</a>&gt;<br>
+[35] <a href="https://www.defensenews.com/news/your-military/2026/02/23/rapid-scaling-soldier-led-market-key-to-us-drone-ambitions-army-secretary-says/">defensenews.com — Rapid scaling, soldier-led market key to US drone ambitions, Army secretary says (2026-02-23T19:07:42+00:00)</a><br>
+Summary: HUNTSVILLE, Ala. — The conclusion of the Army’s inaugural Best Drone Warfighter Competition saw soldiers awarded in Best Operator, Best Innovation and Best Tactical Squad categories. On hand to present awards to the winners, who were selected from more than 200 competitors during the Feb. 17-19 event, were Army Secretary Dan Driscoll and Maj. Gen. Clair A. Gill, commanding general of the U.S. Army Aviation Center of Excellence. Driscoll, who flew to the Huntsville, Alabama, ceremony after participating in Ukraine-Russia peace talks in Geneva, Switzerland, spoke to Military Times about the sign…<br>
+&lt;<a href="https://www.defensenews.com/news/your-military/2026/02/23/rapid-scaling-soldier-led-market-key-to-us-drone-ambitions-army-secretary-says/">https://www.defensenews.com/news/your-military/2026/02/23/rapid-scaling-soldier-led-market-key-to-us-drone-ambitions-army-secretary-says/</a>&gt;<br>
+[36] <a href="https://spacenews.com/space-force-seeks-market-answers-on-in-orbit-refueling/">spacenews.com — Space Force seeks market answers on in-orbit refueling (2026-02-23T19:00:00+00:00)</a><br>
+Summary: A new RFI poses questions to industry on future refueling architecture The post Space Force seeks market answers on in-orbit refueling appeared first on SpaceNews .<br>
+&lt;<a href="https://spacenews.com/space-force-seeks-market-answers-on-in-orbit-refueling/">https://spacenews.com/space-force-seeks-market-answers-on-in-orbit-refueling/</a>&gt;<br>
+[37] <a href="https://spacenews.com/ast-spacemobile-wins-30-million-contract-for-military-broadband-demo/">spacenews.com — AST SpaceMobile wins $30 million contract for military  broadband demo (2026-02-23T18:08:47+00:00)</a><br>
+Summary: The Space Development Agency will explore the use of commercial satellites to test direct-to-device connectivity for future warfighting network The post AST SpaceMobile wins $30 million contract for military broadband demo appeared first on SpaceNews .<br>
+&lt;<a href="https://spacenews.com/ast-spacemobile-wins-30-million-contract-for-military-broadband-demo/">https://spacenews.com/ast-spacemobile-wins-30-million-contract-for-military-broadband-demo/</a>&gt;<br>
+[38] <a href="https://www.pacom.mil/Media/NEWS/News-Article-View/Article/4412710/17th-field-artillery-brigade-conducts-arctic-ground-raid-mission-with-himars/">pacom.mil — 17th Field Artillery Brigade conducts Arctic Ground Raid Mission with HIMARS (2026-02-23T18:00:00+00:00)</a><br>
+Summary: TANANA FLATS TRAINING AREA, Alaska — Soldiers assigned to 17th Field Artillery Brigade conducted a ground raid mission with the High Mobility Artillery Rocket System (HIMARS) during Joint Pacific Multinational Readiness Center 26-02 in support of the 11th Airborne Division.<br>
+&lt;<a href="https://www.pacom.mil/Media/NEWS/News-Article-View/Article/4412710/17th-field-artillery-brigade-conducts-arctic-ground-raid-mission-with-himars/">https://www.pacom.mil/Media/NEWS/News-Article-View/Article/4412710/17th-field-artillery-brigade-conducts-arctic-ground-raid-mission-with-himars/</a>&gt;<br>
+[39] <a href="https://www.navalnews.com/naval-news/2026/02/u-s-army-to-accelerate-fielding-of-1000-km-anti-ship-prsm/">navalnews.com — U.S. Army to Accelerate Fielding of 1000 km Anti-Ship PrSM (2026-02-23T17:48:27+00:00)</a><br>
+Summary: The U.S. Army wants to accelerate the development of a Precision Strike Missile (PrSM) anti-ship variant capable of being fired from the service’s highly mobile rocket launchers and striking maritime targets over a thousand kilometers away, according to a recent notice. PrSM Increment (Inc) 4 is envisioned to equip the ubiquitous High Mobility Rocket Artillery System (HIMARS) and Multiple Rocket Launch Systems with a next-generation long-range strike ability to target moving maritime and ground targets, a mission set that the Army has deemed crucial for expedited early operational capability. …<br>
+&lt;<a href="https://www.navalnews.com/naval-news/2026/02/u-s-army-to-accelerate-fielding-of-1000-km-anti-ship-prsm/">https://www.navalnews.com/naval-news/2026/02/u-s-army-to-accelerate-fielding-of-1000-km-anti-ship-prsm/</a>&gt;<br>
+[40] <a href="https://breakingdefense.com/2026/02/training-logistics-and-property-accountability-army-preparing-for-influx-of-small-drones/">breakingdefense.com — Training, logistics and property accountability: Army preparing for influx of small drones (2026-02-23T17:04:21+00:00)</a><br>
+Summary: “If we have a FPV-style drone that is lethal and armed, and we expect that soldier to hit a very precise target at a very precise point … that soldier is going to need a much higher level of skill and training,” said Col. Nick Ryan, the director of Army UAS Transformation with the Aviation Center of Excellence.<br>
+&lt;<a href="https://breakingdefense.com/2026/02/training-logistics-and-property-accountability-army-preparing-for-influx-of-small-drones/">https://breakingdefense.com/2026/02/training-logistics-and-property-accountability-army-preparing-for-influx-of-small-drones/</a>&gt;<br>
+[41] <a href="https://www.ssc.spaceforce.mil/Newsroom/Article/4411899/space-systems-command-funds-five-fight-tonight-solutions-to-pressing-ussf-chall">ssc.spaceforce.mil — Space Systems Command Funds Five Fight Tonight Solutions to Pressing USSF Challenges (2026-02-23T16:48:00+00:00)</a><br>
+Summary: A containerized backup gateway/GEP (ground entry point) and four other technological solutions to pressing U.S. Space Force challenges were announced as the winners of Space Systems Command’s (SSC) “Fight Tonight” competition Feb. 12, 2026. The competition, now in its fourth consecutive year, encourages military and civilian employees to identify technologies that build upon U.S. Space Force (USSF) capabilities or introduce new ones. “SSC’s annual workforce innovation competition clearly showcases the level of talent our team brings to the table not just once a year, but every single day,” sai…<br>
+&lt;<a href="https://www.ssc.spaceforce.mil/Newsroom/Article/4411899/space-systems-command-funds-five-fight-tonight-solutions-to-pressing-ussf-chall">https://www.ssc.spaceforce.mil/Newsroom/Article/4411899/space-systems-command-funds-five-fight-tonight-solutions-to-pressing-ussf-chall</a>&gt;<br>
+[42] <a href="https://dronelife.com/2026/02/23/nasa-working-group-targets-autonomous-multi-aircraft-uas-operations/">dronelife.com — NASA Working Group Targets Autonomous Multi-Aircraft UAS Operations (2026-02-23T16:38:32+00:00)</a><br>
+Summary: A NASA-sponsored working group is pushing forward efforts to make autonomous, multi-drone fleet operations a routine part of the national airspace, and it’s looking for new members to help. The Routine Autonomous Multi-Aircraft Operations (RAM-AO) Working Group, formerly the m:N Working Group, meets March 3–5 at NASA Ames Research Center in Mountain View, California. Aptima, […] The post NASA Working Group Targets Autonomous Multi-Aircraft UAS Operations appeared first on DRONELIFE .<br>
+&lt;<a href="https://dronelife.com/2026/02/23/nasa-working-group-targets-autonomous-multi-aircraft-uas-operations/">https://dronelife.com/2026/02/23/nasa-working-group-targets-autonomous-multi-aircraft-uas-operations/</a>&gt;<br>
+[43] <a href="https://dronelife.com/2026/02/23/dhs-offers-counter-uav-siting-advice-for-world-cup-communities/">dronelife.com — DHS Offers Counter-UAV Siting Advice For World Cup Communities (2026-02-23T16:28:45+00:00)</a><br>
+Summary: By Dronelife Features Editor Jim Magill (Editor’s note: This following story is part of an ongoing series of stories on efforts to establish new counter-UAS protocols in the U.S. to protect high-profile sporting events and critical infrastructure from the potential threats posed by drones flown by careless or hostile actors.) As U.S. cities get ready […] The post DHS Offers Counter-UAV Siting Advice For World Cup Communities appeared first on DRONELIFE .<br>
+&lt;<a href="https://dronelife.com/2026/02/23/dhs-offers-counter-uav-siting-advice-for-world-cup-communities/">https://dronelife.com/2026/02/23/dhs-offers-counter-uav-siting-advice-for-world-cup-communities/</a>&gt;<br>
+[44] <a href="https://dronelife.com/2026/02/23/rapid-mapping-for-a-24-7-defense-environment-simactive-on-speed-security-and-scalable-intelligence/">dronelife.com — Rapid Mapping for a 24/7 Defense Environment: SimActive on Speed, Security, and Scalable Intelligence (2026-02-23T16:02:50+00:00)</a><br>
+Summary: As defense budgets rise and geopolitical tensions reshape operational priorities, militaries are investing heavily in technologies that can turn raw data into timely, actionable intelligence. For photogrammetry company SimActive, that mission has been central since its founding. In a recent interview with DRONELIFE, CEO Dr. Philippe Simard discussed how the company’s flagship software, Correlator3D, continues […] The post Rapid Mapping for a 24/7 Defense Environment: SimActive on Speed, Security, and Scalable Intelligence appeared first on DRONELIFE .<br>
+&lt;<a href="https://dronelife.com/2026/02/23/rapid-mapping-for-a-24-7-defense-environment-simactive-on-speed-security-and-scalable-intelligence/">https://dronelife.com/2026/02/23/rapid-mapping-for-a-24-7-defense-environment-simactive-on-speed-security-and-scalable-intelligence/</a>&gt;<br>
+[45] <a href="https://cnrse.cnic.navy.mil/Installations/NCBC-Gulfport/News/Article/4411777/topping-out-ceremony-marks-investment-in-future-of-submarine-readiness/">cnrse.cnic.navy.mil — Topping Out Ceremony Marks Investment in Future of Submarine Readiness (2026-02-23T15:51:00+00:00)</a><br>
+Summary: A topping out ceremony was held Jan. 29 to mark a major milestone in the construction of a new facility for the Nuclear Regional Maintenance Department (NRMD) at Naval Submarine Base (NSB) Kings Bay, Georgia.<br>
+&lt;<a href="https://cnrse.cnic.navy.mil/Installations/NCBC-Gulfport/News/Article/4411777/topping-out-ceremony-marks-investment-in-future-of-submarine-readiness/">https://cnrse.cnic.navy.mil/Installations/NCBC-Gulfport/News/Article/4411777/topping-out-ceremony-marks-investment-in-future-of-submarine-readiness/</a>&gt;<br>
+[46] <a href="https://finance.yahoo.com/news/rtx-rtx-defense-autonomy-wins-140932070.html?.tsrc=rss">finance.yahoo.com — What RTX (RTX)&rsquo;s New Defense and Autonomy Wins Mean for Shareholders (2026-02-23T14:09:32+00:00)</a><br>
+Summary: In recent weeks, RTX businesses secured U.S. defense milestones, including Navy approval of Raytheon’s StormBreaker smart weapon for F/A-18E/F Super Hornets and successful Collins Aerospace flight tests of autonomous mission software for the Air Force’s Collaborative Combat Aircraft program. Together with new work on thin-film lithium niobate wafers for secure photonics, these advances highlight RTX’s deepening role in high-end weapons, autonomy, and next‑generation communications for both&hellip;<br>
+&lt;<a href="https://finance.yahoo.com/news/rtx-rtx-defense-autonomy-wins-140932070.html?.tsrc=rss">https://finance.yahoo.com/news/rtx-rtx-defense-autonomy-wins-140932070.html?.tsrc=rss</a>&gt;<br>
+[47] <a href="https://www.suasnews.com/2026/02/ga-asi-and-usaf-demonstrate-manned-unmanned-teaming-with-f-22-and-mq-20-in-joint-autonomy-exercise/">suasnews.com — GA-ASI and USAF Demonstrate Manned-Unmanned Teaming With F-22 and MQ-20 In Joint Autonomy Exercise (2026-02-23T13:17:17+00:00)</a><br>
+Summary: In collaboration with the U.S. Air Force, General Atomics Aeronautical Systems, Inc. (GA-ASI) conducted its latest<br>
+&lt;<a href="https://www.suasnews.com/2026/02/ga-asi-and-usaf-demonstrate-manned-unmanned-teaming-with-f-22-and-mq-20-in-joint-autonomy-exercise/">https://www.suasnews.com/2026/02/ga-asi-and-usaf-demonstrate-manned-unmanned-teaming-with-f-22-and-mq-20-in-joint-autonomy-exercise/</a>&gt;<br>
+[48] <a href="https://www.suasnews.com/2026/02/ga-asi-announces-yfq-42a-dark-merlin/">suasnews.com — GA-ASI Announces YFQ-42A Dark Merlin (2026-02-23T13:01:06+00:00)</a><br>
+Summary: General Atomics Aeronautical Systems, Inc. (GA-ASI) is giving its U.S. Air Force Collaborative Combat Aircraft<br>
+&lt;<a href="https://www.suasnews.com/2026/02/ga-asi-announces-yfq-42a-dark-merlin/">https://www.suasnews.com/2026/02/ga-asi-announces-yfq-42a-dark-merlin/</a>&gt;</p>
+</body>
+</html>

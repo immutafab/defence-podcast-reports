@@ -197,33 +197,6 @@
     catch (e) { return null; }
   }
 
-  function getReportDate() {
-    return document.body.getAttribute("data-report-date") || null;
-  }
-
- function getReportId(reportDate) {
-  // Make sure Segment treats this as a string ID, not a date
-  if (reportDate) return "rpt_" + reportDate;
-  var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
-  return file ? "rpt_" + file : null;
-}
-
-  function getLinkType(a) {
-    var href = (a.getAttribute("href") || "").trim();
-    if (!href) return "unknown";
-
-    // nav-ish links
-    if (href.startsWith("#") || href.startsWith("javascript:")) return "nav";
-    if (a.closest("nav, header, footer")) return "nav";
-
-    // classify by domain
-    var domain = getDomain(a.href);
-    if (!domain) return "unknown";
-
-    if (domain === window.location.hostname) return "internal";
-    return "source"; // outbound
-  }
-
   function shouldIgnore(a) {
     var href = (a.getAttribute("href") || "").trim();
     if (!href) return true;
@@ -233,34 +206,73 @@
     return false;
   }
 
-document.addEventListener("click", function (e) {
-  var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
-  if (!a) return;
-  if (shouldIgnore(a)) return;
-
-  var href = a.href;
-  var domain = getDomain(href);
-  if (!domain) return;
-
-  // Track only outbound links (change/remove if you want all links)
-  if (domain === window.location.hostname) return;
-
-  var reportDate = document.body.getAttribute("data-report-date") || null;
-  var reportId = reportDate ? "rpt_" + reportDate : null;
-
-  if (window.analytics && typeof window.analytics.track === "function") {
-    window.analytics.track("Report Link Clicked", {
-      href: href,
-      domain: domain,
-      text: (a.textContent || "").trim().slice(0, 200),
-      report_date: reportDate,
-      report_id: reportId,
-      link_type: "source",
-      path: window.location.pathname,
-      url: window.location.href
-    });
+  function getReportDate() {
+    return document.body.getAttribute("data-report-date") || null;
   }
-}, true);
+
+  function getReportId(reportDate) {
+    // Prefix so Segment doesn't auto-cast it as a Date
+    if (reportDate) return "rpt_" + reportDate;
+    var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
+    return file ? "rpt_" + file : null;
+  }
+
+  function handleOutboundClick(e) {
+    var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if (!a) return;
+    if (shouldIgnore(a)) return;
+
+    var href = a.href;
+    var domain = getDomain(href);
+    if (!domain) return;
+
+    // outbound only
+    if (domain === window.location.hostname) return;
+
+    var reportDate = getReportDate();
+    var reportId = getReportId(reportDate);
+
+    // Let ctrl/cmd-click and middle-click behave normally (new tab)
+    var isModified = e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1;
+    var target = (a.getAttribute("target") || "").toLowerCase();
+    var opensNewTab = target === "_blank" || isModified;
+
+    // For same-tab nav, delay navigation briefly so track has time to send
+    if (!opensNewTab) {
+      e.preventDefault();
+    }
+
+    var navigated = false;
+    function go() {
+      if (navigated || opensNewTab) return;
+      navigated = true;
+      window.location.href = href;
+    }
+
+    if (window.analytics && typeof window.analytics.track === "function") {
+      window.analytics.track("Report Link Clicked", {
+        href: href,
+        domain: domain,
+        text: (a.textContent || "").trim().slice(0, 200),
+        report_date: reportDate,
+        report_id: reportId,
+        link_type: "source",
+        path: window.location.pathname,
+        url: window.location.href
+      }, function () {
+        go();
+      });
+
+      // Fallback in case callback doesn’t fire
+      if (!opensNewTab) setTimeout(go, 250);
+    } else {
+      go();
+    }
+  }
+
+  // Capture phase helps catch clicks before navigation handlers run
+  document.addEventListener("click", handleOutboundClick, true);
+})();
 </script>
 
 </head>

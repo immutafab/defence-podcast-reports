@@ -189,6 +189,49 @@
 })();
 </script>
 
+<!-- Segment: outbound link click tracking -->
+<script>
+(function () {
+  function getDomain(url) {
+    try { return new URL(url, window.location.href).hostname; }
+    catch (e) { return null; }
+  }
+
+  function shouldIgnore(a) {
+    var href = (a.getAttribute("href") || "").trim();
+    if (!href) return true;
+    if (href.startsWith("#")) return true;
+    if (href.startsWith("javascript:")) return true;
+    if (href.startsWith("mailto:") || href.startsWith("tel:")) return true;
+    return false;
+  }
+
+  document.addEventListener("click", function (e) {
+    var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if (!a) return;
+    if (shouldIgnore(a)) return;
+
+    var href = a.href;
+    var domain = getDomain(href);
+    if (!domain) return;
+
+    // Track only outbound links (change/remove if you want all links)
+    if (domain === window.location.hostname) return;
+
+    if (window.analytics && typeof window.analytics.track === "function") {
+      window.analytics.track("Report Link Clicked", {
+        href: href,
+        domain: domain,
+        text: (a.textContent || "").trim().slice(0, 200),
+        report_date: document.body.getAttribute("data-report-date") || null,
+        path: window.location.pathname,
+        url: window.location.href
+      });
+    }
+  }, true);
+})();
+</script>
+
 </head>
 <body data-report-date="2026-02-19">
 <h1 id="frontline-capital-daily-report-2026-02-19">Frontline Capital – Daily Report – 2026-02-19</h1>

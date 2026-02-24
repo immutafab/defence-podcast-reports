@@ -61,10 +61,9 @@
   }
 
   function getReportId(reportDate) {
-    // Prefer reportDate; fallback to filename sans extension
-    if (reportDate) return reportDate;
+    if (reportDate) return "rpt_" + reportDate;
     var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
-    return file || null;
+    return file ? "rpt_" + file : null;
   }
 
   function setup() {

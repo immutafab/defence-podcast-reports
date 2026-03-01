@@ -47,7 +47,7 @@
     flex-wrap: wrap;
     align-items: center;
   }
-  .signup-form input[type="email"] {
+  .signup-form input {
     flex: 1 1 280px;
     min-width: 220px;
     padding: 10px 12px;
@@ -250,8 +250,6 @@ function getReportId(reportDate) {
     var ticker = a.getAttribute("data-stock-ticker");
     if (!ticker) return;
 
-    // Prevent the outbound handler from also firing for this click
-    e.stopPropagation();
 
     if (window.analytics && typeof window.analytics.track === "function") {
       window.analytics.track("Stock Clicked", {
@@ -386,31 +384,51 @@ function getReportId(reportDate) {
     }
   }
 
+ function normalizePhone(raw) {
+    // Very lightweight normalizer:
+    // - trims
+    // - converts "04..." AU mobile into "+614..."
+    // - strips spaces/dashes
+    var p = (raw || "").trim();
+    if (!p) return null;
+
+    p = p.replace(/[()\-\s]/g, "");
+    if (p.startsWith("04")) p = "+61" + p.slice(1);     // 04xx... -> +614xx...
+    if (p.startsWith("614")) p = "+" + p;               // 614... -> +614...
+    if (p.startsWith("00")) p = "+" + p.slice(2);       // 00.. -> +..
+
+    // Basic sanity: must start with + and have 8-15 digits total
+    if (!/^\+\d{8,15}$/.test(p)) return null;
+    return p;
+  }
+
   function setupSignupSegmentOnly() {
     var form = document.getElementById("signup-form");
-    var emailInput = document.getElementById("signup-email");
-    if (!form || !emailInput) return;
+    var phoneInput = document.getElementById("signup-phone");
+    if (!form || !phoneInput) return;
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      var email = (emailInput.value || "").trim().toLowerCase();
-      if (!email) return;
+      var rawPhone = (phoneInput.value || "").trim();
+      var phone = normalizePhone(rawPhone);
+      if (!phone) {
+        alert("Enter a valid phone number (include country code, e.g. +61...).");
+        return;
+      }
 
       var reportDate = getReportDate();
       var reportId = getReportId(reportDate);
       var userId = getStableUserId();
-      var emailDomain = email.split("@")[1] || null;
 
       if (!(window.analytics && typeof analytics.identify === "function")) {
         alert("Analytics not ready yet — try again in a second.");
         return;
       }
 
-      // 1) Attach email to the same stable user
+      // Attach phone to the same stable user
       analytics.identify(userId, {
-        email,
-        email_domain: emailDomain,
+        phone: phone,
         signup_source: "frontline-capital-report",
         signup_placement: "top",
         last_report_id: reportId,
@@ -421,12 +439,12 @@ function getReportId(reportDate) {
         report_id: reportId,
         report_date_str: reportDate,
         placement: "top",
-        email_domain: emailDomain,
+        contact_channel: "sms",
+        phone_country: phone.slice(0, 3), // crude, but useful (+61 etc)
         path: location.pathname,
         url: location.href
       });
 
-      // 3) Optimistic success UI (since there’s no backend)
       form.innerHTML = "<strong>Saved — you’re on the list.</strong>";
     });
   }
@@ -437,22 +455,32 @@ function getReportId(reportDate) {
     setupSignupSegmentOnly();
   }
 })();
+
+
 </script>
 
 </head>
 <body data-report-date="2026-02-24">
 
 <div class="signup-cta" id="signup-cta">
-  <h3>Get the daily report by email</h3>
-  <p>Get Frontline Capital in your inbox each morning.</p>
+  <h3>Get the daily report by SMS</h3>
+  <p>Get Frontline Capital on your phone each morning.</p>
 
-  <!-- Replace action URL with your provider endpoint -->
- <form id="signup-form" class="signup-form">
-  <input type="email" id="signup-email" placeholder="you@example.com" required autocomplete="email" />
-  <button type="submit">Subscribe</button>
-</form>
+  <form id="signup-form" class="signup-form">
+    <input
+      type="tel"
+      id="signup-phone"
+      placeholder="+61 4xx xxx xxx"
+      required
+      autocomplete="tel"
+      inputmode="tel"
+    />
+    <button type="submit">Text me the report</button>
+  </form>
 
-  <div class="signup-note">No spam. Unsubscribe anytime.</div>
+  <p class="signup-note">
+    We’ll only use your number for Frontline Capital updates. Reply STOP to opt out.
+  </p>
 </div>
 
 <h1 id="frontline-capital-daily-report-2026-02-24">Frontline Capital – Daily Report – 2026-02-24</h1>

@@ -440,7 +440,11 @@ function getReportId(reportDate) {
         report_date_str: reportDate,
         placement: "top",
         contact_channel: "sms",
-        phone_country: phone.slice(0, 3), // crude, but useful (+61 etc)
+
+        // ✅ add this
+        phone: phone,
+
+        phone_country: phone.slice(0, 3),
         path: location.pathname,
         url: location.href
       });

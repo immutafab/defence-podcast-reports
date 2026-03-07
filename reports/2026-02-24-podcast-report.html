@@ -240,6 +240,169 @@ function getReportId(reportDate) {
 })();
 </script>
 
+<script>
+(function () {
+  var LS_USER = "fc_user_id";                 // same key as ensureUserId uses :contentReference[oaicite:3]{index=3}
+  var LS_WL   = "fc_stock_watchlist_rt";
+  var LS_INT  = "fc_interest_rt";
+  var MAX_WL  = 25;
+
+  var pendingExtra = {};
+  var timer = null;
+
+  function loadJson(key, fallback) {
+    try {
+      var v = localStorage.getItem(key);
+      if (!v) return fallback;
+      var j = JSON.parse(v);
+      return (j === null || j === undefined) ? fallback : j;
+    } catch (e) { return fallback; }
+  }
+
+  function saveJson(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
+  }
+
+  function getUserId() {
+    try { return localStorage.getItem(LS_USER) || null; } catch (e) { return null; }
+  }
+
+  function getWatchlist() {
+    var wl = loadJson(LS_WL, []);
+    if (!Array.isArray(wl)) wl = [];
+    // sanitize + cap
+    wl = wl
+      .filter(function (x) { return typeof x === "string"; })
+      .map(function (x) { return x.trim().toUpperCase(); })
+      .filter(Boolean);
+    // de-dupe preserve order
+    var seen = {};
+    var out = [];
+    for (var i=0; i<wl.length; i++) {
+      var t = wl[i];
+      if (seen[t]) continue;
+      seen[t] = true;
+      out.push(t);
+      if (out.length >= MAX_WL) break;
+    }
+    return out;
+  }
+
+  function setWatchlist(wl) {
+    saveJson(LS_WL, wl);
+  }
+
+  function getInterest() {
+    var it = loadJson(LS_INT, { stocks: false, news: false });
+    if (!it || typeof it !== "object") it = { stocks:false, news:false };
+    it.stocks = !!it.stocks;
+    it.news   = !!it.news;
+    return it;
+  }
+
+  function setInterest(it) {
+    saveJson(LS_INT, it);
+  }
+
+  
+
+  function interestType(it) {
+    if (it.stocks && it.news) return "both";
+    if (it.stocks) return "stocks";
+    if (it.news) return "news";
+    return "unknown";
+  }
+
+  function scheduleIdentify(extraTraits) {
+    // merge extras (latest wins)
+    if (extraTraits && typeof extraTraits === "object") {
+      for (var k in extraTraits) pendingExtra[k] = extraTraits[k];
+    }
+
+    if (timer) return;
+    timer = setTimeout(function () {
+      timer = null;
+
+      var userId = getUserId();
+      if (!userId) return;
+
+      var wl = getWatchlist();
+      var it = getInterest();
+
+      var traits = {
+        stock_watchlist_rt: wl,
+        interest_stocks_rt: it.stocks,
+        interest_news_rt: it.news,
+        interest_type_rt: interestType(it)
+      };
+
+      // apply pending extras
+      for (var k in pendingExtra) traits[k] = pendingExtra[k];
+      pendingExtra = {};
+
+      if (window.analytics && typeof window.analytics.identify === "function") {
+        window.analytics.identify(userId, traits);
+      }
+    }, 600); // debounce to avoid spamming Identify on fast clicks
+  }
+
+  function markStockClick(ticker) {
+    var t = (ticker || "").trim().toUpperCase();
+    if (!t) return;
+
+    var wl = getWatchlist();
+    // put most recent first
+    wl = [t].concat(wl.filter(function (x) { return x !== t; }));
+    if (wl.length > MAX_WL) wl = wl.slice(0, MAX_WL);
+    setWatchlist(wl);
+
+    var it = getInterest();
+    it.stocks = true;
+    setInterest(it);
+
+    scheduleIdentify({
+      last_stock_clicked: t,
+      last_stock_clicked_at: new Date().toISOString()
+    });
+  }
+
+  function markNewsClick(domain) {
+    var it = getInterest();
+    it.news = true;
+    setInterest(it);
+
+    scheduleIdentify({
+      last_news_domain: domain || null,
+      last_news_clicked_at: new Date().toISOString()
+    });
+  }
+
+  // expose helpers for your click handlers
+  window.fcRealtimeTraits = {
+    markStockClick: markStockClick,
+    markNewsClick: markNewsClick,
+    flush: function () { scheduleIdentify({}); },
+    getSnapshot: function () {
+      var wl = getWatchlist();
+      var it = getInterest();
+      return {
+        stock_watchlist_rt: wl,
+        interest_stocks_rt: !!it.stocks,
+        interest_news_rt: !!it.news,
+        interest_type_rt: interestType(it)
+      };
+    }
+  };
+  
+  // flush once Segment is ready so the profile gets initial realtime traits ASAP
+  if (window.analytics && typeof window.analytics.ready === "function") {
+    window.analytics.ready(function () { scheduleIdentify({}); });
+  } else {
+    setTimeout(function () { scheduleIdentify({}); }, 1500);
+  }
+})();
+</script>
+
 <!-- Segment: outbound stock click tracking -->
 <script>
 (function () {
@@ -250,6 +413,7 @@ function getReportId(reportDate) {
     var ticker = a.getAttribute("data-stock-ticker");
     if (!ticker) return;
 
+    if (window.fcRealtimeTraits) window.fcRealtimeTraits.markStockClick(ticker);
 
     if (window.analytics && typeof window.analytics.track === "function") {
       window.analytics.track("Stock Clicked", {
@@ -331,6 +495,8 @@ function getReportId(reportDate) {
     }
 
     if (window.analytics && typeof window.analytics.track === "function") {
+      if (window.fcRealtimeTraits) window.fcRealtimeTraits.markNewsClick(domain);
+
       window.analytics.track("Report Link Clicked", {
         href: href,
         domain: domain,
@@ -427,12 +593,22 @@ function getReportId(reportDate) {
       }
 
       // Attach phone to the same stable user
+      var rt = (window.fcRealtimeTraits && typeof window.fcRealtimeTraits.getSnapshot === "function")
+        ? window.fcRealtimeTraits.getSnapshot()
+        : { stock_watchlist_rt: [], interest_stocks_rt: false, interest_news_rt: false, interest_type_rt: "unknown" };
+
       analytics.identify(userId, {
         phone: phone,
-        signup_source: "frontline-capital-report",
-        signup_placement: "top",
-        last_report_id: reportId,
-        last_report_date_str: reportDate
+        sms_opt_in: true,
+
+        // ✅ realtime onboarding traits
+        stock_watchlist_rt: rt.stock_watchlist_rt,
+        interest_stocks_rt: rt.interest_stocks_rt,
+        interest_news_rt: rt.interest_news_rt,
+        interest_type_rt: rt.interest_type_rt,
+
+        // optional: helps debugging
+        rt_traits_updated_at: new Date().toISOString()
       });
 
       analytics.track("Signup CTA Submitted", {

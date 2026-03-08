@@ -346,8 +346,7 @@ function getInterest() {
 
       var traits = {
         stock_watchlist_rt: wl,
-        interest_stocks_rt: it.stocks,
-        interest_type_rt: interestType(it)
+        interest_stocks_rt: !!it.stocks
       };
 
       for (var k in pendingExtra) traits[k] = pendingExtra[k];
@@ -389,22 +388,11 @@ function getInterest() {
     });
   }
 
-  function markNewsClick(domain) {
-    var it = getInterest();
-    it.news = true;
-    setInterest(it);
-
-    scheduleIdentify({
-      last_news_domain: domain || null,
-      last_news_clicked_at: new Date().toISOString()
-    });
-  }
+ 
 
   // expose helpers for your click handlers
   window.fcRealtimeTraits = {
     markStockClick: markStockClick,
-    markNewsClick: markNewsClick,
-    flush: function () { scheduleIdentify({}); },
     getSnapshot: function () {
       var wl = getWatchlist();
       var it = getInterest();
@@ -614,7 +602,7 @@ function getInterest() {
         : { stock_watchlist_rt: [], interest_stocks_rt: false, interest_news_rt: false, interest_type_rt: "unknown" };
 
       analytics.identify(userId, {
-        phone: phone,
+        smsphone: phone,
         sms_opt_in: true,
 
         // ✅ realtime onboarding traits

@@ -300,13 +300,12 @@ function getReportId(reportDate) {
     saveJson(LS_WL, wl);
   }
 
-  function getInterest() {
-    var it = loadJson(LS_INT, { stocks: false, news: false });
-    if (!it || typeof it !== "object") it = { stocks:false, news:false };
-    it.stocks = !!it.stocks;
-    it.news   = !!it.news;
-    return it;
-  }
+function getInterest() {
+  var it = loadJson(LS_INT, { stocks: false });
+  if (!it || typeof it !== "object") it = { stocks:false };
+  it.stocks = !!it.stocks;
+  return it;
+}
 
   function setInterest(it) {
     saveJson(LS_INT, it);
@@ -314,12 +313,9 @@ function getReportId(reportDate) {
 
   
 
-  function interestType(it) {
-    if (it.stocks && it.news) return "both";
-    if (it.stocks) return "stocks";
-    if (it.news) return "news";
-    return "unknown";
-  }
+ function interestType(it) {
+  return it.stocks ? "stocks" : "unknown";
+}
 
     var lastIdentifyHash = null;
   var lastIdentifyAt = 0;
@@ -351,7 +347,6 @@ function getReportId(reportDate) {
       var traits = {
         stock_watchlist_rt: wl,
         interest_stocks_rt: it.stocks,
-        interest_news_rt: it.news,
         interest_type_rt: interestType(it)
       };
 
@@ -416,7 +411,6 @@ function getReportId(reportDate) {
       return {
         stock_watchlist_rt: wl,
         interest_stocks_rt: !!it.stocks,
-        interest_news_rt: !!it.news,
         interest_type_rt: interestType(it)
       };
     }
@@ -518,7 +512,6 @@ function getReportId(reportDate) {
     }
 
     if (window.analytics && typeof window.analytics.track === "function") {
-      if (window.fcRealtimeTraits) window.fcRealtimeTraits.markNewsClick(domain);
 
       window.analytics.track("Report Link Clicked", {
         href: href,

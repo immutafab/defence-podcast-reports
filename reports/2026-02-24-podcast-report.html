@@ -213,21 +213,29 @@ function getReportId(reportDate) {
 
 (function () {
   function ensureUserId() {
-    var key = "fc_user_id";
+    var userKey = "fc_user_id";
+    var onceKey = "fc_identified_once";
     var id = null;
 
     try {
-      id = localStorage.getItem(key);
+      id = localStorage.getItem(userKey);
       if (!id) {
         id = "fc_" + Math.random().toString(16).slice(2) + "_" + Date.now();
-        localStorage.setItem(key, id);
+        localStorage.setItem(userKey, id);
       }
+
+      // ✅ prevent repeated identify calls
+      if (localStorage.getItem(onceKey) === "1") return;
+      localStorage.setItem(onceKey, "1");
     } catch (e) {
-      // if localStorage blocked, fallback to a session id
+      // if localStorage blocked, fallback to a session id + in-memory once guard
       id = "fc_session_" + Date.now();
+      if (window.__fc_identified_once) return;
+      window.__fc_identified_once = true;
     }
 
     if (window.analytics && typeof window.analytics.identify === "function") {
+      // identify ONLY the id here (traits come later from clicks/signup/enrichment)
       window.analytics.identify(id);
     }
   }
@@ -313,8 +321,19 @@ function getReportId(reportDate) {
     return "unknown";
   }
 
+    var lastIdentifyHash = null;
+  var lastIdentifyAt = 0;
+  var MIN_IDENTIFY_INTERVAL_MS = 8000; // hard throttle
+
+  function stableStringify(obj) {
+    // simple stable-ish stringify for small objects
+    var keys = Object.keys(obj).sort();
+    var out = {};
+    for (var i=0;i<keys.length;i++) out[keys[i]] = obj[keys[i]];
+    return JSON.stringify(out);
+  }
+
   function scheduleIdentify(extraTraits) {
-    // merge extras (latest wins)
     if (extraTraits && typeof extraTraits === "object") {
       for (var k in extraTraits) pendingExtra[k] = extraTraits[k];
     }
@@ -336,14 +355,23 @@ function getReportId(reportDate) {
         interest_type_rt: interestType(it)
       };
 
-      // apply pending extras
       for (var k in pendingExtra) traits[k] = pendingExtra[k];
       pendingExtra = {};
+
+      // 🔒 throttle + dedupe
+      var now = Date.now();
+      var hash = stableStringify(traits);
+
+      if (hash === lastIdentifyHash) return; // nothing changed
+      if ((now - lastIdentifyAt) < MIN_IDENTIFY_INTERVAL_MS) return; // too soon
+
+      lastIdentifyHash = hash;
+      lastIdentifyAt = now;
 
       if (window.analytics && typeof window.analytics.identify === "function") {
         window.analytics.identify(userId, traits);
       }
-    }, 600); // debounce to avoid spamming Identify on fast clicks
+    }, 600);
   }
 
   function markStockClick(ticker) {
@@ -394,12 +422,7 @@ function getReportId(reportDate) {
     }
   };
   
-  // flush once Segment is ready so the profile gets initial realtime traits ASAP
-  if (window.analytics && typeof window.analytics.ready === "function") {
-    window.analytics.ready(function () { scheduleIdentify({}); });
-  } else {
-    setTimeout(function () { scheduleIdentify({}); }, 1500);
-  }
+
 })();
 </script>
 

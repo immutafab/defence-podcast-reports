@@ -529,10 +529,11 @@ function getInterest() {
 <script>
 (function () {
   var LS_USER = "fc_user_id";
+  var SIGNUP_ENDPOINT = "https://fc-sms-onboarding-2113.twil.io/util/upsert-phone-fcid";
 
   function getExistingFcId() {
     try {
-      return localStorage.getItem(LS_USER) || null; // do NOT create a new one here
+      return localStorage.getItem(LS_USER) || null;
     } catch (e) {
       return null;
     }
@@ -568,18 +569,64 @@ function getInterest() {
     return file ? "rpt_" + file : null;
   }
 
-  function setupSignupSegmentOnly() {
+  function getRealtimeTraits() {
+    if (window.fcRealtimeTraits && typeof window.fcRealtimeTraits.getSnapshot === "function") {
+      return window.fcRealtimeTraits.getSnapshot();
+    }
+    return {
+      stock_watchlist_rt: [],
+      interest_stocks_rt: false,
+      interest_type_rt: "unknown"
+    };
+  }
+
+  function setBusy(form, isBusy) {
+    var btn = form.querySelector("button[type='submit']");
+    var input = form.querySelector("input");
+    if (btn) {
+      btn.disabled = !!isBusy;
+      btn.textContent = isBusy ? "Saving..." : "Text me the report";
+    }
+    if (input) input.disabled = !!isBusy;
+  }
+
+  async function upsertPhoneMapping(phoneE164, fcId) {
+    var body = new URLSearchParams({
+      phone: phoneE164,
+      fcId: fcId
+    });
+
+    var res = await fetch(SIGNUP_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: body.toString()
+    });
+
+    var data = null;
+    try {
+      data = await res.json();
+    } catch (e) {
+      data = null;
+    }
+
+    if (!res.ok || !data || !data.ok) {
+      throw new Error((data && data.error) || ("Signup mapping failed (" + res.status + ")"));
+    }
+
+    return data;
+  }
+
+  function setupSignup() {
     var form = document.getElementById("signup-form");
     var phoneInput = document.getElementById("signup-phone");
-    if (!form || !phoneInput) return;
+    var cta = document.getElementById("signup-cta");
 
-    form.addEventListener("submit", function (e) {
+    if (!form || !phoneInput || !cta) return;
+
+    form.addEventListener("submit", async function (e) {
       e.preventDefault();
-
-      if (!(window.analytics && typeof window.analytics.track === "function")) {
-        alert("Analytics not ready yet — try again in a second.");
-        return;
-      }
 
       var fcId = getExistingFcId();
       if (!fcId) {
@@ -593,62 +640,61 @@ function getInterest() {
         return;
       }
 
-      var phoneId = "phone_" + phoneE164;
-
-      // ✅ Alias: newId, oldId — and do it ONCE
-      var aliasOnceKey = "fc_alias_done::" + phoneId + "::" + fcId;
-      try {
-        if (typeof window.analytics.alias === "function" &&
-            phoneId !== fcId &&
-            !localStorage.getItem(aliasOnceKey)) {
-          window.analytics.alias(phoneId, fcId);
-          localStorage.setItem(aliasOnceKey, "1");
-        }
-      } catch (e) {
-        // if storage blocked, still try once per page-load
-        if (!window.__fc_alias_done && typeof window.analytics.alias === "function" && phoneId !== fcId) {
-          window.analytics.alias(phoneId, fcId);
-          window.__fc_alias_done = true;
-        }
-      }
-
-      // ✅ Keep canonical profile as fcId; phone is a TRAIT only
-      var rt =
-        (window.fcRealtimeTraits && typeof window.fcRealtimeTraits.getSnapshot === "function")
-          ? window.fcRealtimeTraits.getSnapshot()
-          : { stock_watchlist_rt: [], interest_stocks_rt: false, interest_type_rt: "unknown" };
-
-      window.analytics.identify(fcId, {
-        smsphone: phoneE164,
-        sms_opt_in: true,
-        stock_watchlist_rt: rt.stock_watchlist_rt || [],
-        interest_stocks_rt: !!rt.interest_stocks_rt,
-        interest_type_rt: rt.interest_type_rt || "unknown",
-        rt_traits_updated_at: new Date().toISOString()
-      });
-
+      var rt = getRealtimeTraits();
       var reportDate = getReportDate();
       var reportId = getReportId(reportDate);
 
-      window.analytics.track("Signup CTA Submitted", {
-        report_id: reportId,
-        report_date_str: reportDate,
-        placement: "top",
-        contact_channel: "sms",
-        phone: phoneE164,                 // property only
-        phone_country: phoneE164.startsWith("+61") ? "+61" : phoneE164.slice(0, 3),
-        path: location.pathname,
-        url: location.href
-      });
+      setBusy(form, true);
 
-      form.innerHTML = "<strong>Saved — you’re on the list.</strong>";
+      try {
+        // 1) Write phone -> fcId mapping into Twilio Sync
+        var mappingResult = await upsertPhoneMapping(phoneE164, fcId);
+
+        // 2) Update Segment profile traits on the existing fcId
+        if (window.analytics && typeof window.analytics.identify === "function") {
+          window.analytics.identify(fcId, {
+            smsphone: phoneE164,
+            sms_opt_in: true,
+            stock_watchlist_rt: rt.stock_watchlist_rt || [],
+            interest_stocks_rt: !!rt.interest_stocks_rt,
+            interest_type_rt: rt.interest_type_rt || "unknown",
+            phone_mapping_key: mappingResult.key || null,
+            phone_mapping_action: mappingResult.action || null,
+            sms_signup_at: new Date().toISOString(),
+            rt_traits_updated_at: new Date().toISOString()
+          });
+        }
+
+        // 3) Track signup submission
+        if (window.analytics && typeof window.analytics.track === "function") {
+          window.analytics.track("Signup CTA Submitted", {
+            report_id: reportId,
+            report_date_str: reportDate,
+            placement: "top",
+            contact_channel: "sms",
+            phone: phoneE164,
+            phone_country: phoneE164.startsWith("+61") ? "+61" : phoneE164.slice(0, 3),
+            fc_id: fcId,
+            mapping_key: mappingResult.key || null,
+            mapping_action: mappingResult.action || null,
+            path: location.pathname,
+            url: location.href
+          });
+        }
+
+        form.innerHTML = "<strong>Saved — you’re on the list.</strong>";
+      } catch (err) {
+        console.error("Signup failed", err);
+        alert(err.message || "Could not save signup. Please try again.");
+        setBusy(form, false);
+      }
     });
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setupSignupSegmentOnly);
+    document.addEventListener("DOMContentLoaded", setupSignup);
   } else {
-    setupSignupSegmentOnly();
+    setupSignup();
   }
 })();
 </script>

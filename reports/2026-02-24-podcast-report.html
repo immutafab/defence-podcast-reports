@@ -615,15 +615,25 @@ function getInterest() {
         rt_traits_updated_at: new Date().toISOString()
       });
 
+      var fcId = localStorage.getItem("fc_user_id");   // existing anon/stable id
+      var phone = phoneStr;                            // "+61437194480"
+      var phoneId = "phone_" + phone;
+
+      // 1) Link old -> new (MUST be newId, oldId)
+      analytics.alias(phoneId, fcId);
+
+      // 2) Now start using phoneId as the profile id going forward
+      analytics.identify(phoneId, {
+        smsphone: phone,
+        sms_opt_in: true
+      });
+
       analytics.track("Signup CTA Submitted", {
         report_id: reportId,
         report_date_str: reportDate,
         placement: "top",
         contact_channel: "sms",
-
-        // ✅ add this
         phone: phone,
-
         phone_country: phone.slice(0, 3),
         path: location.pathname,
         url: location.href

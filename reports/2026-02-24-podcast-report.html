@@ -628,6 +628,24 @@ function getInterest() {
         sms_opt_in: true
       });
 
+      // grab raw value from the input
+      const phoneRaw = document.querySelector("#signup-phone").value.trim();
+
+      // normalize to E.164 (AU-focused quick normalize)
+      let phoneStr = phoneRaw.replace(/\s+/g, "");
+      if (!phoneStr.startsWith("+")) {
+        // if they typed 614..., 043..., 437..., etc.
+        if (phoneStr.startsWith("61")) phoneStr = "+" + phoneStr;
+        else if (phoneStr.startsWith("0")) phoneStr = "+61" + phoneStr.slice(1);
+        else phoneStr = "+61" + phoneStr;
+      }
+
+      // basic validation
+      if (!/^\+\d{8,15}$/.test(phoneStr)) {
+        console.warn("Invalid phone, expected E.164:", phoneRaw);
+        return;
+      }
+
       analytics.track("Signup CTA Submitted", {
         report_id: reportId,
         report_date_str: reportDate,

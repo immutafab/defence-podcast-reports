@@ -528,17 +528,13 @@ function getInterest() {
 
 <script>
 (function () {
-  function getStableUserId() {
-    var key = "fc_user_id";
+  var LS_USER = "fc_user_id";
+
+  function getExistingFcId() {
     try {
-      var id = localStorage.getItem(key);
-      if (!id) {
-        id = "fc_" + Math.random().toString(16).slice(2) + "_" + Date.now();
-        localStorage.setItem(key, id);
-      }
-      return id;
+      return localStorage.getItem(LS_USER) || null; // do NOT create a new one here
     } catch (e) {
-      return "fc_session_" + Date.now();
+      return null;
     }
   }
 
@@ -548,10 +544,10 @@ function getInterest() {
 
     p = p.replace(/[()\-\s]/g, "");
 
-    // AU-friendly normalize:
-    if (p.startsWith("04")) p = "+61" + p.slice(1);   // 04xx... -> +614xx...
-    if (p.startsWith("614")) p = "+" + p;             // 614...  -> +614...
-    if (p.startsWith("00")) p = "+" + p.slice(2);     // 00..    -> +..
+    // AU-friendly normalize
+    if (p.startsWith("04")) p = "+61" + p.slice(1);
+    if (p.startsWith("614")) p = "+" + p;
+    if (p.startsWith("00")) p = "+" + p.slice(2);
 
     if (!p.startsWith("+")) {
       if (p.startsWith("61")) p = "+" + p;
@@ -585,22 +581,38 @@ function getInterest() {
         return;
       }
 
-      var fcId = getStableUserId();
-      var phoneE164 = normalizePhone(phoneInput.value);
+      var fcId = getExistingFcId();
+      if (!fcId) {
+        alert("User ID not ready yet — refresh and try again.");
+        return;
+      }
 
+      var phoneE164 = normalizePhone(phoneInput.value);
       if (!phoneE164) {
         alert("Enter a valid phone number (include country code, e.g. +61...).");
         return;
       }
 
-      // Optional: help unify if any system later uses phone_* as an ID
-      // alias(newId, oldId)
       var phoneId = "phone_" + phoneE164;
-      if (typeof window.analytics.alias === "function") {
-        window.analytics.alias(phoneId, fcId);
+
+      // ✅ Alias: newId, oldId — and do it ONCE
+      var aliasOnceKey = "fc_alias_done::" + phoneId + "::" + fcId;
+      try {
+        if (typeof window.analytics.alias === "function" &&
+            phoneId !== fcId &&
+            !localStorage.getItem(aliasOnceKey)) {
+          window.analytics.alias(phoneId, fcId);
+          localStorage.setItem(aliasOnceKey, "1");
+        }
+      } catch (e) {
+        // if storage blocked, still try once per page-load
+        if (!window.__fc_alias_done && typeof window.analytics.alias === "function" && phoneId !== fcId) {
+          window.analytics.alias(phoneId, fcId);
+          window.__fc_alias_done = true;
+        }
       }
 
-      // ✅ Canonical profile remains fcId; phone is a TRAIT only
+      // ✅ Keep canonical profile as fcId; phone is a TRAIT only
       var rt =
         (window.fcRealtimeTraits && typeof window.fcRealtimeTraits.getSnapshot === "function")
           ? window.fcRealtimeTraits.getSnapshot()
@@ -623,8 +635,8 @@ function getInterest() {
         report_date_str: reportDate,
         placement: "top",
         contact_channel: "sms",
-        phone: phoneE164,                 // property only (fine)
-        phone_country: phoneE164.slice(0, 3),
+        phone: phoneE164,                 // property only
+        phone_country: phoneE164.startsWith("+61") ? "+61" : phoneE164.slice(0, 3),
         path: location.pathname,
         url: location.href
       });

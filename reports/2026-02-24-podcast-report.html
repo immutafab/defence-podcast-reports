@@ -524,22 +524,10 @@ function getInterest() {
   // Capture phase helps catch clicks before navigation handlers run
   document.addEventListener("click", handleOutboundClick, true);
 })();
-
-
 </script>
 
 <script>
 (function () {
-  function getReportDate() {
-    return document.body.getAttribute("data-report-date") || null;
-  }
-
-  function getReportId(reportDate) {
-    if (reportDate) return "rpt_" + reportDate;
-    var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
-    return file ? "rpt_" + file : null;
-  }
-
   function getStableUserId() {
     var key = "fc_user_id";
     try {
@@ -554,22 +542,34 @@ function getInterest() {
     }
   }
 
- function normalizePhone(raw) {
-    // Very lightweight normalizer:
-    // - trims
-    // - converts "04..." AU mobile into "+614..."
-    // - strips spaces/dashes
+  function normalizePhone(raw) {
     var p = (raw || "").trim();
     if (!p) return null;
 
     p = p.replace(/[()\-\s]/g, "");
-    if (p.startsWith("04")) p = "+61" + p.slice(1);     // 04xx... -> +614xx...
-    if (p.startsWith("614")) p = "+" + p;               // 614... -> +614...
-    if (p.startsWith("00")) p = "+" + p.slice(2);       // 00.. -> +..
 
-    // Basic sanity: must start with + and have 8-15 digits total
-    if (!/^\+\d{8,15}$/.test(p)) return null;
-    return p;
+    // AU-friendly normalize:
+    if (p.startsWith("04")) p = "+61" + p.slice(1);   // 04xx... -> +614xx...
+    if (p.startsWith("614")) p = "+" + p;             // 614...  -> +614...
+    if (p.startsWith("00")) p = "+" + p.slice(2);     // 00..    -> +..
+
+    if (!p.startsWith("+")) {
+      if (p.startsWith("61")) p = "+" + p;
+      else if (p.startsWith("0")) p = "+61" + p.slice(1);
+      else p = "+61" + p;
+    }
+
+    return /^\+\d{8,15}$/.test(p) ? p : null;
+  }
+
+  function getReportDate() {
+    return document.body.getAttribute("data-report-date") || null;
+  }
+
+  function getReportId(reportDate) {
+    if (reportDate) return "rpt_" + reportDate;
+    var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
+    return file ? "rpt_" + file : null;
   }
 
   function setupSignupSegmentOnly() {
@@ -580,79 +580,51 @@ function getInterest() {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      var rawPhone = (phoneInput.value || "").trim();
-      var phone = normalizePhone(rawPhone);
-      if (!phone) {
-        alert("Enter a valid phone number (include country code, e.g. +61...).");
-        return;
-      }
-
-      var reportDate = getReportDate();
-      var reportId = getReportId(reportDate);
-      var userId = getStableUserId();
-
-      if (!(window.analytics && typeof analytics.identify === "function")) {
+      if (!(window.analytics && typeof window.analytics.track === "function")) {
         alert("Analytics not ready yet — try again in a second.");
         return;
       }
 
-      // Attach phone to the same stable user
-      var rt = (window.fcRealtimeTraits && typeof window.fcRealtimeTraits.getSnapshot === "function")
-        ? window.fcRealtimeTraits.getSnapshot()
-        : { stock_watchlist_rt: [], interest_stocks_rt: false, interest_news_rt: false, interest_type_rt: "unknown" };
+      var fcId = getStableUserId();
+      var phoneE164 = normalizePhone(phoneInput.value);
 
-      analytics.identify(userId, {
-        smsphone: phone,
-        sms_opt_in: true,
-
-        // ✅ realtime onboarding traits
-        stock_watchlist_rt: rt.stock_watchlist_rt,
-        interest_stocks_rt: rt.interest_stocks_rt,
-        interest_news_rt: rt.interest_news_rt,
-        interest_type_rt: rt.interest_type_rt,
-
-        // optional: helps debugging
-        rt_traits_updated_at: new Date().toISOString()
-      });
-
-      var fcId = localStorage.getItem("fc_user_id");   // existing anon/stable id
-      var phone = phoneStr;                            // "+61437194480"
-      var phoneId = "phone_" + phone;
-
-      // 1) Link old -> new (MUST be newId, oldId)
-      analytics.alias(phoneId, fcId);
-
-      // 2) Now start using phoneId as the profile id going forward
-      analytics.identify(phoneId, {
-        smsphone: phone,
-        sms_opt_in: true
-      });
-
-      // grab raw value from the input
-      const phoneRaw = document.querySelector("#signup-phone").value.trim();
-
-      // normalize to E.164 (AU-focused quick normalize)
-      let phoneStr = phoneRaw.replace(/\s+/g, "");
-      if (!phoneStr.startsWith("+")) {
-        // if they typed 614..., 043..., 437..., etc.
-        if (phoneStr.startsWith("61")) phoneStr = "+" + phoneStr;
-        else if (phoneStr.startsWith("0")) phoneStr = "+61" + phoneStr.slice(1);
-        else phoneStr = "+61" + phoneStr;
-      }
-
-      // basic validation
-      if (!/^\+\d{8,15}$/.test(phoneStr)) {
-        console.warn("Invalid phone, expected E.164:", phoneRaw);
+      if (!phoneE164) {
+        alert("Enter a valid phone number (include country code, e.g. +61...).");
         return;
       }
 
-      analytics.track("Signup CTA Submitted", {
+      // Optional: help unify if any system later uses phone_* as an ID
+      // alias(newId, oldId)
+      var phoneId = "phone_" + phoneE164;
+      if (typeof window.analytics.alias === "function") {
+        window.analytics.alias(phoneId, fcId);
+      }
+
+      // ✅ Canonical profile remains fcId; phone is a TRAIT only
+      var rt =
+        (window.fcRealtimeTraits && typeof window.fcRealtimeTraits.getSnapshot === "function")
+          ? window.fcRealtimeTraits.getSnapshot()
+          : { stock_watchlist_rt: [], interest_stocks_rt: false, interest_type_rt: "unknown" };
+
+      window.analytics.identify(fcId, {
+        smsphone: phoneE164,
+        sms_opt_in: true,
+        stock_watchlist_rt: rt.stock_watchlist_rt || [],
+        interest_stocks_rt: !!rt.interest_stocks_rt,
+        interest_type_rt: rt.interest_type_rt || "unknown",
+        rt_traits_updated_at: new Date().toISOString()
+      });
+
+      var reportDate = getReportDate();
+      var reportId = getReportId(reportDate);
+
+      window.analytics.track("Signup CTA Submitted", {
         report_id: reportId,
         report_date_str: reportDate,
         placement: "top",
         contact_channel: "sms",
-        phone: phone,
-        phone_country: phone.slice(0, 3),
+        phone: phoneE164,                 // property only (fine)
+        phone_country: phoneE164.slice(0, 3),
         path: location.pathname,
         url: location.href
       });
@@ -667,9 +639,8 @@ function getInterest() {
     setupSignupSegmentOnly();
   }
 })();
-
-
 </script>
+
 
 </head>
 <body data-report-date="2026-02-24">

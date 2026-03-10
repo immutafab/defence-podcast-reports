@@ -1,0 +1,1062 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Frontline Capital — Daily Report — 2026-03-10</title>
+
+<style>
+  body { font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif; margin:32px auto; max-width:960px; color:#0f172a; background:#fff; }
+  h1,h2,h3,h4,h5,h6 { line-height:1.25; margin-top:1.8em; margin-bottom:0.6em; font-weight:600; }
+  h1 { font-size:1.9em; border-bottom:2px solid #e2e8f0; padding-bottom:.3em; }
+  h2 { font-size:1.6em; border-bottom:1px solid #e2e8f0; padding-bottom:.2em; }
+  h3 { font-size:1.3em; color:#1e293b; }
+  a { color:#2563eb; text-decoration:none; } a:hover { text-decoration:underline; }
+  table { width:100%; border-collapse:collapse; margin:1.2em 0; font-size:.95em; }
+  th,td { border:1px solid #e2e8f0; padding:6px 10px; text-align:left; }
+  th { background:#f1f5f9; font-weight:600; }
+  tr:nth-child(even) td { background:#f8fafc; }
+  code { background:#f1f5f9; border-radius:4px; padding:2px 4px; font-size:90%; }
+  pre { background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:12px; overflow-x:auto; }
+  blockquote { border-left:4px solid #94a3b8; margin:1em 0; padding:.6em 1em; color:#475569; background:#f8fafc; }
+  hr { border:0; border-top:1px solid #e2e8f0; margin:2em 0; }
+  ul,ol { margin:.5em 0 .8em 1.4em; } li { margin-bottom:.3em; }
+
+  /* ...existing styles... */
+
+  .signup-cta {
+    margin: 16px 0 24px;
+    padding: 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #f8fafc;
+  }
+  .signup-cta h3 {
+    margin: 0 0 6px;
+    font-size: 1.05rem;
+    color: #0f172a;
+  }
+  .signup-cta p {
+    margin: 0 0 10px;
+    color: #334155;
+    font-size: 0.95rem;
+  }
+  .signup-form {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .signup-form input {
+    flex: 1 1 280px;
+    min-width: 220px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font: inherit;
+  }
+  .signup-form button {
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .signup-form button:hover { opacity: 0.95; }
+  .signup-note {
+    margin-top: 8px;
+    font-size: 0.82rem;
+    color: #64748b;
+  }
+
+</style>
+
+<!-- Segment: loader -->
+<script>
+  !function(){var i="analytics",analytics=window[i]=window[i]||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window[i].initialized)return window[i][e].apply(window[i],arguments);var n=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");n.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}n.unshift(e);analytics.push(n);return analytics}};for(var n=0;n<analytics.methods.length;n++){var key=analytics.methods[n];analytics[key]=analytics.factory(key)}analytics.load=function(key,n){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute("data-global-segment-analytics-key",i);t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r);analytics._loadOptions=n};analytics.SNIPPET_VERSION="5.2.0";
+  analytics.load("7RsCbsh97yt1jrOUsWf8fOwxiNNQhlSc");
+  analytics.page();
+  }}();
+</script>
+
+<!-- Segment: section tracking (by H2 headings) -->
+<script>
+(function () {
+  function trackOnceFactory() {
+    var seen = new Set();
+    return function (name, props, key) {
+      var k = key || (name + "::" + JSON.stringify(props || {}));
+      if (seen.has(k)) return;
+      seen.add(k);
+      if (window.analytics && typeof window.analytics.track === "function") {
+        window.analytics.track(name, props || {});
+      }
+    };
+  }
+  var trackOnce = trackOnceFactory();
+
+  function slug(s) {
+    return (s || "")
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  function getReportDate() {
+    // Always keep as YYYY-MM-DD string (stable dimension for charts)
+    return document.body.getAttribute("data-report-date") || null;
+  }
+
+function getReportId(reportDate) {
+  // Force string ID so Segment doesn't cast it as a date
+  if (reportDate) return "rpt_" + reportDate;
+  var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
+  return file ? "rpt_" + file : null;
+}
+
+  function setup() {
+    var reportDate = getReportDate();     // "2026-02-19"
+    var reportId = getReportId(reportDate);
+
+    // Stable keys (prevents analytics drift when you rename headings)
+    var SECTION_KEY_MAP = {
+      "Summary": "summary",
+      "Stock Report": "stock-report",
+      "News (analysis)": "news-analysis",
+      "Complete List of News Articles": "news-list"
+    };
+
+    // Optional: if you want "Report Viewed" to mean "engaged", delay it 5s.
+    // If you want "landed", remove the setTimeout wrapper.
+    setTimeout(function () {
+      trackOnce(
+        "Report Viewed",
+        {
+          report_date: reportDate,
+          report_id: reportId,
+          url: location.href,
+          path: location.pathname,
+          title: document.title
+        },
+        "Report Viewed::" + (reportId || "") + "::" + location.href
+      );
+    }, 5000);
+
+    var headings = Array.prototype.slice.call(document.querySelectorAll("h2"));
+    if (!headings.length) return;
+
+    headings.forEach(function (h, idx) {
+      var title = (h.textContent || "").trim();
+      var key = SECTION_KEY_MAP[title] || slug(title) || "section";
+
+      if (!h.id) h.id = "sec-" + key;
+
+      h.setAttribute("data-segment-section", key);
+      h.setAttribute("data-segment-title", title);
+      h.setAttribute("data-segment-order", String(idx + 1));
+    });
+
+    var obs = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+
+          var h = entry.target;
+          var sectionKey = h.getAttribute("data-segment-section");
+          var sectionTitle = h.getAttribute("data-segment-title");
+          var sectionOrder = Number(h.getAttribute("data-segment-order") || "0");
+
+          trackOnce(
+            "Report Section Viewed",
+            {
+              report_date: reportDate,
+              report_id: reportId,
+              section: sectionKey,
+              section_title: sectionTitle,
+              section_id: h.id,
+              section_order: sectionOrder,
+              url: location.href,
+              path: location.pathname
+            },
+            "Section::" + (reportId || "") + "::" + sectionKey + "::" + location.href
+          );
+        });
+      },
+      { threshold: 0.10 } // lower threshold = more reliable firing
+    );
+
+    headings.forEach(function (h) {
+      obs.observe(h);
+    });
+  }
+
+  function boot() {
+    // Ensure Segment is fully ready before firing initial events
+    if (window.analytics && typeof window.analytics.ready === "function") {
+      window.analytics.ready(setup);
+    } else {
+      // Fallback if analytics isn't available for some reason
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", setup);
+      } else {
+        setup();
+      }
+    }
+  }
+
+  boot();
+})();
+
+(function () {
+  function ensureUserId() {
+    var userKey = "fc_user_id";
+    var onceKey = "fc_identified_once";
+    var id = null;
+
+    try {
+      id = localStorage.getItem(userKey);
+      if (!id) {
+        id = "fc_" + Math.random().toString(16).slice(2) + "_" + Date.now();
+        localStorage.setItem(userKey, id);
+      }
+
+      // ✅ prevent repeated identify calls
+      if (localStorage.getItem(onceKey) === "1") return;
+      localStorage.setItem(onceKey, "1");
+    } catch (e) {
+      // if localStorage blocked, fallback to a session id + in-memory once guard
+      id = "fc_session_" + Date.now();
+      if (window.__fc_identified_once) return;
+      window.__fc_identified_once = true;
+    }
+
+    if (window.analytics && typeof window.analytics.identify === "function") {
+      // identify ONLY the id here (traits come later from clicks/signup/enrichment)
+      window.analytics.identify(id);
+    }
+  }
+
+  if (window.analytics && typeof window.analytics.ready === "function") {
+    window.analytics.ready(ensureUserId);
+  } else {
+    setTimeout(ensureUserId, 1000);
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var LS_USER = "fc_user_id";                 // same key as ensureUserId uses :contentReference[oaicite:3]{index=3}
+  var LS_WL   = "fc_stock_watchlist_rt";
+  var LS_INT  = "fc_interest_rt";
+  var MAX_WL  = 25;
+
+  var pendingExtra = {};
+  var timer = null;
+
+  function loadJson(key, fallback) {
+    try {
+      var v = localStorage.getItem(key);
+      if (!v) return fallback;
+      var j = JSON.parse(v);
+      return (j === null || j === undefined) ? fallback : j;
+    } catch (e) { return fallback; }
+  }
+
+  function saveJson(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
+  }
+
+  function getUserId() {
+    try { return localStorage.getItem(LS_USER) || null; } catch (e) { return null; }
+  }
+
+  function getWatchlist() {
+    var wl = loadJson(LS_WL, []);
+    if (!Array.isArray(wl)) wl = [];
+    // sanitize + cap
+    wl = wl
+      .filter(function (x) { return typeof x === "string"; })
+      .map(function (x) { return x.trim().toUpperCase(); })
+      .filter(Boolean);
+    // de-dupe preserve order
+    var seen = {};
+    var out = [];
+    for (var i=0; i<wl.length; i++) {
+      var t = wl[i];
+      if (seen[t]) continue;
+      seen[t] = true;
+      out.push(t);
+      if (out.length >= MAX_WL) break;
+    }
+    return out;
+  }
+
+  function setWatchlist(wl) {
+    saveJson(LS_WL, wl);
+  }
+
+function getInterest() {
+  var it = loadJson(LS_INT, { stocks: false });
+  if (!it || typeof it !== "object") it = { stocks:false };
+  it.stocks = !!it.stocks;
+  return it;
+}
+
+  function setInterest(it) {
+    saveJson(LS_INT, it);
+  }
+
+  
+
+ function interestType(it) {
+  return it.stocks ? "stocks" : "unknown";
+}
+
+    var lastIdentifyHash = null;
+  var lastIdentifyAt = 0;
+  var MIN_IDENTIFY_INTERVAL_MS = 8000; // hard throttle
+
+  function stableStringify(obj) {
+    // simple stable-ish stringify for small objects
+    var keys = Object.keys(obj).sort();
+    var out = {};
+    for (var i=0;i<keys.length;i++) out[keys[i]] = obj[keys[i]];
+    return JSON.stringify(out);
+  }
+
+  function scheduleIdentify(extraTraits) {
+    if (extraTraits && typeof extraTraits === "object") {
+      for (var k in extraTraits) pendingExtra[k] = extraTraits[k];
+    }
+
+    if (timer) return;
+    timer = setTimeout(function () {
+      timer = null;
+
+      var userId = getUserId();
+      if (!userId) return;
+
+      var wl = getWatchlist();
+      var it = getInterest();
+
+      var traits = {
+        stock_watchlist_rt: wl,
+        interest_stocks_rt: !!it.stocks
+      };
+
+      for (var k in pendingExtra) traits[k] = pendingExtra[k];
+      pendingExtra = {};
+
+      // 🔒 throttle + dedupe
+      var now = Date.now();
+      var hash = stableStringify(traits);
+
+      if (hash === lastIdentifyHash) return; // nothing changed
+      if ((now - lastIdentifyAt) < MIN_IDENTIFY_INTERVAL_MS) return; // too soon
+
+      lastIdentifyHash = hash;
+      lastIdentifyAt = now;
+
+      if (window.analytics && typeof window.analytics.identify === "function") {
+        window.analytics.identify(userId, traits);
+      }
+    }, 600);
+  }
+
+  function markStockClick(ticker) {
+    var t = (ticker || "").trim().toUpperCase();
+    if (!t) return;
+
+    var wl = getWatchlist();
+    // put most recent first
+    wl = [t].concat(wl.filter(function (x) { return x !== t; }));
+    if (wl.length > MAX_WL) wl = wl.slice(0, MAX_WL);
+    setWatchlist(wl);
+
+    var it = getInterest();
+    it.stocks = true;
+    setInterest(it);
+
+    scheduleIdentify({
+      last_stock_clicked: t,
+      last_stock_clicked_at: new Date().toISOString()
+    });
+  }
+
+ 
+
+  // expose helpers for your click handlers
+  window.fcRealtimeTraits = {
+    markStockClick: markStockClick,
+    getSnapshot: function () {
+      var wl = getWatchlist();
+      var it = getInterest();
+      return {
+        stock_watchlist_rt: wl,
+        interest_stocks_rt: !!it.stocks,
+        interest_type_rt: interestType(it)
+      };
+    }
+  };
+  
+
+})();
+</script>
+
+<!-- Segment: outbound stock click tracking -->
+<script>
+(function () {
+  document.addEventListener("click", function (e) {
+    var a = e.target && e.target.closest ? e.target.closest("a.stock-link") : null;
+    if (!a) return;
+
+    var ticker = a.getAttribute("data-stock-ticker");
+    if (!ticker) return;
+
+    if (window.fcRealtimeTraits) window.fcRealtimeTraits.markStockClick(ticker);
+
+    if (window.analytics && typeof window.analytics.track === "function") {
+      window.analytics.track("Stock Clicked", {
+        ticker: ticker,
+        price: a.getAttribute("data-stock-price") || null,
+        change: a.getAttribute("data-stock-change") || null,
+        href: a.href,
+        report_date: document.body.getAttribute("data-report-date") || null,
+        path: location.pathname,
+        url: location.href
+      });
+    }
+    // let navigation proceed normally (your links are target=_blank from yahoo)
+  }, true);
+})();
+</script>
+
+<!-- Segment: outbound link click tracking -->
+<script>
+(function () {
+  function getDomain(url) {
+    try { return new URL(url, window.location.href).hostname; }
+    catch (e) { return null; }
+  }
+
+  function shouldIgnore(a) {
+    var href = (a.getAttribute("href") || "").trim();
+    if (!href) return true;
+    if (href.startsWith("#")) return true;
+    if (href.startsWith("javascript:")) return true;
+    if (href.startsWith("mailto:") || href.startsWith("tel:")) return true;
+    return false;
+  }
+
+  function getReportDate() {
+    return document.body.getAttribute("data-report-date") || null;
+  }
+
+  function getReportId(reportDate) {
+    // Prefix so Segment doesn't auto-cast it as a Date
+    if (reportDate) return "rpt_" + reportDate;
+    var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
+    return file ? "rpt_" + file : null;
+  }
+
+  function handleOutboundClick(e) {
+    var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if (!a) return;
+
+    if (a.classList && a.classList.contains("stock-link")) return;
+    
+    if (shouldIgnore(a)) return;
+
+    var href = a.href;
+    var domain = getDomain(href);
+    if (!domain) return;
+
+    // outbound only
+    if (domain === window.location.hostname) return;
+
+    var reportDate = getReportDate();
+    var reportId = getReportId(reportDate);
+
+    // Let ctrl/cmd-click and middle-click behave normally (new tab)
+    var isModified = e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1;
+    var target = (a.getAttribute("target") || "").toLowerCase();
+    var opensNewTab = target === "_blank" || isModified;
+
+    // For same-tab nav, delay navigation briefly so track has time to send
+    if (!opensNewTab) {
+      e.preventDefault();
+    }
+
+    var navigated = false;
+    function go() {
+      if (navigated || opensNewTab) return;
+      navigated = true;
+      window.location.href = href;
+    }
+
+    if (window.analytics && typeof window.analytics.track === "function") {
+
+      window.analytics.track("Report Link Clicked", {
+        href: href,
+        domain: domain,
+        text: (a.textContent || "").trim().slice(0, 200),
+        report_date: reportDate,
+        report_id: reportId,
+        link_type: "source",
+        path: window.location.pathname,
+        url: window.location.href
+      }, function () {
+        go();
+      });
+
+      // Fallback in case callback doesn’t fire
+      if (!opensNewTab) setTimeout(go, 250);
+    } else {
+      go();
+    }
+  }
+
+  // Capture phase helps catch clicks before navigation handlers run
+  document.addEventListener("click", handleOutboundClick, true);
+})();
+</script>
+
+<script>
+(function () {
+  var LS_USER = "fc_user_id";
+  var SIGNUP_ENDPOINT = "https://fc-sms-onboarding-2113.twil.io/util/upsert-phone-fcid";
+
+  function getExistingFcId() {
+    try {
+      return localStorage.getItem(LS_USER) || null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function normalizePhone(raw) {
+    var p = (raw || "").trim();
+    if (!p) return null;
+
+    p = p.replace(/[()\-\s]/g, "");
+
+    // AU-friendly normalize
+    if (p.startsWith("04")) p = "+61" + p.slice(1);
+    if (p.startsWith("614")) p = "+" + p;
+    if (p.startsWith("00")) p = "+" + p.slice(2);
+
+    if (!p.startsWith("+")) {
+      if (p.startsWith("61")) p = "+" + p;
+      else if (p.startsWith("0")) p = "+61" + p.slice(1);
+      else p = "+61" + p;
+    }
+
+    return /^\+\d{8,15}$/.test(p) ? p : null;
+  }
+
+  function getReportDate() {
+    return document.body.getAttribute("data-report-date") || null;
+  }
+
+  function getReportId(reportDate) {
+    if (reportDate) return "rpt_" + reportDate;
+    var file = (location.pathname.split("/").pop() || "").replace(/\.html?$/i, "");
+    return file ? "rpt_" + file : null;
+  }
+
+  function getRealtimeTraits() {
+    if (window.fcRealtimeTraits && typeof window.fcRealtimeTraits.getSnapshot === "function") {
+      return window.fcRealtimeTraits.getSnapshot();
+    }
+    return {
+      stock_watchlist_rt: [],
+      interest_stocks_rt: false,
+      interest_type_rt: "unknown"
+    };
+  }
+
+  function setBusy(form, isBusy) {
+    var btn = form.querySelector("button[type='submit']");
+    var input = form.querySelector("input");
+    if (btn) {
+      btn.disabled = !!isBusy;
+      btn.textContent = isBusy ? "Saving..." : "Text me the report";
+    }
+    if (input) input.disabled = !!isBusy;
+  }
+
+  async function upsertPhoneMapping(phoneE164, fcId) {
+    var body = new URLSearchParams({
+      phone: phoneE164,
+      fcId: fcId
+    });
+
+    var res = await fetch(SIGNUP_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: body.toString()
+    });
+
+    var data = null;
+    try {
+      data = await res.json();
+    } catch (e) {
+      data = null;
+    }
+
+    if (!res.ok || !data || !data.ok) {
+      throw new Error((data && data.error) || ("Signup mapping failed (" + res.status + ")"));
+    }
+
+    return data;
+  }
+
+  function setupSignup() {
+    var form = document.getElementById("signup-form");
+    var phoneInput = document.getElementById("signup-phone");
+    var cta = document.getElementById("signup-cta");
+
+    if (!form || !phoneInput || !cta) return;
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      var fcId = getExistingFcId();
+      if (!fcId) {
+        alert("User ID not ready yet — refresh and try again.");
+        return;
+      }
+
+      var phoneE164 = normalizePhone(phoneInput.value);
+      if (!phoneE164) {
+        alert("Enter a valid phone number (include country code, e.g. +61...).");
+        return;
+      }
+
+      var rt = getRealtimeTraits();
+      var reportDate = getReportDate();
+      var reportId = getReportId(reportDate);
+
+      setBusy(form, true);
+
+      try {
+        // 1) Write phone -> fcId mapping into Twilio Sync
+        var mappingResult = await upsertPhoneMapping(phoneE164, fcId);
+
+        // 2) Update Segment profile traits on the existing fcId
+        if (window.analytics && typeof window.analytics.identify === "function") {
+          window.analytics.identify(fcId, {
+            smsphone: phoneE164,
+            sms_opt_in: true,
+            stock_watchlist_rt: rt.stock_watchlist_rt || [],
+            interest_stocks_rt: !!rt.interest_stocks_rt,
+            interest_type_rt: rt.interest_type_rt || "unknown",
+            phone_mapping_key: mappingResult.key || null,
+            phone_mapping_action: mappingResult.action || null,
+            sms_signup_at: new Date().toISOString(),
+            rt_traits_updated_at: new Date().toISOString()
+          });
+        }
+
+        // 3) Track signup submission
+        if (window.analytics && typeof window.analytics.track === "function") {
+          window.analytics.track("Signup CTA Submitted", {
+            report_id: reportId,
+            report_date_str: reportDate,
+            placement: "top",
+            contact_channel: "sms",
+            phone: phoneE164,
+            phone_country: phoneE164.startsWith("+61") ? "+61" : phoneE164.slice(0, 3),
+            fc_id: fcId,
+            mapping_key: mappingResult.key || null,
+            mapping_action: mappingResult.action || null,
+            path: location.pathname,
+            url: location.href
+          });
+        }
+
+        form.innerHTML = "<strong>Saved — you’re on the list.</strong>";
+      } catch (err) {
+        console.error("Signup failed", err);
+        alert(err.message || "Could not save signup. Please try again.");
+        setBusy(form, false);
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupSignup);
+  } else {
+    setupSignup();
+  }
+})();
+</script>
+
+
+</head>
+<body data-report-date="2026-03-10">
+
+<div class="signup-cta" id="signup-cta">
+  <h3>Get the daily report by SMS</h3>
+  <p>Get Frontline Capital on your phone each morning.</p>
+
+  <form id="signup-form" class="signup-form">
+    <input
+      type="tel"
+      id="signup-phone"
+      placeholder="+61 4xx xxx xxx"
+      required
+      autocomplete="tel"
+      inputmode="tel"
+    />
+    <button type="submit">Text me the report</button>
+  </form>
+
+  <p class="signup-note">
+    We’ll only use your number for Frontline Capital updates. Reply STOP to opt out.
+  </p>
+</div>
+
+<h1 id="frontline-capital-daily-report-2026-03-10">Frontline Capital – Daily Report – 2026-03-10</h1>
+<!-- segment:summary -->
+<h2 id="summary">Summary</h2>
+<h3 id="headline-summary">Headline Summary</h3>
+<p>U.S [25]. B-1B Lancer bombers have been stationed at RAF Fairford, UK, to counter Iranian missile threats, marking a significant deployment in ongoing operations against Iran. NATO intercepted an Iranian missile in Turkey, the second such interception since the onset of U.S [36]. and Israeli strikes on Iran. The U.S [7]. Army is deploying the Merops counter-drone system in the Middle East, leveraging its success in Ukraine to combat Iranian Shahed drones. China&rsquo;s defense budget has increased by 7% to approximately $277 billion, reflecting strategic shifts amid leadership changes [1]. LOCKHEED MARTIN (LMT) is boosting munitions production to meet rising demand from Middle East conflicts [14]. NORTHROP GRUMMAN (NOC) is advancing the U.S [11]. Space Force&rsquo;s Deep Space Advanced Radar Capability (DARC) program, enhancing space situational awareness.</p>
+<h3 id="markets-in-brief">Markets in Brief</h3>
+<p>Today&rsquo;s defense market showed mixed performance, with some stocks rising on increased defense budgets in Asia, while others fell despite positive contract news. The overall tone was influenced by geopolitical developments, including China&rsquo;s significant boost to its defense spending [999].</p>
+<!-- segment:stock-report -->
+<h2 id="stock-report">Stock Report</h2>
+<h3 id="1-main-table">1) Main table</h3>
+<table>
+<thead>
+<tr>
+<th>Ticker</th>
+<th>Today Price/Δ</th>
+<th>Fresh catalyst(s) [n] (direct / adjacent / macro)</th>
+<th>TA snapshot</th>
+<th>Plan (Entry / ATR-stop / Targets)</th>
+<th>Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://finance.yahoo.com/quote/PLTR" target="_blank" rel="noopener noreferrer" class="stock-link" data-stock-ticker="PLTR">PLTR</a></td>
+<td>$156.43 (▼ -0.73, -0.46%)</td>
+<td>Macro: Increased defense budgets in Asia [1]</td>
+<td>D/W/M: Up/Up/Up; &gt;20/50; testing R1 160</td>
+<td>150 / 145 / 170</td>
+<td>Bullish - Strong defense demand</td>
+</tr>
+<tr>
+<td><a href="https://finance.yahoo.com/quote/AVAV" target="_blank" rel="noopener noreferrer" class="stock-link" data-stock-ticker="AVAV">AVAV</a></td>
+<td>$227.29 (▼ -2.51, -1.09%)</td>
+<td>Adjacent: U.S. Army drone procurement [8]</td>
+<td>D/W/M: Up/Flat/Up; &gt;20/50; testing S1 225</td>
+<td>220 / 215 / 240</td>
+<td>Cautious - Awaiting contract news</td>
+</tr>
+<tr>
+<td><a href="https://finance.yahoo.com/quote/APH" target="_blank" rel="noopener noreferrer" class="stock-link" data-stock-ticker="APH">APH</a></td>
+<td>$136.06 (▲ +4.19, +3.18%)</td>
+<td>Macro: Increased defense budgets in Asia [1]</td>
+<td>D/W/M: Up/Up/Up; &gt;20/50; testing R1 140</td>
+<td>130 / 125 / 145</td>
+<td>Bullish - Strong sector momentum</td>
+</tr>
+<tr>
+<td><a href="https://finance.yahoo.com/quote/KTOS" target="_blank" rel="noopener noreferrer" class="stock-link" data-stock-ticker="KTOS">KTOS</a></td>
+<td>$92.47 (▲ +5.47, +6.29%)</td>
+<td>Direct: U.S. Army C-UAS deployment [7]</td>
+<td>D/W/M: Up/Up/Up; &gt;20/50; testing R1 95</td>
+<td>90 / 85 / 100</td>
+<td>Bullish - Positive contract flow</td>
+</tr>
+<tr>
+<td><a href="https://finance.yahoo.com/quote/EPIRUS" target="_blank" rel="noopener noreferrer" class="stock-link" data-stock-ticker="EPIRUS">EPIRUS</a></td>
+<td>Not publicly listed (no market data)</td>
+<td>No fresh catalysts</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="https://finance.yahoo.com/quote/RHM.DE" target="_blank" rel="noopener noreferrer" class="stock-link" data-stock-ticker="RHM.DE">RHM.DE</a></td>
+<td>$1,645.00 (▲ +20.00, +1.23%)</td>
+<td>Macro: Increased defense budgets in Asia [1]</td>
+<td>D/W/M: Up/Up/Up; &gt;20/50; testing R1 1650</td>
+<td>1620 / 1600 / 1700</td>
+<td>Bullish - European defense demand</td>
+</tr>
+<tr>
+<td><a href="https://finance.yahoo.com/quote/ITA" target="_blank" rel="noopener noreferrer" class="stock-link" data-stock-ticker="ITA">ITA</a></td>
+<td>$241.99 (▼ -0.21, -0.09%)</td>
+<td>Macro: Increased defense budgets in Asia [1]</td>
+<td>D/W/M: Up/Flat/Up; &gt;20/50; testing S1 240</td>
+<td>238 / 235 / 250</td>
+<td>Cautious - Broad sector exposure</td>
+</tr>
+<tr>
+<td><a href="https://finance.yahoo.com/quote/LMT" target="_blank" rel="noopener noreferrer" class="stock-link" data-stock-ticker="LMT">LMT</a></td>
+<td>$664.15 (▼ -7.62, -1.13%)</td>
+<td>Direct: Ramping munitions output [14]</td>
+<td>D/W/M: Up/Flat/Up; &gt;20/50; testing S1 660</td>
+<td>650 / 640 / 680</td>
+<td>Bullish - Increased production</td>
+</tr>
+<tr>
+<td><a href="https://finance.yahoo.com/quote/NOC" target="_blank" rel="noopener noreferrer" class="stock-link" data-stock-ticker="NOC">NOC</a></td>
+<td>$747.34 (▼ -8.79, -1.16%)</td>
+<td>Direct: Space Force DARC role [11]</td>
+<td>D/W/M: Up/Flat/Up; &gt;20/50; testing S1 740</td>
+<td>730 / 720 / 760</td>
+<td>Bullish - Strong space contracts</td>
+</tr>
+<tr>
+<td><a href="https://finance.yahoo.com/quote/RTX" target="_blank" rel="noopener noreferrer" class="stock-link" data-stock-ticker="RTX">RTX</a></td>
+<td>$208.23 (▼ -1.53, -0.73%)</td>
+<td>Direct: DARPA and German optics wins [29]</td>
+<td>D/W/M: Up/Flat/Up; &gt;20/50; testing S1 205</td>
+<td>200 / 195 / 215</td>
+<td>Bullish - New contracts secured</td>
+</tr>
+<tr>
+<td><a href="https://finance.yahoo.com/quote/BA" target="_blank" rel="noopener noreferrer" class="stock-link" data-stock-ticker="BA">BA</a></td>
+<td>$225.00 (▼ -6.11, -2.64%)</td>
+<td>Macro: Increased defense budgets in Asia [1]</td>
+<td>D/W/M: Up/Flat/Up; &gt;20/50; testing S1 220</td>
+<td>215 / 210 / 230</td>
+<td>Cautious - Awaiting contract news</td>
+</tr>
+<tr>
+<td><a href="https://finance.yahoo.com/quote/GD" target="_blank" rel="noopener noreferrer" class="stock-link" data-stock-ticker="GD">GD</a></td>
+<td>$361.98 (▼ -1.51, -0.42%)</td>
+<td>Macro: Increased defense budgets in Asia [1]</td>
+<td>D/W/M: Up/Flat/Up; &gt;20/50; testing S1 360</td>
+<td>355 / 350 / 370</td>
+<td>Cautious - Broad sector exposure</td>
+</tr>
+<tr>
+<td><a href="https://finance.yahoo.com/quote/HII" target="_blank" rel="noopener noreferrer" class="stock-link" data-stock-ticker="HII">HII</a></td>
+<td>$429.58 (▲ +0.47, +0.11%)</td>
+<td>Macro: Increased defense budgets in Asia [1]</td>
+<td>D/W/M: Up/Flat/Up; &gt;20/50; testing R1 430</td>
+<td>425 / 420 / 440</td>
+<td>Bullish - Strong naval demand</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-market-sector-context">2) Market &amp; Sector Context</h3>
+<ul>
+<li>China has increased its 2026 defense budget by 7%, potentially boosting demand for defense contractors globally [1].</li>
+<li>The U.S. Army is actively procuring small unmanned aerial systems, indicating ongoing investment in drone capabilities [8].</li>
+<li>Lockheed Martin is ramping up munitions production in response to increased demand from Middle East operations [14].</li>
+</ul>
+<h3 id="3-other-interesting-aidefense-names">3) Other interesting AI/defense names</h3>
+<ul>
+<li>Northrop Grumman is deepening its role in the U.S. Space Force&rsquo;s DARC program, enhancing its space situational awareness capabilities [11].</li>
+<li>RTX has secured significant contracts with DARPA and the German Armed Forces, highlighting its role in advanced defense technologies [29].</li>
+</ul>
+<!-- segment:news-analysis -->
+<h2 id="news-analysis">News (analysis)</h2>
+<h3 id="wars-conflict">Wars &amp; Conflict</h3>
+<ul>
+<li>U.S. B-1B Lancer bombers are now stationed at RAF Fairford, UK, as part of operations against Iran, aiming to thwart missile threats [25].</li>
+<li>NATO successfully intercepted an Iranian missile in Turkey, the second such event since U.S. and Israeli strikes on Iran began [36].</li>
+<li>The U.S. Army is deploying the Merops counter-drone system in the Middle East to counter Iranian Shahed drones, building on its success in Ukraine [7].</li>
+<li>Ukraine is aiding U.S. bases in the Middle East with counter-drone tech to address Iranian threats [35].</li>
+</ul>
+<h3 id="military-spending-policy">Military Spending &amp; Policy</h3>
+<ul>
+<li>China&rsquo;s defense budget for 2026 has risen by 7% to approximately $277 billion, amid changes in military leadership [1].</li>
+<li>Lockheed Martin is ramping up munitions production due to increased demand from Middle East conflicts [14].  ⟶ Companies: Lockheed Martin (LMT)</li>
+<li>Japan has launched its fifth Taigei-class submarine, boosting its maritime defense capabilities [5].</li>
+</ul>
+<h3 id="ai-drones-autonomy">AI, Drones &amp; Autonomy</h3>
+<ul>
+<li>Thales has launched the STORM 2, a portable counter-UAS system originally for counter-IED tasks [2].</li>
+<li>The U.S. Army National Guard is acquiring small FPV strike drones for training and operations [8].</li>
+<li>Ukrainian firm The Fourth Law has developed the Zerov-8 interceptor drone with autonomous targeting capabilities [9].</li>
+<li>Ondas Inc. secured $6 million in orders for counter-drone systems from Middle Eastern defense clients [10].</li>
+</ul>
+<h3 id="new-defense-tech-programs">New Defense Tech &amp; Programs</h3>
+<ul>
+<li>Northrop Grumman is progressing with the U.S. Space Force&rsquo;s Deep Space Advanced Radar Capability (DARC) program to enhance space situational awareness [11].  ⟶ Companies: Northrop Grumman (NOC)</li>
+<li>The U.S. Air Force is seeking partners for a new Stand-in Attack Weapon for future aircraft like the F-47 and B-21 [15].</li>
+<li>The U.S. Space Force reached a design milestone for its Resilient Missile Warning and Tracking Epoch 2 MEO constellation [33].</li>
+</ul>
+<h3 id="geopolitics-resources">Geopolitics &amp; Resources</h3>
+<ul>
+<li>China plans to expand its strategic transport network in Xinjiang and Tibet to strengthen power projection [3].</li>
+<li>NATO is conducting a cold-weather exercise in Norway, exploring potential Arctic conflict scenarios with Russia [34].</li>
+</ul>
+<h3 id="other-signals">Other Signals</h3>
+<ul>
+<li>Amentum-led joint venture won a $112 million contract for nuclear site cleanup in Europe [6].</li>
+<li>The U.S. and South Korea have started the Freedom Shield 26 exercise, focusing on regional stability [12].</li>
+<li>U.S. Space Forces in Korea have initiated space operations as part of the Freedom Shield 26 exercise [13].</li>
+<li>Mobix Labs continues to supply secure communications hardware for U.S. Navy ships, supporting critical military functions [31].</li>
+<li>RAF fighter jets intercepted drones targeting UK allies in the Middle East, with Defense Secretary John Healey calling for de-escalation in Lebanon [4].</li>
+<li>The Dutch frigate HNLMS Evertsen is being deployed to the eastern Mediterranean to support allied defense efforts [22].</li>
+<li>Swedish fighter jets are operating in Iceland as part of a new defense strategy amid heightened tensions [27].</li>
+<li>A U.S. intelligence assessment indicated that military intervention in Iran was unlikely to change its leadership, even with significant military action [28].</li>
+<li>Defense Secretary Pete Hegseth downplayed risks to U.S. troops from Iran-Russia cooperation, despite recent casualties in the conflict [30].</li>
+<li>Reliable Robotics and the City of Albuquerque are collaborating on the FAA&rsquo;s Advanced Air Mobility Integration Pilot Program to enhance regional air cargo safety [16].</li>
+<li>Elroy Air has been selected by the FAA and DOT for a key Advanced Air Mobility Pilot Program [21].</li>
+<li>Eight programs have been selected by the US DOT to accelerate the advanced air mobility industry, with operations expected to begin by summer 2026 [23].</li>
+<li>NUBURU&rsquo;s subsidiary, Lyocon, completed a proof of concept for a portable laser platform targeting the $20 billion anti-drone market [26].</li>
+<li>Vector introduced the Hammer F1 quadcopter drone, designed for reconnaissance and strike capabilities in contested environments [37].</li>
+<li>Estonia, the US, and allies tested a coordinated counter-UAS system during the Digital Shield 2.0 exercise [38].</li>
+<li>Space Delta 5&rsquo;s Capt. Tyler Riechmann played a key role in multinational integration at France&rsquo;s SPARTEX 2026 military space exercise [17].</li>
+<li>An unarmed Minuteman III ICBM test launch was conducted by the Air Force Global Strike Command to verify system reliability [18].</li>
+<li>BAE Systems&rsquo; missile detection satellites passed an early review, advancing the Space Force&rsquo;s hypersonic tracking capabilities [19].</li>
+<li>U.S. STRATCOM leadership visited Vandenberg Space Force Base during an ICBM test launch, highlighting strategic command involvement [32].</li>
+<li>Voyager Technologies invested in Max Space to accelerate the development of lunar habitats [41].</li>
+<li>The Department of War announced contracts valued at $7.5 million or more [20].</li>
+<li>RTX&rsquo;s BBN Technologies and Raytheon ELCAN secured contracts with DARPA and the German Armed Forces, enhancing their defense technology portfolio [29].  ⟶ Companies: RTX (RTX)</li>
+<li>Europe led global arms imports from 2021 to 2025, with Ukraine, Poland, and the UK as top importers, according to a SIPRI report [39].</li>
+<li>The Navy and Marine Corps launched an Amphibious Force Readiness Board to prioritize amphibious readiness [24].</li>
+<li>The Air Force signed an MOU with MASS-TF to explore strategic real estate opportunities for mission support [40].</li>
+</ul>
+<!-- segment:news-list -->
+<h2 id="complete-list-of-news-articles">Complete List of News Articles</h2>
+<p>[1] defensenews.com — China amps up its 2026 defense budget by 7% amid purge of generals (2026-03-10T09:36:06+00:00)<br>
+Summary: CHRISTCHURCH, New Zealand — China is increasing its 2026 defense budget by 7%, bringing the nation’s military expenditure for the coming year to 1.91 trillion yuan, or about $277 billion. This year’s increase compares to 7.2% rises for the past three years, with Beijing claiming its defense spending “remains comparatively modest across key relative indicators, including its share of gross domestic product, per capita defense expenditure, and defense expenditure per military personnel.” The budget was announced on March 5, as China’s top leaders convened for the 14th National People’s Congress …<br>
+<a href="https://www.defensenews.com/global/asia-pacific/2026/03/10/china-amps-up-its-2026-defense-budget-by-7-amid-purge-of-generals/" target="_blank" rel="noopener noreferrer">https://www.defensenews.com/global/asia-pacific/2026/03/10/china-amps-up-its-2026-defense-budget-by-7-amid-purge-of-generals/</a></p>
+<p>[2] unmannedairspace.info — Thales adapts counter-IED node for portable UAS protection (2026-03-10T09:17:45+00:00)<br>
+Summary: Thales has launched STORM 2, a compact cyber and electromagnetic activities (CEMA) node. Originally designed to counter improvised explosive devices, Thales has developed the system to equip soldiers with localised protection from radio frequency controlled uncrewed aerial systems (UAS). Weighing less than 2kg, STORM 2 provides frequency coverage from 20 MHz to 6 GHz. It hosts a software defined radio and processor that enables it to be re-configured to perform other CEMA roles, including hosting third-party applications and techniques. For more information Thales Group<br>
+<a href="https://www.unmannedairspace.info/counter-uas-systems-and-policies/thales-adapts-counter-ied-node-for-portable-uas-protection/" target="_blank" rel="noopener noreferrer">https://www.unmannedairspace.info/counter-uas-systems-and-policies/thales-adapts-counter-ied-node-for-portable-uas-protection/</a></p>
+<p>[3] scmp.com — How China plans for greater power projection in Xinjiang and Tibet over the next 5 years (2026-03-10T09:10:04+00:00)<br>
+Summary: China plans to further strengthen its strategic transport network in sensitive border regions over the next five years to fortify and better project power along its remote frontiers amid rising geopolitical uncertainty. One project involves building a 394km (245-mile) highway linking the northern and southern sides of the rugged Tianshan Mountains in far-western Xinjiang Uygur autonomous region, according to the draft 15th five-year plan released last week. The route will run parallel to a&hellip;<br>
+<a href="https://www.scmp.com/news/china/diplomacy/article/3346094/how-china-plans-greater-power-projection-xinjiang-and-tibet-over-next-5-years?utm_source=rss_feed" target="_blank" rel="noopener noreferrer">https://www.scmp.com/news/china/diplomacy/article/3346094/how-china-plans-greater-power-projection-xinjiang-and-tibet-over-next-5-years?utm_source=rss_feed</a></p>
+<p>[4] independent.co.uk — RAF fighter jets shoot down drones targeting UK allies in Middle East (2026-03-10T08:55:34+00:00)<br>
+Summary: Defence secretary John Healey urged for de-escalation in Lebanon and ‘a return to a negotiated process’<br>
+<a href="https://www.independent.co.uk/news/world/middle-east/raf-jets-shoot-down-drones-us-iran-war-middle-east-b2935308.html" target="_blank" rel="noopener noreferrer">https://www.independent.co.uk/news/world/middle-east/raf-jets-shoot-down-drones-us-iran-war-middle-east-b2935308.html</a></p>
+<p>[5] navalnews.com — Japan Commissions Fifth Taigei-class Submarine (2026-03-10T08:27:51+00:00)<br>
+Summary: The Japan Maritime Self-Defense Force (JMSDF) has commissioned the fifth of its Taigei-class diesel-electric attack submarines (SSK), which feature improved detection capability and reduced detectability compared with earlier submarines. Named JS Chogei (with pennant number SS 517), the new Taigei-class boat was inducted into the Submarine Division 2 of Submarine Flotilla 2, which is homeported at the Yokosuka naval base in Kanagawa Prefecture, shortly after being handed over by shipbuilder Mitsubishi Heavy Industries (MHI) at its facility in Kobe City on March 10. According to the JMSDF, the …<br>
+<a href="https://www.navalnews.com/naval-news/2026/03/japan-commissions-fifth-taigei-class-submarine/" target="_blank" rel="noopener noreferrer">https://www.navalnews.com/naval-news/2026/03/japan-commissions-fifth-taigei-class-submarine/</a></p>
+<p>[6] businesswire.com — Amentum-led Joint Venture selected for $112 Million Clean-up at Four European Nuclear Research Sites (2026-03-10T08:00:00+00:00)<br>
+Summary: CHANTILLY, Va.&ndash;(BUSINESS WIRE)---- $AMTM #Amentum&ndash;A joint venture led by Amentum (NYSE: AMTM) has won a new framework contract as the lead decommissioning and waste management contractor for nuclear research sites in four European countries. Under the $112 million (€95.7 million) contract, awarded by the European Commission Joint Research Centre (JRC), the Amentum-led JV will provide decommissioning solutions to accelerate the cleanup efforts of JRC sites in Ispra (Italy), Karlsruhe (Germany), Geel (Belgium) an<br>
+<a href="http://www.businesswire.com/news/home/20260310491705/en/Amentum-led-Joint-Venture-selected-for-112-Million-Clean-up-at-Four-European-Nuclear-Research-Sites/?feedref=JjAwJuNHiystnCoBq_hl-d9cWptq3LFKqvWRRM6VXqVcgiwDl5F89IquLVWUqfRVgLxDkSKfgoruKb9yWl5as-PbWreMWuYBefATrZ0EPTXUYDHrCfzvcc7PfEC8QrAfBSvR87oUDgbHejiywQBpbg==" target="_blank" rel="noopener noreferrer">http://www.businesswire.com/news/home/20260310491705/en/Amentum-led-Joint-Venture-selected-for-112-Million-Clean-up-at-Four-European-Nuclear-Research-Sites/?feedref=JjAwJuNHiystnCoBq_hl-d9cWptq3LFKqvWRRM6VXqVcgiwDl5F89IquLVWUqfRVgLxDkSKfgoruKb9yWl5as-PbWreMWuYBefATrZ0EPTXUYDHrCfzvcc7PfEC8QrAfBSvR87oUDgbHejiywQBpbg==</a></p>
+<p>[7] uasvision.com — U.S. Army to Send Merops C-UAS System Against Iranian Shahed Drones in Middle East (2026-03-10T06:50:30+00:00)<br>
+Summary: The United States is moving quickly to deploy the Merops anti-drone system to the Middle East within the next week. This compact, AI-powered counter-drone technology—already battle-tested in Ukraine with more than 1,000 successful intercepts of Iranian-designed Shahed drones—offers a cost-effective shield against swarming threats that can overwhelm traditional missile defences such as Patriot. Merops is […]<br>
+<a href="https://www.uasvision.com/2026/03/10/u-s-army-to-send-merops-c-uas-system-against-iranian-shahed-drones-in-middle-east/" target="_blank" rel="noopener noreferrer">https://www.uasvision.com/2026/03/10/u-s-army-to-send-merops-c-uas-system-against-iranian-shahed-drones-in-middle-east/</a></p>
+<p>[8] uasvision.com — U.S. Army National Guard to buy Small FPV Strike Drones (2026-03-10T06:49:40+00:00)<br>
+Summary: The United States Army National Guard has launched a procurement effort to acquire several small unmanned aerial systems for training and operational support, according to solicitations published March 7, 2026. The request, issued by the Tennessee Army National Guard, focuses on lightweight drones that meet the U.S. military’s Blue UAS security certification requirements. These systems […]<br>
+<a href="https://www.uasvision.com/2026/03/10/u-s-army-national-guard-to-buy-small-fpv-strike-drones/" target="_blank" rel="noopener noreferrer">https://www.uasvision.com/2026/03/10/u-s-army-national-guard-to-buy-small-fpv-strike-drones/</a></p>
+<p>[9] uasvision.com — The Fourth Law Develops Autonomous Interceptor Drone Zerov-8 (2026-03-10T06:48:35+00:00)<br>
+Summary: Ukrainian defence company The Fourth Law has developed the Zerov-8, an interceptor drone equipped with an autonomous targeting system. It includes the TFL Anti-Shahed detection module, designed to counter enemy aerial threats such as Shahed drones. Technical Specifications The Zerov-8 uses a tailsitter design (vertical take-off and landing), combining missile-like speed with drone maneuverability. Maximum […]<br>
+<a href="https://www.uasvision.com/2026/03/10/the-fourth-law-develops-autonomous-interceptor-drone-zerov-8/" target="_blank" rel="noopener noreferrer">https://www.uasvision.com/2026/03/10/the-fourth-law-develops-autonomous-interceptor-drone-zerov-8/</a></p>
+<p>[10] uasvision.com — Ondas Gets $6M Orders for C-UAS Systems from Current Middle East Customers (2026-03-10T06:40:31+00:00)<br>
+Summary: Ondas Inc., a provider of autonomous aerial and ground robot intelligence through its Ondas Autonomous Systems (OAS) business unit and private wireless solutions through Ondas Networks, has received multiple orders totaling approximately $6 million for dozens of counter-drone systems from existing defence and homeland security customers in the Middle East and other regions. The orders […]<br>
+<a href="https://www.uasvision.com/2026/03/10/ondas-gets-6m-orders-for-c-uas-systems-from-current-middle-east-customers/" target="_blank" rel="noopener noreferrer">https://www.uasvision.com/2026/03/10/ondas-gets-6m-orders-for-c-uas-systems-from-current-middle-east-customers/</a></p>
+<p>[11] finance.yahoo.com — Northrop Grumman Deepens Space Force DARC Role As Investors Weigh Valuation (2026-03-10T05:08:49+00:00)<br>
+Summary: Northrop Grumman, NYSE:NOC, is playing a key role in the U.S. Space Force Deep Space Advanced Radar Capability, or DARC, program. The company is progressing the DARC effort with a significant hardware order for its Wales site, tied to building out global space situational awareness infrastructure. DARC is designed to support continuous, all weather monitoring of satellites and spacecraft across multiple global locations. For investors watching defense and space exposure, Northrop Grumman&hellip;<br>
+<a href="https://finance.yahoo.com/news/northrop-grumman-deepens-space-force-050849425.html?.tsrc=rss" target="_blank" rel="noopener noreferrer">https://finance.yahoo.com/news/northrop-grumman-deepens-space-force-050849425.html?.tsrc=rss</a></p>
+<p>[12] pacom.mil — Multinational Forces Arrive for Exercise Freedom Shield 2026 - Reaffirming Commitment to Stability (2026-03-10T02:49:00+00:00)<br>
+Summary: CAMP HUMPHREYS, South Korea — The Republic of Korea (ROK) and the United States (U.S.), in collaboration with the United Nations Command (UNC), have commenced the annual Freedom Shield 26 (FS26) exercise from March 9-19, 2026.<br>
+<a href="https://www.pacom.mil/Media/NEWS/News-Article-View/Article/4429492/multinational-forces-arrive-for-exercise-freedom-shield-2026-reaffirming-commit/" target="_blank" rel="noopener noreferrer">https://www.pacom.mil/Media/NEWS/News-Article-View/Article/4429492/multinational-forces-arrive-for-exercise-freedom-shield-2026-reaffirming-commit/</a></p>
+<p>[13] pacom.mil — U.S. Space Forces - Korea launches space component operations for Freedom Shield 26 (2026-03-10T02:36:00+00:00)<br>
+Summary: OSAN AIR BASE, Republic of Korea — U.S. Space Forces - Korea kicked off space component operations for Freedom Shield 26, an annual defense-focused exercise conducted by the Republic of Korea and United States, in collaboration with the United Nations Command from March 9-19, 2026.<br>
+<a href="https://www.pacom.mil/Media/NEWS/News-Article-View/Article/4429483/us-space-forces-korea-launches-space-component-operations-for-freedom-shield-26/" target="_blank" rel="noopener noreferrer">https://www.pacom.mil/Media/NEWS/News-Article-View/Article/4429483/us-space-forces-korea-launches-space-component-operations-for-freedom-shield-26/</a></p>
+<p>[14] finance.yahoo.com — Lockheed Martin Ramps Munitions Output As Conflict Driven Demand Shapes Outlook (2026-03-10T02:08:56+00:00)<br>
+Summary: Lockheed Martin is working with U.S. defense leaders to quadruple munitions production in response to active U.S. and allied operations in the Middle East. The plan includes expanded facilities and higher output across key weapons lines to support ongoing military supply chains. This move places NYSE:LMT more directly in the flow of current defense spending tied to real time conflicts. For investors watching NYSE:LMT, this step comes with the stock at $664.15 and strong longer term returns,&hellip;<br>
+<a href="https://finance.yahoo.com/news/lockheed-martin-ramps-munitions-output-020856704.html?.tsrc=rss" target="_blank" rel="noopener noreferrer">https://finance.yahoo.com/news/lockheed-martin-ramps-munitions-output-020856704.html?.tsrc=rss</a></p>
+<p>[15] defensenews.com — US Air Force seeks sources for Stand-in Attack Weapon compatible with F-47, B-21 (2026-03-09T23:43:18+00:00)<br>
+Summary: The U.S. Air Force is seeking additional industry sources capable of producing a Stand-in Attack Weapon or equivalent system compatible with the future F-47 fighter and B-21 Raider stealth bomber, according to a sources sought notice posted Wednesday on SAM.gov. The notice, issued by the Air Force Life Cycle Management Center’s weapons office at Eglin Air Force Base, Florida, is not a solicitation but a market research tool to identify firms capable of producing a system with “similar or improved capabilities” to the SiAW. Responses are due March 19. The SiAW is a supersonic air-to-ground miss…<br>
+<a href="https://www.defensenews.com/air/2026/03/09/us-air-force-seeks-sources-for-stand-in-attack-weapon-compatible-with-f-47-b-21/" target="_blank" rel="noopener noreferrer">https://www.defensenews.com/air/2026/03/09/us-air-force-seeks-sources-for-stand-in-attack-weapon-compatible-with-f-47-b-21/</a></p>
+<p>[16] businesswire.com — Reliable Robotics, City of Albuquerque Aviation Department Partner to Enhance Aviation Safety Through FAA Advanced Air Mobility Integration Pilot Program (2026-03-09T23:22:00+00:00)<br>
+Summary: MOUNTAIN VIEW, Calif. &amp; ALBUQUERQUE, N.M.&ndash;(BUSINESS WIRE)&ndash; #AAM&ndash;Reliable Robotics, the leader in autonomous aircraft systems, and the City of Albuquerque Aviation Department are honored to have been selected for the Federal Aviation Administration’s (FAA) Advanced Air Mobility Integration Pilot Program to deliver safety-enhancing technologies to regional air cargo operations. Under this program, known as eIPP, autonomous commercial cargo aircraft will be used to connect Albuquerque and other commun<br>
+<a href="http://www.businesswire.com/news/home/20260309922880/en/Reliable-Robotics-City-of-Albuquerque-Aviation-Department-Partner-to-Enhance-Aviation-Safety-Through-FAA-Advanced-Air-Mobility-Integration-Pilot-Program/?feedref=JjAwJuNHiystnCoBq_hl-d9cWptq3LFKqvWRRM6VXqVcgiwDl5F89IquLVWUqfRVgLxDkSKfgoruKb9yWl5as-PbWreMWuYBefATrZ0EPTXUYDHrCfzvcc7PfEC8QrAfBSvR87oUDgbHejiywQBpbg==" target="_blank" rel="noopener noreferrer">http://www.businesswire.com/news/home/20260309922880/en/Reliable-Robotics-City-of-Albuquerque-Aviation-Department-Partner-to-Enhance-Aviation-Safety-Through-FAA-Advanced-Air-Mobility-Integration-Pilot-Program/?feedref=JjAwJuNHiystnCoBq_hl-d9cWptq3LFKqvWRRM6VXqVcgiwDl5F89IquLVWUqfRVgLxDkSKfgoruKb9yWl5as-PbWreMWuYBefATrZ0EPTXUYDHrCfzvcc7PfEC8QrAfBSvR87oUDgbHejiywQBpbg==</a></p>
+<p>[17] spaceforces-space.mil — Space Delta 5 planner drives multinational integration at Exercise SPARTEX 2026 (2026-03-09T21:55:00+00:00)<br>
+Summary: U.S. Space Force Capt. Tyler Riechmann, special technical operations deputy division chief at Space Delta 5, represented S4S and the Combined Space Operations Center (CSpOC) during SPARTEX 2026, France’s premier annual military space exercise Feb. 8-27, 2026.<br>
+<a href="https://www.spaceforces-space.mil/Newsroom/Article/4429324/space-delta-5-planner-drives-multinational-integration-at-exercise-spartex-2026/" target="_blank" rel="noopener noreferrer">https://www.spaceforces-space.mil/Newsroom/Article/4429324/space-delta-5-planner-drives-multinational-integration-at-exercise-spartex-2026/</a></p>
+<p>[18] minot.af.mil — GT 255: ICBM Test Launch Verifies Multiple Reentry Vehicle and System Reliability (2026-03-09T21:32:06+00:00)<br>
+Summary: Air Force Global Strike Command conducted a test launch of an unarmed Minuteman III intercontinental ballistic missile equipped with two test re-entry vehicles March 3, at 11:01 p.m. Pacific Time from Vandenberg Space Force Base, California.<br>
+<a href="https://www.minot.af.mil/News/Article-Display/Article/4429302/gt-255-icbm-test-launch-verifies-multiple-reentry-vehicle-and-system-reliability/" target="_blank" rel="noopener noreferrer">https://www.minot.af.mil/News/Article-Display/Article/4429302/gt-255-icbm-test-launch-verifies-multiple-reentry-vehicle-and-system-reliability/</a></p>
+<p>[19] spacenews.com — Missile detection satellites designed by BAE Systems pass early review (2026-03-09T21:15:08+00:00)<br>
+Summary: Space Force pushes ahead with medium Earth orbit sensor layer for hypersonic tracking The post Missile detection satellites designed by BAE Systems pass early review appeared first on SpaceNews .<br>
+<a href="https://spacenews.com/missile-detection-satellite-designed-by-bae-systems-passes-early-review/" target="_blank" rel="noopener noreferrer">https://spacenews.com/missile-detection-satellite-designed-by-bae-systems-passes-early-review/</a></p>
+<p>[20] war.gov — Contracts for March 9, 2026 (2026-03-09T21:00:29+00:00)<br>
+Summary: Today&rsquo;s Department of War contracts valued at $7.5 million or more are now live on War.gov.<br>
+<a href="https://www.war.gov/News/Contracts/Contract/Article/4429282/contracts-for-march-9-2026/" target="_blank" rel="noopener noreferrer">https://www.war.gov/News/Contracts/Contract/Article/4429282/contracts-for-march-9-2026/</a></p>
+<p>[21] suasnews.com — Elroy Air Selected by FAA and DOT for Landmark Advanced Air Mobility Pilot Program (2026-03-09T20:46:18+00:00)<br>
+Summary: We’re excited to share that Elroy Air and our partners in Louisiana were selected by<br>
+<a href="https://www.suasnews.com/2026/03/elroy-air-selected-by-faa-and-dot-for-landmark-advanced-air-mobility-pilot-program/" target="_blank" rel="noopener noreferrer">https://www.suasnews.com/2026/03/elroy-air-selected-by-faa-and-dot-for-landmark-advanced-air-mobility-pilot-program/</a></p>
+<p>[22] navalnews.com — Dutch frigate HNLMS Evertsen to be deployed in the Mediterranean (2026-03-09T20:34:01+00:00)<br>
+Summary: The Government of the Netherlands has decided to deploy the De Zeven Provinciën-class air defense and command frigate HNLMS Evertsen in the eastern Mediterranean from this week until early April. Dutch MoD press release The frigate will contribute to the defense of the Carrier Strike Group and the defense of Cyprus and allied territory. Ministers Tom Berendsen (Foreign Affairs) and Dilan Yeşilgöz-Zegerius (Defense) announced this today to the House of Representatives and the Senate. Minister Berendsen: “With this commitment, the Netherlands demonstrates allied solidarity and contributes to Eur…<br>
+<a href="https://www.navalnews.com/naval-news/2026/03/dutch-frigate-hnlms-evertsen-to-be-deployed-in-the-mediterranean/" target="_blank" rel="noopener noreferrer">https://www.navalnews.com/naval-news/2026/03/dutch-frigate-hnlms-evertsen-to-be-deployed-in-the-mediterranean/</a></p>
+<p>[23] unmannedairspace.info — US DOT selects eight eIPP programmes to accelerate advanced air mobility industry (2026-03-09T20:19:15+00:00)<br>
+Summary: US Transportation Secretary Sean P Duffy and the Federal Aviation Administration (FAA) today announced eight proposals were selected as part of the Advanced Air Mobility and Electric Vertical Takeoff and Landing (eVTOL) Integration Pilot Program (eIPP). According to a DoT announcement, the American public will start to see operations begin under this program by summer 2026. The eight selected projects span 26 states and involve leading aircraft manufacturers, operators, and state partners. They include a range of operational concepts, including urban air taxi services, regional passenger trans…<br>
+<a href="https://www.unmannedairspace.info/uncategorized/us-dot-selects-eight-eipp-programmes-to-accelerate-advanced-air-mobility-industry/" target="_blank" rel="noopener noreferrer">https://www.unmannedairspace.info/uncategorized/us-dot-selects-eight-eipp-programmes-to-accelerate-advanced-air-mobility-industry/</a></p>
+<p>[24] breakingdefense.com — Navy, Marine Corps amphibious readiness board launches as services put issue on ‘front burner’ (2026-03-09T20:09:56+00:00)<br>
+Summary: The Amphibious Force Readiness Board gathered for the first time on Thursday, and will continue to meet monthly.<br>
+<a href="https://breakingdefense.com/2026/03/navy-marine-corps-amphibious-readiness-board-launches-as-services-put-issue-on-front-burner/" target="_blank" rel="noopener noreferrer">https://breakingdefense.com/2026/03/navy-marine-corps-amphibious-readiness-board-launches-as-services-put-issue-on-front-burner/</a></p>
+<p>[25] defensenews.com — US B-1B Lancers arrive at RAF Fairford as strikes on Iran intensify (2026-03-09T19:39:01+00:00)<br>
+Summary: Multiple U.S. Air Force B-1B Lancer bombers have arrived at RAF Fairford in Gloucestershire, United Kingdom, as American forces intensify strike operations against Iran under Operation Epic Fury. The U.K. Ministry of Defence confirmed Saturday that U.S. forces had begun using the British base for “specific defensive operations to prevent Iran firing missiles into the region.” The BBC reported at least three B-1B Lancers at the base, with the first aircraft arriving the evening of March 6 and two more on March 7. Aviation tracking outlet The Aviationist reported four arrivals in the initial dep…<br>
+<a href="https://www.defensenews.com/news/your-military/2026/03/09/us-b-1b-lancers-arrive-at-raf-fairford-as-strikes-on-iran-intensify/" target="_blank" rel="noopener noreferrer">https://www.defensenews.com/news/your-military/2026/03/09/us-b-1b-lancers-arrive-at-raf-fairford-as-strikes-on-iran-intensify/</a></p>
+<p>[26] businesswire.com — NUBURU debutta nel mercato globale militare anti-droni da 20 miliardi di dollari mentre Lyocon completa la prova di concetto per la piattaforma laser portatile a energia diretta (2026-03-09T19:32:00+00:00)<br>
+Summary: DENVER&ndash;(BUSINESS WIRE)&ndash;NUBURU, Inc. (NYSE American: BURU), una società di piattaforme di difesa e sicurezza dal doppio utilizzo specializzata negli effetti non cinetici, nella tecnologie a energia diretta, nei conflitti elettronici e nei sistemi di difesa orchestrati da software, oggi ha reso noto che la sua controllata al 100% Lyocon Srl (&ldquo;Lyocon&rdquo;) ha completato con successo la prova di concetto (&ldquo;POC&rdquo;) di una piattaforma portatile di disturbo visivo laser a energia diretta studiata per le a<br>
+<a href="http://www.businesswire.com/news/home/20260309516264/it/?feedref=JjAwJuNHiystnCoBq_hl-d9cWptq3LFKqvWRRM6VXqVcgiwDl5F89IquLVWUqfRVgLxDkSKfgoruKb9yWl5as-PbWreMWuYBefATrZ0EPTXUYDHrCfzvcc7PfEC8QrAfBSvR87oUDgbHejiywQBpbg==" target="_blank" rel="noopener noreferrer">http://www.businesswire.com/news/home/20260309516264/it/?feedref=JjAwJuNHiystnCoBq_hl-d9cWptq3LFKqvWRRM6VXqVcgiwDl5F89IquLVWUqfRVgLxDkSKfgoruKb9yWl5as-PbWreMWuYBefATrZ0EPTXUYDHrCfzvcc7PfEC8QrAfBSvR87oUDgbHejiywQBpbg==</a></p>
+<p>[27] breakingdefense.com — On the flightline with Swedish fighter jets in Iceland, in Cold War 2.0 (2026-03-09T19:24:59+00:00)<br>
+Summary: Deployment comes after Reykjavík adopted Iceland’s first-ever defense strategy in 70 years of NATO history.<br>
+<a href="https://breakingdefense.com/2026/03/on-the-flightline-with-swedish-fighter-jets-in-iceland-in-cold-war-2-0/" target="_blank" rel="noopener noreferrer">https://breakingdefense.com/2026/03/on-the-flightline-with-swedish-fighter-jets-in-iceland-in-cold-war-2-0/</a></p>
+<p>[28] defensenews.com — Prewar US intel found intervention in Iran wasn’t likely to change leadership (2026-03-09T18:44:33+00:00)<br>
+Summary: A U.S. intelligence assessment completed shortly before the United States and Israel launched a war in Iran had determined that American military intervention was not likely to lead to regime change in the Islamic Republic, according to two people familiar with the finding. The National Intelligence Council’s assessment in February concluded that neither limited airstrikes nor a larger, prolonged military campaign would be likely to result in a new government taking over in Iran, even if the current leadership was killed, according to the two people, who spoke on condition of anonymity to desc…<br>
+<a href="https://www.defensenews.com/news/your-military/2026/03/09/prewar-us-intel-found-intervention-in-iran-wasnt-likely-to-change-leadership/" target="_blank" rel="noopener noreferrer">https://www.defensenews.com/news/your-military/2026/03/09/prewar-us-intel-found-intervention-in-iran-wasnt-likely-to-change-leadership/</a></p>
+<p>[29] finance.yahoo.com — How Dual DARPA and German Optics Wins At RTX (RTX) Have Changed Its Investment Story (2026-03-09T18:12:02+00:00)<br>
+Summary: In late February 2026, RTX’s BBN Technologies won a DARPA XENA research contract and Raytheon ELCAN secured a customized Specter DR 1–4x sight production deal for the German Armed Forces, extending RTX’s role in advanced sensing and soldier modernization across the U.S. and Europe. Together, these wins highlight how RTX’s mix of cutting-edge defense research and long-serving optical systems can tie next-generation capabilities to existing NATO procurement programs. We’ll now examine how&hellip;<br>
+<a href="https://finance.yahoo.com/news/dual-darpa-german-optics-wins-181202889.html?.tsrc=rss" target="_blank" rel="noopener noreferrer">https://finance.yahoo.com/news/dual-darpa-german-optics-wins-181202889.html?.tsrc=rss</a></p>
+<p>[30] armytimes.com — Hegseth downplays risk to US troops from Iran-Russia cooperation (2026-03-09T17:34:51+00:00)<br>
+Summary: Defense Secretary Pete Hegseth contends that American troops are not in danger across the Middle East – even as the Pentagon announced on Sunday that a seventh U.S. service member had been killed in the war against Iran. The latest casualty, Sgt. Benjamin Pennington, 26, died of wounds sustained in an Iranian attack on Prince Sultan Air Base, Saudi Arabia, according to the Department of Defense. His death came one day after President Donald Trump and other senior officials observed the solemn return of six flag-draped cases to Dover Air Force Base in Delaware. With the conflict now in its seco…<br>
+<a href="https://www.armytimes.com/news/pentagon-congress/2026/03/09/hegseth-downplays-risk-to-us-troops-from-iran-russia-cooperation/" target="_blank" rel="noopener noreferrer">https://www.armytimes.com/news/pentagon-congress/2026/03/09/hegseth-downplays-risk-to-us-troops-from-iran-russia-cooperation/</a></p>
+<p>[31] businesswire.com — Mobix Labs: Defense Communications Hardware Supporting U.S. Navy Ships (2026-03-09T17:30:00+00:00)<br>
+Summary: IRVINE, Calif.&ndash;(BUSINESS WIRE)---- $MOBX #defense&ndash;Mobix Labs, Inc. (Nasdaq: MOBX) announced continued production of communications hardware supporting secure network systems deployed aboard U.S. Navy ships. The production supports a multi-year defense program with a prime U.S. Navy contractor under the company’s previously disclosed orders. Mobix Labs’ technology is designed to protect critical military communications from interference and disruption, helping ensure reliable connectivity for naval operations in<br>
+<a href="http://www.businesswire.com/news/home/20260309212322/en/Mobix-Labs-Defense-Communications-Hardware-Supporting-U.S.-Navy-Ships/?feedref=JjAwJuNHiystnCoBq_hl-d9cWptq3LFKqvWRRM6VXqVcgiwDl5F89IquLVWUqfRVgLxDkSKfgoruKb9yWl5as-PbWreMWuYBefATrZ0EPTXUYDHrCfzvcc7PfEC8QrAfBSvR87oUDgbHejiywQBpbg==" target="_blank" rel="noopener noreferrer">http://www.businesswire.com/news/home/20260309212322/en/Mobix-Labs-Defense-Communications-Hardware-Supporting-U.S.-Navy-Ships/?feedref=JjAwJuNHiystnCoBq_hl-d9cWptq3LFKqvWRRM6VXqVcgiwDl5F89IquLVWUqfRVgLxDkSKfgoruKb9yWl5as-PbWreMWuYBefATrZ0EPTXUYDHrCfzvcc7PfEC8QrAfBSvR87oUDgbHejiywQBpbg==</a></p>
+<p>[32] vandenberg.spaceforce.mil — U.S. STRATCOM Leadership Visit Vandenberg SFB During ICBM Test Launch (2026-03-09T17:21:00+00:00)<br>
+Summary: U.S. Air Force Lt. Gen. Michael J. Lutton, right, deputy commander of U.S. Strategic Command, and U.S. Army Command Sgt. Maj. Jo Naumann, middle, command senior enlisted leader, USSTRATCOM, and Casey L. Deering, left, Deputy Assistant Secretary of War for Nuclear Matters, engage in conversation after a 377th Test and Evaluation Group mission brief prior to an unarmed Minuteman III Intercontinental Ballistic Missile test at Vandenberg Space Force Base, Calif., March 3, 2026.<br>
+<a href="https://www.vandenberg.spaceforce.mil/News/Article-Display/Article/4428938/us-stratcom-leadership-visit-vandenberg-sfb-during-icbm-test-launch/" target="_blank" rel="noopener noreferrer">https://www.vandenberg.spaceforce.mil/News/Article-Display/Article/4428938/us-stratcom-leadership-visit-vandenberg-sfb-during-icbm-test-launch/</a></p>
+<p>[33] ssc.spaceforce.mil — U.S. Space Force achieves key design milestone for Resilient Missile Warning and Tracking Epoch 2 MEO Constellation (2026-03-09T17:08:00+00:00)<br>
+Summary: The U.S. Space Force advances the future of proliferated Resilient Missile Warning and Tracking (MWT) capabilities through the MWT Epoch 2 program’s completion of the preliminary design review for its Medium Earth Orbit (MEO) constellation. The Epoch 2 constellation will expand the resilient capabilities of Epoch 1, creating a more robust design to track missile threats around the world and advancing the global coverage of defense for the Nation, Warfighter, Allies, and partners.<br>
+<a href="https://www.ssc.spaceforce.mil/Newsroom/Article/4428927/us-space-force-achieves-key-design-milestone-for-resilient-missile-warning-and" target="_blank" rel="noopener noreferrer">https://www.ssc.spaceforce.mil/Newsroom/Article/4428927/us-space-force-achieves-key-design-milestone-for-resilient-missile-warning-and</a></p>
+<p>[34] defensenews.com — NATO to study what-if scenarios that could cause Arctic conflict with Russia (2026-03-09T16:54:26+00:00)<br>
+Summary: BRUSSELS — NATO nations are sending troops to Norway for a cold-weather exercise this week, as alliance officials kick off a yearslong analysis into causes for conflict in the Arctic. As part of the planning effort, a U.S. and Norwegian-led research task force will compile a report by 2029 under the name “High North Scenarios for Wargaming and Analysis — Winter Storm 2030.” Beyond the lead nations, NATO countries to have thus far committed to participating in the Arctic security simulation include Canada, the Czech Republic, France, Italy, Sweden and Turkey. “The region faces rapid militarizat…<br>
+<a href="https://www.defensenews.com/global/europe/2026/03/09/nato-to-study-what-if-scenarios-that-could-cause-arctic-conflict-with-russia/" target="_blank" rel="noopener noreferrer">https://www.defensenews.com/global/europe/2026/03/09/nato-to-study-what-if-scenarios-that-could-cause-arctic-conflict-with-russia/</a></p>
+<p>[35] nytimes.com — Ukraine Helps U.S. Bases in the Mideast With Stopping Drones (2026-03-09T16:29:36+00:00)<br>
+Summary: As the war in Iran spreads, Kyiv is eagerly offering its hard-won expertise and advanced technology to counter Iranian drones.<br>
+<a href="https://www.nytimes.com/2026/03/09/world/middleeast/ukraine-shahed-drone-middle-east.html" target="_blank" rel="noopener noreferrer">https://www.nytimes.com/2026/03/09/world/middleeast/ukraine-shahed-drone-middle-east.html</a></p>
+<p>[36] defensenews.com — NATO defenses shoot down ballistic missile in Turkey (2026-03-09T15:53:59+00:00)<br>
+Summary: NATO defenses intercepted an Iranian missile on Monday that entered Turkey’s airspace, the country’s defense ministry said. The interception is the second of a Turkey-bound missile since the U.S. and Israel launched military strikes against Iran on Feb. 28. In retaliation, Iran has fired missiles and drones at several countries across the region . The ballistic missile was downed by NATO units stationed in the eastern Mediterranean, a Turkey Defense Ministry statement said. The ministry said debris from the downed Iranian missile fell on empty fields in Gaziantep province in southern Turkey. T…<br>
+<a href="https://www.defensenews.com/global/europe/2026/03/09/nato-defenses-shoot-down-ballistic-missile-in-turkey/" target="_blank" rel="noopener noreferrer">https://www.defensenews.com/global/europe/2026/03/09/nato-defenses-shoot-down-ballistic-missile-in-turkey/</a></p>
+<p>[37] dronelife.com — Vector Announces Warfighter-Focused Hammer F1 Quadcopter Drone (2026-03-09T15:25:54+00:00)<br>
+Summary: Vector has introduced the Hammer F1, a foldable quadcopter designed to combine reconnaissance and strike capability in a single, compact platform. The system targets U.S. defense authority requirements and frontline operator needs, with a focus on speed, modularity, and contested-environment performance.​ Hammer F1: Designed for the Edge The Hammer F1 is a 10-inch foldable quadcopter […] The post Vector Announces Warfighter-Focused Hammer F1 Quadcopter Drone appeared first on DRONELIFE .<br>
+<a href="https://dronelife.com/2026/03/09/vector-announces-warfighter-focused-hammer-f1-quadcopter-drone/" target="_blank" rel="noopener noreferrer">https://dronelife.com/2026/03/09/vector-announces-warfighter-focused-hammer-f1-quadcopter-drone/</a></p>
+<p>[38] unmannedairspace.info — Estonia, US and allies test remotely coordinated C-UAS (2026-03-09T14:32:04+00:00)<br>
+Summary: The Estonian Defence Forces, the United States Army and other allied forces practiced counter-uncrewed aerial systems (C-UAS) tactics on March 5, during the Digital Shield 2.0 exercise in Rutja, Estonia. During the exercise, Estonian and Allied sensors and command centres were linked to a real-time unified data network in order to identify threats more quickly and respond to them in a coordinated manner. “We tested a concept for ensuring effective protection against the threat of UAS using centralised command and control software, which can be used to control interceptor drones and missiles,” …<br>
+<a href="https://www.unmannedairspace.info/counter-uas-systems-and-policies/estonia-us-allies-test-remotely-controlled-and-coordinated-c-uas/" target="_blank" rel="noopener noreferrer">https://www.unmannedairspace.info/counter-uas-systems-and-policies/estonia-us-allies-test-remotely-controlled-and-coordinated-c-uas/</a></p>
+<p>[39] breakingdefense.com — Europe leads global arms imports market as demand surges: SIPRI report (2026-03-09T14:10:00+00:00)<br>
+Summary: Ukraine, Poland and the United Kingdom were the three biggest European weapon system importers between 2021 and 2025, said SIPRI.<br>
+<a href="https://breakingdefense.com/2026/03/europe-leads-global-arms-imports-market-as-demand-surges-sipri-report/" target="_blank" rel="noopener noreferrer">https://breakingdefense.com/2026/03/europe-leads-global-arms-imports-market-as-demand-surges-sipri-report/</a></p>
+<p>[40] af.mil — Air Force, MASS-TF sign MOU to evaluate strategic real estate opportunities (2026-03-09T13:30:00+00:00)<br>
+Summary: The agreement establishes a framework for collaboration to pursue a strategic real estate and mission support partnership.<br>
+<a href="https://www.af.mil/News/Article-Display/Article/4428374/air-force-mass-tf-sign-mou-to-evaluate-strategic-real-estate-opportunities/" target="_blank" rel="noopener noreferrer">https://www.af.mil/News/Article-Display/Article/4428374/air-force-mass-tf-sign-mou-to-evaluate-strategic-real-estate-opportunities/</a></p>
+<p>[41] spacenews.com — Voyager Technologies invests in Max Space (2026-03-09T13:00:00+00:00)<br>
+Summary: Voyager Technologies is investing in Max Space to help accelerate a partnership between the two companies on developing lunar habitats. The post Voyager Technologies invests in Max Space appeared first on SpaceNews .<br>
+<a href="https://spacenews.com/voyager-technologies-invests-in-max-space/" target="_blank" rel="noopener noreferrer">https://spacenews.com/voyager-technologies-invests-in-max-space/</a></p>
+
+<img
+  src="https://px.ads.linkedin.com/collect/?pid=8920588&fmt=gif"
+  height="1"
+  width="1"
+  style="display:none;"
+  alt=""
+/>
+
+</body>
+</html>

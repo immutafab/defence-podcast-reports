@@ -1,0 +1,477 @@
+{
+  "date": "2026-03-10",
+  "report_path": "daily-data/2026/03/10/report.html",
+  "digest": {
+    "key_news_summary": "U.S [25]. B-1B Lancer bombers have been stationed at RAF Fairford, UK, to counter Iranian missile threats, marking a significant deployment in ongoing operations against Iran. NATO intercepted an Iranian missile in Turkey, the second such interception since the onset of U.S [36]. and Israeli strikes on Iran. The U.S [7]. Army is deploying the Merops counter-drone system in the Middle East, leveraging its success in Ukraine to combat Iranian Shahed drones. China's defense budget has increased by 7% to approximately $277 billion, reflecting strategic shifts amid leadership changes [1]. LOCKHEED MARTIN (LMT) is boosting munitions production to meet rising demand from Middle East conflicts [14]. NORTHROP GRUMMAN (NOC) is advancing the U.S [11]. Space Force's Deep Space Advanced Radar Capability (DARC) program, enhancing space situational awareness.\n\nToday's defense market showed mixed performance, with some stocks rising on increased defense budgets in Asia, while others fell despite positive contract news. The overall tone was influenced by geopolitical developments, including China's significant boost to its defense spending [999].",
+    "key_stocks_summary": "Today's defense market showed mixed performance, with some stocks rising on increased defense budgets in Asia, while others fell despite positive contract news. The overall tone was influenced by geopolitical developments, including China's significant boost to its defense spending [999].",
+    "disclaimer": "General information only — not financial advice."
+  },
+  "stocks": {
+    "table_rows": [
+      {
+        "Ticker": "PLTR",
+        "Today Price/Δ": "$156.43 (▼ -0.73, -0.46%)",
+        "Fresh catalyst(s) [n] (direct / adjacent / macro)": "Macro: Increased defense budgets in Asia [1]",
+        "TA snapshot": "D/W/M: Up/Up/Up; >20/50; testing R1 160",
+        "Signal": "Bullish - Strong defense demand"
+      },
+      {
+        "Ticker": "AVAV",
+        "Today Price/Δ": "$227.29 (▼ -2.51, -1.09%)",
+        "Fresh catalyst(s) [n] (direct / adjacent / macro)": "Adjacent: U.S. Army drone procurement [8]",
+        "TA snapshot": "D/W/M: Up/Flat/Up; >20/50; testing S1 225",
+        "Signal": "Cautious - Awaiting contract news"
+      },
+      {
+        "Ticker": "APH",
+        "Today Price/Δ": "$136.06 (▲ +4.19, +3.18%)",
+        "Fresh catalyst(s) [n] (direct / adjacent / macro)": "Macro: Increased defense budgets in Asia [1]",
+        "TA snapshot": "D/W/M: Up/Up/Up; >20/50; testing R1 140",
+        "Signal": "Bullish - Strong sector momentum"
+      },
+      {
+        "Ticker": "KTOS",
+        "Today Price/Δ": "$92.47 (▲ +5.47, +6.29%)",
+        "Fresh catalyst(s) [n] (direct / adjacent / macro)": "Direct: U.S. Army C-UAS deployment [7]",
+        "TA snapshot": "D/W/M: Up/Up/Up; >20/50; testing R1 95",
+        "Signal": "Bullish - Positive contract flow"
+      },
+      {
+        "Ticker": "EPIRUS",
+        "Today Price/Δ": "Not publicly listed (no market data)",
+        "Fresh catalyst(s) [n] (direct / adjacent / macro)": "No fresh catalysts",
+        "TA snapshot": "N/A",
+        "Signal": "N/A"
+      },
+      {
+        "Ticker": "RHM.DE",
+        "Today Price/Δ": "$1,645.00 (▲ +20.00, +1.23%)",
+        "Fresh catalyst(s) [n] (direct / adjacent / macro)": "Macro: Increased defense budgets in Asia [1]",
+        "TA snapshot": "D/W/M: Up/Up/Up; >20/50; testing R1 1650",
+        "Signal": "Bullish - European defense demand"
+      },
+      {
+        "Ticker": "ITA",
+        "Today Price/Δ": "$241.99 (▼ -0.21, -0.09%)",
+        "Fresh catalyst(s) [n] (direct / adjacent / macro)": "Macro: Increased defense budgets in Asia [1]",
+        "TA snapshot": "D/W/M: Up/Flat/Up; >20/50; testing S1 240",
+        "Signal": "Cautious - Broad sector exposure"
+      },
+      {
+        "Ticker": "LMT",
+        "Today Price/Δ": "$664.15 (▼ -7.62, -1.13%)",
+        "Fresh catalyst(s) [n] (direct / adjacent / macro)": "Direct: Ramping munitions output [14]",
+        "TA snapshot": "D/W/M: Up/Flat/Up; >20/50; testing S1 660",
+        "Signal": "Bullish - Increased production"
+      },
+      {
+        "Ticker": "NOC",
+        "Today Price/Δ": "$747.34 (▼ -8.79, -1.16%)",
+        "Fresh catalyst(s) [n] (direct / adjacent / macro)": "Direct: Space Force DARC role [11]",
+        "TA snapshot": "D/W/M: Up/Flat/Up; >20/50; testing S1 740",
+        "Signal": "Bullish - Strong space contracts"
+      },
+      {
+        "Ticker": "RTX",
+        "Today Price/Δ": "$208.23 (▼ -1.53, -0.73%)",
+        "Fresh catalyst(s) [n] (direct / adjacent / macro)": "Direct: DARPA and German optics wins [29]",
+        "TA snapshot": "D/W/M: Up/Flat/Up; >20/50; testing S1 205",
+        "Signal": "Bullish - New contracts secured"
+      },
+      {
+        "Ticker": "BA",
+        "Today Price/Δ": "$225.00 (▼ -6.11, -2.64%)",
+        "Fresh catalyst(s) [n] (direct / adjacent / macro)": "Macro: Increased defense budgets in Asia [1]",
+        "TA snapshot": "D/W/M: Up/Flat/Up; >20/50; testing S1 220",
+        "Signal": "Cautious - Awaiting contract news"
+      },
+      {
+        "Ticker": "GD",
+        "Today Price/Δ": "$361.98 (▼ -1.51, -0.42%)",
+        "Fresh catalyst(s) [n] (direct / adjacent / macro)": "Macro: Increased defense budgets in Asia [1]",
+        "TA snapshot": "D/W/M: Up/Flat/Up; >20/50; testing S1 360",
+        "Signal": "Cautious - Broad sector exposure"
+      },
+      {
+        "Ticker": "HII",
+        "Today Price/Δ": "$429.58 (▲ +0.47, +0.11%)",
+        "Fresh catalyst(s) [n] (direct / adjacent / macro)": "Macro: Increased defense budgets in Asia [1]",
+        "TA snapshot": "D/W/M: Up/Flat/Up; >20/50; testing R1 430",
+        "Signal": "Bullish - Strong naval demand"
+      }
+    ]
+  },
+  "news": {
+    "items": [
+      {
+        "ref": 1,
+        "title": "China amps up its 2026 defense budget by 7% amid purge of generals",
+        "url": "https://www.defensenews.com/global/asia-pacific/2026/03/10/china-amps-up-its-2026-defense-budget-by-7-amid-purge-of-generals/",
+        "source": "defensenews.com",
+        "published": "2026-03-10T09:36:06+00:00",
+        "summary": "CHRISTCHURCH, New Zealand — China is increasing its 2026 defense budget by 7%, bringing the nation’s military expenditure for the coming year to 1.91 trillion yuan, or about $277 billion. This year’s increase compares to 7.2% rises for the past three years, with Beijing claiming its defense spending “remains comparatively modest across key relative indicators, including its share of gross domestic product, per capita defense expenditure, and defense expenditure per military personnel.” The budget was announced on March 5, as China’s top leaders convened for the 14th National People’s Congress …",
+        "topics": []
+      },
+      {
+        "ref": 2,
+        "title": "Thales adapts counter-IED node for portable UAS protection",
+        "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/thales-adapts-counter-ied-node-for-portable-uas-protection/",
+        "source": "unmannedairspace.info",
+        "published": "2026-03-10T09:17:45+00:00",
+        "summary": "Thales has launched STORM 2, a compact cyber and electromagnetic activities (CEMA) node. Originally designed to counter improvised explosive devices, Thales has developed the system to equip soldiers with localised protection from radio frequency controlled uncrewed aerial systems (UAS). Weighing less than 2kg, STORM 2 provides frequency coverage from 20 MHz to 6 GHz. It hosts a software defined radio and processor that enables it to be re-configured to perform other CEMA roles, including hosting third-party applications and techniques. For more information Thales Group",
+        "topics": []
+      },
+      {
+        "ref": 3,
+        "title": "How China plans for greater power projection in Xinjiang and Tibet over the next 5 years",
+        "url": "https://www.scmp.com/news/china/diplomacy/article/3346094/how-china-plans-greater-power-projection-xinjiang-and-tibet-over-next-5-years?utm_source=rss_feed",
+        "source": "scmp.com",
+        "published": "2026-03-10T09:10:04+00:00",
+        "summary": "China plans to further strengthen its strategic transport network in sensitive border regions over the next five years to fortify and better project power along its remote frontiers amid rising geopolitical uncertainty. One project involves building a 394km (245-mile) highway linking the northern and southern sides of the rugged Tianshan Mountains in far-western Xinjiang Uygur autonomous region, according to the draft 15th five-year plan released last week. The route will run parallel to a...",
+        "topics": []
+      },
+      {
+        "ref": 4,
+        "title": "RAF fighter jets shoot down drones targeting UK allies in Middle East",
+        "url": "https://www.independent.co.uk/news/world/middle-east/raf-jets-shoot-down-drones-us-iran-war-middle-east-b2935308.html",
+        "source": "independent.co.uk",
+        "published": "2026-03-10T08:55:34+00:00",
+        "summary": "Defence secretary John Healey urged for de-escalation in Lebanon and ‘a return to a negotiated process’",
+        "topics": []
+      },
+      {
+        "ref": 5,
+        "title": "Japan Commissions Fifth Taigei-class Submarine",
+        "url": "https://www.navalnews.com/naval-news/2026/03/japan-commissions-fifth-taigei-class-submarine/",
+        "source": "navalnews.com",
+        "published": "2026-03-10T08:27:51+00:00",
+        "summary": "The Japan Maritime Self-Defense Force (JMSDF) has commissioned the fifth of its Taigei-class diesel-electric attack submarines (SSK), which feature improved detection capability and reduced detectability compared with earlier submarines. Named JS Chogei (with pennant number SS 517), the new Taigei-class boat was inducted into the Submarine Division 2 of Submarine Flotilla 2, which is homeported at the Yokosuka naval base in Kanagawa Prefecture, shortly after being handed over by shipbuilder Mitsubishi Heavy Industries (MHI) at its facility in Kobe City on March 10. According to the JMSDF, the …",
+        "topics": []
+      },
+      {
+        "ref": 6,
+        "title": "Amentum-led Joint Venture selected for $112 Million Clean-up at Four European Nuclear Research Sites",
+        "url": "http://www.businesswire.com/news/home/20260310491705/en/Amentum-led-Joint-Venture-selected-for-112-Million-Clean-up-at-Four-European-Nuclear-Research-Sites/?feedref=JjAwJuNHiystnCoBq_hl-d9cWptq3LFKqvWRRM6VXqVcgiwDl5F89IquLVWUqfRVgLxDkSKfgoruKb9yWl5as-PbWreMWuYBefATrZ0EPTXUYDHrCfzvcc7PfEC8QrAfBSvR87oUDgbHejiywQBpbg==",
+        "source": "businesswire.com",
+        "published": "2026-03-10T08:00:00+00:00",
+        "summary": "CHANTILLY, Va.--(BUSINESS WIRE)---- $AMTM #Amentum--A joint venture led by Amentum (NYSE: AMTM) has won a new framework contract as the lead decommissioning and waste management contractor for nuclear research sites in four European countries. Under the $112 million (€95.7 million) contract, awarded by the European Commission Joint Research Centre (JRC), the Amentum-led JV will provide decommissioning solutions to accelerate the cleanup efforts of JRC sites in Ispra (Italy), Karlsruhe (Germany), Geel (Belgium) an",
+        "topics": []
+      },
+      {
+        "ref": 7,
+        "title": "U.S. Army to Send Merops C-UAS System Against Iranian Shahed Drones in Middle East",
+        "url": "https://www.uasvision.com/2026/03/10/u-s-army-to-send-merops-c-uas-system-against-iranian-shahed-drones-in-middle-east/",
+        "source": "uasvision.com",
+        "published": "2026-03-10T06:50:30+00:00",
+        "summary": "The United States is moving quickly to deploy the Merops anti-drone system to the Middle East within the next week. This compact, AI-powered counter-drone technology—already battle-tested in Ukraine with more than 1,000 successful intercepts of Iranian-designed Shahed drones—offers a cost-effective shield against swarming threats that can overwhelm traditional missile defences such as Patriot. Merops is […]",
+        "topics": []
+      },
+      {
+        "ref": 8,
+        "title": "U.S. Army National Guard to buy Small FPV Strike Drones",
+        "url": "https://www.uasvision.com/2026/03/10/u-s-army-national-guard-to-buy-small-fpv-strike-drones/",
+        "source": "uasvision.com",
+        "published": "2026-03-10T06:49:40+00:00",
+        "summary": "The United States Army National Guard has launched a procurement effort to acquire several small unmanned aerial systems for training and operational support, according to solicitations published March 7, 2026. The request, issued by the Tennessee Army National Guard, focuses on lightweight drones that meet the U.S. military’s Blue UAS security certification requirements. These systems […]",
+        "topics": []
+      },
+      {
+        "ref": 9,
+        "title": "The Fourth Law Develops Autonomous Interceptor Drone Zerov-8",
+        "url": "https://www.uasvision.com/2026/03/10/the-fourth-law-develops-autonomous-interceptor-drone-zerov-8/",
+        "source": "uasvision.com",
+        "published": "2026-03-10T06:48:35+00:00",
+        "summary": "Ukrainian defence company The Fourth Law has developed the Zerov-8, an interceptor drone equipped with an autonomous targeting system. It includes the TFL Anti-Shahed detection module, designed to counter enemy aerial threats such as Shahed drones. Technical Specifications The Zerov-8 uses a tailsitter design (vertical take-off and landing), combining missile-like speed with drone maneuverability. Maximum […]",
+        "topics": []
+      },
+      {
+        "ref": 10,
+        "title": "Ondas Gets $6M Orders for C-UAS Systems from Current Middle East Customers",
+        "url": "https://www.uasvision.com/2026/03/10/ondas-gets-6m-orders-for-c-uas-systems-from-current-middle-east-customers/",
+        "source": "uasvision.com",
+        "published": "2026-03-10T06:40:31+00:00",
+        "summary": "Ondas Inc., a provider of autonomous aerial and ground robot intelligence through its Ondas Autonomous Systems (OAS) business unit and private wireless solutions through Ondas Networks, has received multiple orders totaling approximately $6 million for dozens of counter-drone systems from existing defence and homeland security customers in the Middle East and other regions. The orders […]",
+        "topics": []
+      },
+      {
+        "ref": 11,
+        "title": "Northrop Grumman Deepens Space Force DARC Role As Investors Weigh Valuation",
+        "url": "https://finance.yahoo.com/news/northrop-grumman-deepens-space-force-050849425.html?.tsrc=rss",
+        "source": "finance.yahoo.com",
+        "published": "2026-03-10T05:08:49+00:00",
+        "summary": "Northrop Grumman, NYSE:NOC, is playing a key role in the U.S. Space Force Deep Space Advanced Radar Capability, or DARC, program. The company is progressing the DARC effort with a significant hardware order for its Wales site, tied to building out global space situational awareness infrastructure. DARC is designed to support continuous, all weather monitoring of satellites and spacecraft across multiple global locations. For investors watching defense and space exposure, Northrop Grumman...",
+        "topics": []
+      },
+      {
+        "ref": 12,
+        "title": "Multinational Forces Arrive for Exercise Freedom Shield 2026 - Reaffirming Commitment to Stability",
+        "url": "https://www.pacom.mil/Media/NEWS/News-Article-View/Article/4429492/multinational-forces-arrive-for-exercise-freedom-shield-2026-reaffirming-commit/",
+        "source": "pacom.mil",
+        "published": "2026-03-10T02:49:00+00:00",
+        "summary": "CAMP HUMPHREYS, South Korea — The Republic of Korea (ROK) and the United States (U.S.), in collaboration with the United Nations Command (UNC), have commenced the annual Freedom Shield 26 (FS26) exercise from March 9-19, 2026.",
+        "topics": []
+      },
+      {
+        "ref": 13,
+        "title": "U.S. Space Forces - Korea launches space component operations for Freedom Shield 26",
+        "url": "https://www.pacom.mil/Media/NEWS/News-Article-View/Article/4429483/us-space-forces-korea-launches-space-component-operations-for-freedom-shield-26/",
+        "source": "pacom.mil",
+        "published": "2026-03-10T02:36:00+00:00",
+        "summary": "OSAN AIR BASE, Republic of Korea — U.S. Space Forces - Korea kicked off space component operations for Freedom Shield 26, an annual defense-focused exercise conducted by the Republic of Korea and United States, in collaboration with the United Nations Command from March 9-19, 2026.",
+        "topics": []
+      },
+      {
+        "ref": 14,
+        "title": "Lockheed Martin Ramps Munitions Output As Conflict Driven Demand Shapes Outlook",
+        "url": "https://finance.yahoo.com/news/lockheed-martin-ramps-munitions-output-020856704.html?.tsrc=rss",
+        "source": "finance.yahoo.com",
+        "published": "2026-03-10T02:08:56+00:00",
+        "summary": "Lockheed Martin is working with U.S. defense leaders to quadruple munitions production in response to active U.S. and allied operations in the Middle East. The plan includes expanded facilities and higher output across key weapons lines to support ongoing military supply chains. This move places NYSE:LMT more directly in the flow of current defense spending tied to real time conflicts. For investors watching NYSE:LMT, this step comes with the stock at $664.15 and strong longer term returns,...",
+        "topics": []
+      },
+      {
+        "ref": 15,
+        "title": "US Air Force seeks sources for Stand-in Attack Weapon compatible with F-47, B-21",
+        "url": "https://www.defensenews.com/air/2026/03/09/us-air-force-seeks-sources-for-stand-in-attack-weapon-compatible-with-f-47-b-21/",
+        "source": "defensenews.com",
+        "published": "2026-03-09T23:43:18+00:00",
+        "summary": "The U.S. Air Force is seeking additional industry sources capable of producing a Stand-in Attack Weapon or equivalent system compatible with the future F-47 fighter and B-21 Raider stealth bomber, according to a sources sought notice posted Wednesday on SAM.gov. The notice, issued by the Air Force Life Cycle Management Center’s weapons office at Eglin Air Force Base, Florida, is not a solicitation but a market research tool to identify firms capable of producing a system with “similar or improved capabilities” to the SiAW. Responses are due March 19. The SiAW is a supersonic air-to-ground miss…",
+        "topics": []
+      },
+      {
+        "ref": 16,
+        "title": "Reliable Robotics, City of Albuquerque Aviation Department Partner to Enhance Aviation Safety Through FAA Advanced Air Mobility Integration Pilot Program",
+        "url": "http://www.businesswire.com/news/home/20260309922880/en/Reliable-Robotics-City-of-Albuquerque-Aviation-Department-Partner-to-Enhance-Aviation-Safety-Through-FAA-Advanced-Air-Mobility-Integration-Pilot-Program/?feedref=JjAwJuNHiystnCoBq_hl-d9cWptq3LFKqvWRRM6VXqVcgiwDl5F89IquLVWUqfRVgLxDkSKfgoruKb9yWl5as-PbWreMWuYBefATrZ0EPTXUYDHrCfzvcc7PfEC8QrAfBSvR87oUDgbHejiywQBpbg==",
+        "source": "businesswire.com",
+        "published": "2026-03-09T23:22:00+00:00",
+        "summary": "MOUNTAIN VIEW, Calif. & ALBUQUERQUE, N.M.--(BUSINESS WIRE)-- #AAM--Reliable Robotics, the leader in autonomous aircraft systems, and the City of Albuquerque Aviation Department are honored to have been selected for the Federal Aviation Administration’s (FAA) Advanced Air Mobility Integration Pilot Program to deliver safety-enhancing technologies to regional air cargo operations. Under this program, known as eIPP, autonomous commercial cargo aircraft will be used to connect Albuquerque and other commun",
+        "topics": []
+      },
+      {
+        "ref": 17,
+        "title": "Space Delta 5 planner drives multinational integration at Exercise SPARTEX 2026",
+        "url": "https://www.spaceforces-space.mil/Newsroom/Article/4429324/space-delta-5-planner-drives-multinational-integration-at-exercise-spartex-2026/",
+        "source": "spaceforces-space.mil",
+        "published": "2026-03-09T21:55:00+00:00",
+        "summary": "U.S. Space Force Capt. Tyler Riechmann, special technical operations deputy division chief at Space Delta 5, represented S4S and the Combined Space Operations Center (CSpOC) during SPARTEX 2026, France’s premier annual military space exercise Feb. 8-27, 2026.",
+        "topics": []
+      },
+      {
+        "ref": 18,
+        "title": "GT 255: ICBM Test Launch Verifies Multiple Reentry Vehicle and System Reliability",
+        "url": "https://www.minot.af.mil/News/Article-Display/Article/4429302/gt-255-icbm-test-launch-verifies-multiple-reentry-vehicle-and-system-reliability/",
+        "source": "minot.af.mil",
+        "published": "2026-03-09T21:32:06+00:00",
+        "summary": "Air Force Global Strike Command conducted a test launch of an unarmed Minuteman III intercontinental ballistic missile equipped with two test re-entry vehicles March 3, at 11:01 p.m. Pacific Time from Vandenberg Space Force Base, California.",
+        "topics": []
+      },
+      {
+        "ref": 19,
+        "title": "Missile detection satellites designed by BAE Systems pass early review",
+        "url": "https://spacenews.com/missile-detection-satellite-designed-by-bae-systems-passes-early-review/",
+        "source": "spacenews.com",
+        "published": "2026-03-09T21:15:08+00:00",
+        "summary": "Space Force pushes ahead with medium Earth orbit sensor layer for hypersonic tracking The post Missile detection satellites designed by BAE Systems pass early review appeared first on SpaceNews .",
+        "topics": []
+      },
+      {
+        "ref": 20,
+        "title": "Contracts for March 9, 2026",
+        "url": "https://www.war.gov/News/Contracts/Contract/Article/4429282/contracts-for-march-9-2026/",
+        "source": "war.gov",
+        "published": "2026-03-09T21:00:29+00:00",
+        "summary": "Today's Department of War contracts valued at $7.5 million or more are now live on War.gov.",
+        "topics": []
+      },
+      {
+        "ref": 21,
+        "title": "Elroy Air Selected by FAA and DOT for Landmark Advanced Air Mobility Pilot Program",
+        "url": "https://www.suasnews.com/2026/03/elroy-air-selected-by-faa-and-dot-for-landmark-advanced-air-mobility-pilot-program/",
+        "source": "suasnews.com",
+        "published": "2026-03-09T20:46:18+00:00",
+        "summary": "We’re excited to share that Elroy Air and our partners in Louisiana were selected by",
+        "topics": []
+      },
+      {
+        "ref": 22,
+        "title": "Dutch frigate HNLMS Evertsen to be deployed in the Mediterranean",
+        "url": "https://www.navalnews.com/naval-news/2026/03/dutch-frigate-hnlms-evertsen-to-be-deployed-in-the-mediterranean/",
+        "source": "navalnews.com",
+        "published": "2026-03-09T20:34:01+00:00",
+        "summary": "The Government of the Netherlands has decided to deploy the De Zeven Provinciën-class air defense and command frigate HNLMS Evertsen in the eastern Mediterranean from this week until early April. Dutch MoD press release The frigate will contribute to the defense of the Carrier Strike Group and the defense of Cyprus and allied territory. Ministers Tom Berendsen (Foreign Affairs) and Dilan Yeşilgöz-Zegerius (Defense) announced this today to the House of Representatives and the Senate. Minister Berendsen: “With this commitment, the Netherlands demonstrates allied solidarity and contributes to Eur…",
+        "topics": []
+      },
+      {
+        "ref": 23,
+        "title": "US DOT selects eight eIPP programmes to accelerate advanced air mobility industry",
+        "url": "https://www.unmannedairspace.info/uncategorized/us-dot-selects-eight-eipp-programmes-to-accelerate-advanced-air-mobility-industry/",
+        "source": "unmannedairspace.info",
+        "published": "2026-03-09T20:19:15+00:00",
+        "summary": "US Transportation Secretary Sean P Duffy and the Federal Aviation Administration (FAA) today announced eight proposals were selected as part of the Advanced Air Mobility and Electric Vertical Takeoff and Landing (eVTOL) Integration Pilot Program (eIPP). According to a DoT announcement, the American public will start to see operations begin under this program by summer 2026. The eight selected projects span 26 states and involve leading aircraft manufacturers, operators, and state partners. They include a range of operational concepts, including urban air taxi services, regional passenger trans…",
+        "topics": []
+      },
+      {
+        "ref": 24,
+        "title": "Navy, Marine Corps amphibious readiness board launches as services put issue on ‘front burner’",
+        "url": "https://breakingdefense.com/2026/03/navy-marine-corps-amphibious-readiness-board-launches-as-services-put-issue-on-front-burner/",
+        "source": "breakingdefense.com",
+        "published": "2026-03-09T20:09:56+00:00",
+        "summary": "The Amphibious Force Readiness Board gathered for the first time on Thursday, and will continue to meet monthly.",
+        "topics": []
+      },
+      {
+        "ref": 25,
+        "title": "US B-1B Lancers arrive at RAF Fairford as strikes on Iran intensify",
+        "url": "https://www.defensenews.com/news/your-military/2026/03/09/us-b-1b-lancers-arrive-at-raf-fairford-as-strikes-on-iran-intensify/",
+        "source": "defensenews.com",
+        "published": "2026-03-09T19:39:01+00:00",
+        "summary": "Multiple U.S. Air Force B-1B Lancer bombers have arrived at RAF Fairford in Gloucestershire, United Kingdom, as American forces intensify strike operations against Iran under Operation Epic Fury. The U.K. Ministry of Defence confirmed Saturday that U.S. forces had begun using the British base for “specific defensive operations to prevent Iran firing missiles into the region.” The BBC reported at least three B-1B Lancers at the base, with the first aircraft arriving the evening of March 6 and two more on March 7. Aviation tracking outlet The Aviationist reported four arrivals in the initial dep…",
+        "topics": []
+      },
+      {
+        "ref": 26,
+        "title": "NUBURU debutta nel mercato globale militare anti-droni da 20 miliardi di dollari mentre Lyocon completa la prova di concetto per la piattaforma laser portatile a energia diretta",
+        "url": "http://www.businesswire.com/news/home/20260309516264/it/?feedref=JjAwJuNHiystnCoBq_hl-d9cWptq3LFKqvWRRM6VXqVcgiwDl5F89IquLVWUqfRVgLxDkSKfgoruKb9yWl5as-PbWreMWuYBefATrZ0EPTXUYDHrCfzvcc7PfEC8QrAfBSvR87oUDgbHejiywQBpbg==",
+        "source": "businesswire.com",
+        "published": "2026-03-09T19:32:00+00:00",
+        "summary": "DENVER--(BUSINESS WIRE)--NUBURU, Inc. (NYSE American: BURU), una società di piattaforme di difesa e sicurezza dal doppio utilizzo specializzata negli effetti non cinetici, nella tecnologie a energia diretta, nei conflitti elettronici e nei sistemi di difesa orchestrati da software, oggi ha reso noto che la sua controllata al 100% Lyocon Srl (\"Lyocon\") ha completato con successo la prova di concetto (\"POC\") di una piattaforma portatile di disturbo visivo laser a energia diretta studiata per le a",
+        "topics": []
+      },
+      {
+        "ref": 27,
+        "title": "On the flightline with Swedish fighter jets in Iceland, in Cold War 2.0",
+        "url": "https://breakingdefense.com/2026/03/on-the-flightline-with-swedish-fighter-jets-in-iceland-in-cold-war-2-0/",
+        "source": "breakingdefense.com",
+        "published": "2026-03-09T19:24:59+00:00",
+        "summary": "Deployment comes after Reykjavík adopted Iceland’s first-ever defense strategy in 70 years of NATO history.",
+        "topics": []
+      },
+      {
+        "ref": 28,
+        "title": "Prewar US intel found intervention in Iran wasn’t likely to change leadership",
+        "url": "https://www.defensenews.com/news/your-military/2026/03/09/prewar-us-intel-found-intervention-in-iran-wasnt-likely-to-change-leadership/",
+        "source": "defensenews.com",
+        "published": "2026-03-09T18:44:33+00:00",
+        "summary": "A U.S. intelligence assessment completed shortly before the United States and Israel launched a war in Iran had determined that American military intervention was not likely to lead to regime change in the Islamic Republic, according to two people familiar with the finding. The National Intelligence Council’s assessment in February concluded that neither limited airstrikes nor a larger, prolonged military campaign would be likely to result in a new government taking over in Iran, even if the current leadership was killed, according to the two people, who spoke on condition of anonymity to desc…",
+        "topics": []
+      },
+      {
+        "ref": 29,
+        "title": "How Dual DARPA and German Optics Wins At RTX (RTX) Have Changed Its Investment Story",
+        "url": "https://finance.yahoo.com/news/dual-darpa-german-optics-wins-181202889.html?.tsrc=rss",
+        "source": "finance.yahoo.com",
+        "published": "2026-03-09T18:12:02+00:00",
+        "summary": "In late February 2026, RTX’s BBN Technologies won a DARPA XENA research contract and Raytheon ELCAN secured a customized Specter DR 1–4x sight production deal for the German Armed Forces, extending RTX’s role in advanced sensing and soldier modernization across the U.S. and Europe. Together, these wins highlight how RTX’s mix of cutting-edge defense research and long-serving optical systems can tie next-generation capabilities to existing NATO procurement programs. We’ll now examine how...",
+        "topics": []
+      },
+      {
+        "ref": 30,
+        "title": "Hegseth downplays risk to US troops from Iran-Russia cooperation",
+        "url": "https://www.armytimes.com/news/pentagon-congress/2026/03/09/hegseth-downplays-risk-to-us-troops-from-iran-russia-cooperation/",
+        "source": "armytimes.com",
+        "published": "2026-03-09T17:34:51+00:00",
+        "summary": "Defense Secretary Pete Hegseth contends that American troops are not in danger across the Middle East – even as the Pentagon announced on Sunday that a seventh U.S. service member had been killed in the war against Iran. The latest casualty, Sgt. Benjamin Pennington, 26, died of wounds sustained in an Iranian attack on Prince Sultan Air Base, Saudi Arabia, according to the Department of Defense. His death came one day after President Donald Trump and other senior officials observed the solemn return of six flag-draped cases to Dover Air Force Base in Delaware. With the conflict now in its seco…",
+        "topics": []
+      },
+      {
+        "ref": 31,
+        "title": "Mobix Labs: Defense Communications Hardware Supporting U.S. Navy Ships",
+        "url": "http://www.businesswire.com/news/home/20260309212322/en/Mobix-Labs-Defense-Communications-Hardware-Supporting-U.S.-Navy-Ships/?feedref=JjAwJuNHiystnCoBq_hl-d9cWptq3LFKqvWRRM6VXqVcgiwDl5F89IquLVWUqfRVgLxDkSKfgoruKb9yWl5as-PbWreMWuYBefATrZ0EPTXUYDHrCfzvcc7PfEC8QrAfBSvR87oUDgbHejiywQBpbg==",
+        "source": "businesswire.com",
+        "published": "2026-03-09T17:30:00+00:00",
+        "summary": "IRVINE, Calif.--(BUSINESS WIRE)---- $MOBX #defense--Mobix Labs, Inc. (Nasdaq: MOBX) announced continued production of communications hardware supporting secure network systems deployed aboard U.S. Navy ships. The production supports a multi-year defense program with a prime U.S. Navy contractor under the company’s previously disclosed orders. Mobix Labs’ technology is designed to protect critical military communications from interference and disruption, helping ensure reliable connectivity for naval operations in",
+        "topics": []
+      },
+      {
+        "ref": 32,
+        "title": "U.S. STRATCOM Leadership Visit Vandenberg SFB During ICBM Test Launch",
+        "url": "https://www.vandenberg.spaceforce.mil/News/Article-Display/Article/4428938/us-stratcom-leadership-visit-vandenberg-sfb-during-icbm-test-launch/",
+        "source": "vandenberg.spaceforce.mil",
+        "published": "2026-03-09T17:21:00+00:00",
+        "summary": "U.S. Air Force Lt. Gen. Michael J. Lutton, right, deputy commander of U.S. Strategic Command, and U.S. Army Command Sgt. Maj. Jo Naumann, middle, command senior enlisted leader, USSTRATCOM, and Casey L. Deering, left, Deputy Assistant Secretary of War for Nuclear Matters, engage in conversation after a 377th Test and Evaluation Group mission brief prior to an unarmed Minuteman III Intercontinental Ballistic Missile test at Vandenberg Space Force Base, Calif., March 3, 2026.",
+        "topics": []
+      },
+      {
+        "ref": 33,
+        "title": "U.S. Space Force achieves key design milestone for Resilient Missile Warning and Tracking Epoch 2 MEO Constellation",
+        "url": "https://www.ssc.spaceforce.mil/Newsroom/Article/4428927/us-space-force-achieves-key-design-milestone-for-resilient-missile-warning-and",
+        "source": "ssc.spaceforce.mil",
+        "published": "2026-03-09T17:08:00+00:00",
+        "summary": "The U.S. Space Force advances the future of proliferated Resilient Missile Warning and Tracking (MWT) capabilities through the MWT Epoch 2 program’s completion of the preliminary design review for its Medium Earth Orbit (MEO) constellation. The Epoch 2 constellation will expand the resilient capabilities of Epoch 1, creating a more robust design to track missile threats around the world and advancing the global coverage of defense for the Nation, Warfighter, Allies, and partners.",
+        "topics": []
+      },
+      {
+        "ref": 34,
+        "title": "NATO to study what-if scenarios that could cause Arctic conflict with Russia",
+        "url": "https://www.defensenews.com/global/europe/2026/03/09/nato-to-study-what-if-scenarios-that-could-cause-arctic-conflict-with-russia/",
+        "source": "defensenews.com",
+        "published": "2026-03-09T16:54:26+00:00",
+        "summary": "BRUSSELS — NATO nations are sending troops to Norway for a cold-weather exercise this week, as alliance officials kick off a yearslong analysis into causes for conflict in the Arctic. As part of the planning effort, a U.S. and Norwegian-led research task force will compile a report by 2029 under the name “High North Scenarios for Wargaming and Analysis — Winter Storm 2030.” Beyond the lead nations, NATO countries to have thus far committed to participating in the Arctic security simulation include Canada, the Czech Republic, France, Italy, Sweden and Turkey. “The region faces rapid militarizat…",
+        "topics": []
+      },
+      {
+        "ref": 35,
+        "title": "Ukraine Helps U.S. Bases in the Mideast With Stopping Drones",
+        "url": "https://www.nytimes.com/2026/03/09/world/middleeast/ukraine-shahed-drone-middle-east.html",
+        "source": "nytimes.com",
+        "published": "2026-03-09T16:29:36+00:00",
+        "summary": "As the war in Iran spreads, Kyiv is eagerly offering its hard-won expertise and advanced technology to counter Iranian drones.",
+        "topics": []
+      },
+      {
+        "ref": 36,
+        "title": "NATO defenses shoot down ballistic missile in Turkey",
+        "url": "https://www.defensenews.com/global/europe/2026/03/09/nato-defenses-shoot-down-ballistic-missile-in-turkey/",
+        "source": "defensenews.com",
+        "published": "2026-03-09T15:53:59+00:00",
+        "summary": "NATO defenses intercepted an Iranian missile on Monday that entered Turkey’s airspace, the country’s defense ministry said. The interception is the second of a Turkey-bound missile since the U.S. and Israel launched military strikes against Iran on Feb. 28. In retaliation, Iran has fired missiles and drones at several countries across the region . The ballistic missile was downed by NATO units stationed in the eastern Mediterranean, a Turkey Defense Ministry statement said. The ministry said debris from the downed Iranian missile fell on empty fields in Gaziantep province in southern Turkey. T…",
+        "topics": []
+      },
+      {
+        "ref": 37,
+        "title": "Vector Announces Warfighter-Focused Hammer F1 Quadcopter Drone",
+        "url": "https://dronelife.com/2026/03/09/vector-announces-warfighter-focused-hammer-f1-quadcopter-drone/",
+        "source": "dronelife.com",
+        "published": "2026-03-09T15:25:54+00:00",
+        "summary": "Vector has introduced the Hammer F1, a foldable quadcopter designed to combine reconnaissance and strike capability in a single, compact platform. The system targets U.S. defense authority requirements and frontline operator needs, with a focus on speed, modularity, and contested-environment performance.​ Hammer F1: Designed for the Edge The Hammer F1 is a 10-inch foldable quadcopter […] The post Vector Announces Warfighter-Focused Hammer F1 Quadcopter Drone appeared first on DRONELIFE .",
+        "topics": []
+      },
+      {
+        "ref": 38,
+        "title": "Estonia, US and allies test remotely coordinated C-UAS",
+        "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/estonia-us-allies-test-remotely-controlled-and-coordinated-c-uas/",
+        "source": "unmannedairspace.info",
+        "published": "2026-03-09T14:32:04+00:00",
+        "summary": "The Estonian Defence Forces, the United States Army and other allied forces practiced counter-uncrewed aerial systems (C-UAS) tactics on March 5, during the Digital Shield 2.0 exercise in Rutja, Estonia. During the exercise, Estonian and Allied sensors and command centres were linked to a real-time unified data network in order to identify threats more quickly and respond to them in a coordinated manner. “We tested a concept for ensuring effective protection against the threat of UAS using centralised command and control software, which can be used to control interceptor drones and missiles,” …",
+        "topics": []
+      },
+      {
+        "ref": 39,
+        "title": "Europe leads global arms imports market as demand surges: SIPRI report",
+        "url": "https://breakingdefense.com/2026/03/europe-leads-global-arms-imports-market-as-demand-surges-sipri-report/",
+        "source": "breakingdefense.com",
+        "published": "2026-03-09T14:10:00+00:00",
+        "summary": "Ukraine, Poland and the United Kingdom were the three biggest European weapon system importers between 2021 and 2025, said SIPRI.",
+        "topics": []
+      },
+      {
+        "ref": 40,
+        "title": "Air Force, MASS-TF sign MOU to evaluate strategic real estate opportunities",
+        "url": "https://www.af.mil/News/Article-Display/Article/4428374/air-force-mass-tf-sign-mou-to-evaluate-strategic-real-estate-opportunities/",
+        "source": "af.mil",
+        "published": "2026-03-09T13:30:00+00:00",
+        "summary": "The agreement establishes a framework for collaboration to pursue a strategic real estate and mission support partnership.",
+        "topics": []
+      },
+      {
+        "ref": 41,
+        "title": "Voyager Technologies invests in Max Space",
+        "url": "https://spacenews.com/voyager-technologies-invests-in-max-space/",
+        "source": "spacenews.com",
+        "published": "2026-03-09T13:00:00+00:00",
+        "summary": "Voyager Technologies is investing in Max Space to help accelerate a partnership between the two companies on developing lunar habitats. The post Voyager Technologies invests in Max Space appeared first on SpaceNews .",
+        "topics": []
+      }
+    ]
+  }
+}
